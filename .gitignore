@@ -1,0 +1,8 @@
+.tup
+bin
+lib
+obj
+build.py
+umbrella.txt
+*.skip
+

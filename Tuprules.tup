@@ -1,0 +1,7 @@
+CFLAGS += -Iinclude -Llib
+LDFLAGS += -Llib
+
+!cc = |> gcc $(CFLAGS) -c %f -o %o |>
+!ld = |> gcc $(LDFLAGS) %f -o %o |>
+!ar = |> ar rcs %o %f |>
+

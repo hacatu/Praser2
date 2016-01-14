@@ -1,0 +1,7 @@
+include_rules
+
+: foreach src/*.c |> !cc |> obj/%B.o
+: obj/parser.o |> !ar |> lib/lib%B.a
+: obj/parser_generator.o | lib/libparser.a |> gcc $(LDFLAGS) %f -o %o -lparser |> bin/%B
+: obj/ast_interpreter.o | lib/libparser.a |> gcc $(LDFLAGS) %f -o %o -lparser |> bin/%B
+
