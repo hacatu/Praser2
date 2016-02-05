@@ -2,6 +2,7 @@ include_rules
 
 : foreach src/*.c |> !cc |> obj/%B.o
 : obj/parser.o |> !ar |> lib/lib%B.a
-: obj/parser_generator.o | lib/libparser.a |> gcc $(LDFLAGS) %f -o %o -lparser |> bin/%B
-: obj/ast_interpreter.o | lib/libparser.a |> gcc $(LDFLAGS) %f -o %o -lparser |> bin/%B
+: obj/ast_interpreter.o |> !ar |> lib/lib%B.a
+: obj/parser_parser.o obj/parser_runner.o obj/ast_callback_print.o | lib/libparser.a |> gcc $(LDFLAGS) %f -o %o -lparser |> bin/run_parser_print
+: obj/parser_parser.o obj/parser_runner.o obj/ast_callback_interpret.o | lib/libparser.a lib/libast_interpreter.a |> gcc $(LDFLAGS) %f -o %o -lparser -last_interpreter |> bin/run_parser_interpret
 

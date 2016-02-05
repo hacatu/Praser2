@@ -1,6 +1,15 @@
+/*
+ * parser.c
+ * Parser, ast, and position utility functions including ast allocators, position constructors, and special parsers.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include "parser.h"
 
 static ast *_alloc_ast(void);
@@ -53,6 +62,51 @@ int parse_hex4(ast *t, position *p){
 	return 0;
 }
 
+const char *esc_seq_parser(ast *t, position *p){
+	position s = *p;
+	if(!read_string("\\", NULL, p)){
+		return "esc_seq";
+	}
+	if(parse_hex2(t, p) || parse_hex4(t, p)){
+		NULL;
+	}
+	//abfnrtv
+	if(!is_end(p)){
+		char repr;
+		switch(*p->curr){
+			case 'a':
+			repr = '\a';
+			break;
+			case 'b':
+			repr = '\b';
+			break;
+			case 'f':
+			repr = '\f';
+			break;
+			case 'n':
+			repr = '\n';
+			break;
+			case 'r':
+			repr = '\r';
+			break;
+			case 't':
+			repr = '\t';
+			break;
+			case 'v':
+			repr = '\v';
+			break;
+			default:
+			repr = *p->curr;
+			break;
+		}
+		++p->curr;
+		add_text(t, &repr, 1);
+		return NULL;
+	}
+	*p = s;
+	return "esc_seq";
+}
+
 void append_ast(ast *t, ast *c){
 	if(!t){
 		delete_ast(c);
@@ -74,22 +128,36 @@ void merge_ast(ast *t, ast *c){
 		delete_ast(c);
 		return;
 	}
-	size_t size = t->size + c->size;
-	size_t length = t->length + c->length;
-	void *tmp = realloc(t->children, size*sizeof(ast*));
-	if(!tmp){
-		//TODO: Handle error
-		return;
+	if(t->size){
+		size_t size = t->size + c->size;
+		void *tmp = realloc(t->children, size*sizeof(ast*));
+		if(!tmp){
+			//TODO: Handle error
+			return;
+		}
+		t->children = tmp;
+		memcpy(t->children + t->size, c->children, c->size*sizeof(ast*));
+		t->size = size;
+		free(c->children);
+	}else{
+		t->children = c->children;
+		t->size = c->size;
 	}
-	t->children = tmp;
-	tmp = realloc((char*)t->text, length*sizeof(char));
-	if(!tmp){
-		t->children = realloc(t->children, t->size*sizeof(ast*));
-		return;
+	if(t->length){
+		size_t length = t->length + c->length;
+		void *tmp = realloc((void*)t->text, length*sizeof(char));
+		if(!tmp){
+			t->children = realloc(t->children, t->size*sizeof(ast*));
+			return;
+		}
+		t->text = tmp;
+		memcpy((void*)t->text + t->length, c->text, c->length*sizeof(char));
+		t->length = length;
+		free((char*)c->text);//discard const qualifier
+	}else{
+		t->text = c->text;
+		t->length = c->length;
 	}
-	t->text = tmp;
-	memcpy(t->children + t->size, c->children, c->size*sizeof(ast*));
-	memcpy((char*)t->text + t->length, c->text, c->length*sizeof(char));
 	free_ast(c);
 }
 
@@ -189,7 +257,7 @@ int read_dedent(position *p){
 	return 0;
 }
 
-void add_text(ast *t, const char *a, size_t l){//TODO: distinguish between pointers to static and dynamic memory somehow
+void add_text(ast *t, const char *a, size_t l){//no longer uses pointers to input so all text pointers are dynamic memory.
 	if(!t){
 		return;
 	}
@@ -235,11 +303,12 @@ static void _delete_ast(ast *t){
 	for(size_t i = 0; i < t->size; ++i){
 		_delete_ast(t->children[i]);
 	}
+	free((char*)t->text);//discard const qualifier
+	free(t->children);
 	free_ast(t);
 }
 
 static void _free_ast(ast *t){
-	free(t->children);
 	free(t);
 }
 
@@ -301,21 +370,6 @@ ast *flatten_ast(ast *t){
 	return ret;
 }
 
-void prune_ast(ast *t){
-	for(size_t i = 0; i < t->size; ++i){
-		prune_ast(t->children[i]);
-	}
-	if(t->size == 1){
-		if(!t->children[0]->name){
-			t->text = t->children[0]->text;
-			t->length = t->children[0]->length;
-			free_ast(t->children[0]);
-			free(t->children);
-			t->size = 0;
-		}
-	}
-}
-
 position canonicalize_indents(const position *p, size_t tab_spaces){//note this does not currently produce multiple indent/dedent characters in a row even if multiple indents or dedents are performed because this is a problem with mixed tabs and spaces.  If you promise not to mix tabs and spaces I might fix this.
 	position ret = {0};
 	ret.start = malloc(sizeof(char)*(p->end - p->start));
@@ -356,5 +410,29 @@ position canonicalize_indents(const position *p, size_t tab_spaces){//note this 
 	ret.end = ret.start + (ret.end - ret.curr);
 	ret.curr = ret.start;
 	return ret;
+}
+
+const char *mmap_open(const char *name, position *out){
+	int fd = open(name, O_RDONLY);
+	if(fd == -1){
+		return "Could not open file";
+	}
+	struct stat buf;
+	if(fstat(fd, &buf)){
+		close(fd);
+		return "Could not stat file";
+	}
+	out->start = mmap(NULL, buf.st_size*sizeof(char), PROT_READ, MAP_SHARED, fd, 0);
+	close(fd);
+	if(out->start == MAP_FAILED){
+		return "Could not mmap file";
+	}
+	out->curr = out->start;
+	out->end = out->start + buf.st_size;
+	return NULL;
+}
+
+void mmap_close(const position *p){
+	munmap((void*)p->start, p->end - p->start);//cast to non const pointer.
 }
 

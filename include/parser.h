@@ -1,6 +1,8 @@
 #ifndef __UMBRELLA_PARSER_H__
 #define __UMBRELLA_PARSER_H__
 
+#include <stddef.h>
+
 typedef struct ast{
 	const char *name;
 	const char *text;
@@ -39,10 +41,15 @@ extern void (*delete_ast)(ast*);
 extern void (*free_ast)(ast*);
 void clear_ast(ast*);
 ast *flatten_ast(ast*);
-void prune_ast(ast*);
 
 int parse_hex2(ast*, position*);
 int parse_hex4(ast*, position*);
+
+const char *mmap_open(const char *name, position *out);
+
+void mmap_close(const position *p);
+
+const char *esc_seq_parser(ast*, position*);
 
 #endif
 

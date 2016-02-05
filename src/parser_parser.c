@@ -1,7 +1,8 @@
 /*
-parser_generator.c
-Generates parsers from a PEG
+parser_parser.c
+parses a PEG and produces an ast.
 Written by by hacatu (Gabriel Eiseman)
+This file is handwritten and should be replaced with generated code as soon as I can.
 
 Grammar specification:
 start= rule*
@@ -19,7 +20,7 @@ charset= lbracket (setrange | setchar)* rbracket
 setrange= setchar dash setchar
 setchar= [^\\\-\]] | "\\-" | "\\]" | esc_seq 
 string= quote ([^\\"\n] | "\\\"" | esc_seq)* quote
-esc_seq< backslash [nt\\] | ("x" hex hex) | ("u" hex hex hex hex)//needs to be specially defined
+esc_seq< "\" [nt\\] | ("x" hex hex) | ("u" hex hex hex hex)//needs to be specially defined
 whitespace: [ \t]+
 lparen: "("
 rparen: ")"
@@ -29,7 +30,6 @@ caret: "^"
 quote: "\""
 bar: "|"
 dash: "-"
-backslash: "\\"
 newline: "\n"//needs to be specially defined
 */
 
@@ -37,9 +37,26 @@ newline: "\n"//needs to be specially defined
 #include <stdlib.h>
 #include <string.h>
 #include "parser.h"
-#include "parser_generator.h"
+#include "parser_parser.h"
 
 //TODO: When I rewrite the generator in Umbrella, specify parse rules and output rules more separately and use CYK so that there is no merge_ast and stuff can happen faster.  The first ast should have all input output in some node or another.  Not deferring the next stage of processing is a good idea, but it might not be feasable.
+
+const char const
+*start_tag = "start",
+*rule_tag = "rule",
+*name_tag = "name",
+*assign_tag = "assign",
+*pattern_tag = "pattern",
+*group_tag = "group",
+*option_tag = "option",
+*atom_tag = "atom",
+*quantifier_tag = "quantifier",
+*parens_tag = "parens",
+*invset_tag = "invset",
+*charset_tag = "charset",
+*setrange_tag = "setrange",
+*setchar_tag = "setchar",
+*string_tag = "string";
 
 const char *start_parser(ast *t, position *p){
 	const char *err = NULL;
@@ -101,7 +118,7 @@ const char *name_parser(ast *t, position *p){
 	if(!found){
 		delete_ast(c);
 	}else{
-		append_ast(t, c);
+		merge_ast(t, c);
 	}
 	return found ? NULL : name_tag;
 }
@@ -113,7 +130,7 @@ const char *assign_parser(ast *t, position *p){
 		delete_ast(c);
 		return assign_tag;
 	}
-	append_ast(t, c);
+	merge_ast(t, c);
 	return NULL;
 }
 
@@ -151,13 +168,13 @@ const char *group_parser(ast *t, position *p){
 	append_ast(t, c);
 	while(1){
 		position s = *p;
-		c = alloc_ast();
 		whitespace_parser(NULL, p);
 		if(bar_parser(NULL, p)){
 			*p = s;
 			break;
 		}
 		whitespace_parser(NULL, p);
+		c = alloc_ast();
 		if(option_parser(c, p)){
 			*p = s;
 			delete_ast(c);
@@ -250,7 +267,7 @@ const char *quantifier_parser(ast *t, position *p){
 		delete_ast(c);
 		return quantifier_tag;
 	}
-	append_ast(t, c);
+	merge_ast(t, c);
 	return NULL;
 }
 
@@ -339,6 +356,7 @@ const char *setrange_parser(ast *t, position *p){
 		return err;
 	}
 	if((err = dash_parser(NULL, p))){
+		delete_ast(c);
 		return err;
 	}
 	append_ast(t, c);
@@ -354,8 +372,8 @@ const char *setrange_parser(ast *t, position *p){
 const char *setchar_parser(ast *t, position *p){
 	set_tag(t, setchar_tag);
 	ast *c = alloc_ast();
-	if(read_noneOf("\\-]", c, p) || read_string("\\-", c, p) || read_string("\\]", c, p) || !esc_seq_parser(c, p)){
-		append_ast(t, c);
+	if(read_noneOf("\\-]", c, p) || !esc_seq_parser(c, p)){
+		merge_ast(t, c);
 		return NULL;
 	}
 	delete_ast(c);
@@ -371,27 +389,14 @@ const char *string_parser(ast *t, position *p){
 	ast *c;
 	while(1){
 		c = alloc_ast();
-		if(!(read_noneOf("\\\"\n", c, p) || read_string("\\\\", c, p) || read_string("\\\"", c, p) || read_string("\\n", c, p) || !esc_seq_parser(c, p))){
+		if(!(read_noneOf("\\\"\n", c, p) || !esc_seq_parser(c, p))){
 			delete_ast(c);
 			break;
 		}
-		append_ast(t, c);
+		merge_ast(t, c);
 	}
 	if((err = quote_parser(NULL, p))){
 		return err;
-	}
-	return NULL;
-}
-
-const char *esc_seq_parser(ast *t, position *p){
-	const char *err = NULL;
-	position s = *p;
-	if((err = backslash_parser(NULL, p))){
-		return err;
-	}
-	if(!(read_oneOf("\\nt", t, p) || parse_hex2(t, p) || parse_hex4(t, p))){
-		*p = s;
-		return "esc_seq";
 	}
 	return NULL;
 }
@@ -438,62 +443,5 @@ const char *backslash_parser(ast *t, position *p){
 
 const char *newline_parser(ast *t, position *p){
 	return read_newline(p) ? NULL : "newline";
-}
-
-int main(void){
-	ast *t = alloc_ast();
-	/*
-	position p = {
-		"start= additive\n"
-		"additive= multiplicative (whitespace? addition whitespace? multiplicative)*\n"
-		"multiplicative= atom (whitespace? multiplication whitespace? atom)*\n"
-		"atom= number | parens\n"
-		"addition= [+\\-]\n"
-		"multiplication= [/*]\n"
-		"parens= lparen whitespace? additive whitespace? rparen\n"
-		"number= [0-9]+\n"
-		"lparen: \"(\"\n"
-		"rparen: \")\"\n"
-		"whitespace: [ \t]+\n"
-	};
-	*/
-	position p = {
-		"start= rule*\n"
-		"rule= name whitespace? assign whitespace? pattern newline\n"
-		"name= [a-zA-Z0-9_]+\n"
-		"assign= [:=<]\n"
-		"pattern= group (whitespace? group)*\n"
-		"group= option (whitespace? bar whitespace? option)*\n"
-		"option= atom whitespace? quantifier?\n"
-		"atom= parens | name | string | invset | charset\n"
-		"quantifier= [+*?]\n"
-		"parens= lparen whitespace? pattern whitespace? rparen\n"
-		"invset= lbracket caret (setrange | setchar)* rbracket\n"
-		"charset= lbracket (setrange | setchar)* rbracket\n"
-		"setrange= setchar dash setchar\n"
-		"setchar= [^\\\\\\-\\]] | \"\\\\-\" | \"\\\\]\" | esc_seq\n"
-		"string= quote ([^\\\\\"\\n] | \"\\\\\\\"\" | esc_seq)* quote\n"
-		"whitespace: [ \\t]+\n"
-		"lparen: \"(\"\n"
-		"rparen: \")\"\n"
-		"lbracket: \"[\"\n"
-		"rbracket: \"]\"\n"
-		"caret: \"^\"\n"
-		"quote: \"\\\"\"\n"
-		"bar: \"|\"\n"
-		"dash: \"-\"\n"
-		"backslash: \"\\\\\"\n"
-	};
-	p.curr = p.start;
-	p.end = p.start + strlen(p.start);
-	const char *err = NULL;
-	if((err = start_parser(t, &p))){
-		log_err(err, p);
-	}else{
-		//t = flatten_ast(t);
-		prune_ast(t);
-		print_ast(t);
-	}
-	delete_ast(t);
 }
 

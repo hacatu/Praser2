@@ -1,0 +1,5 @@
+start= lbracket setchar* rbracket
+setchar= [^\\\-\]] | esc_seq
+lbracket: "["
+rbracket: "]"
+esc_seq< special

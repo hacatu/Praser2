@@ -1,19 +1,19 @@
-//ast_interpreter.c
+/*
+ * ast_interpreter.c
+ * Runs a parser specified by an ast on some text.  The ast should be obtained by using a compiled version of parser_parser on a description (.pra).
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "parser.h"
+#include "ast_interpreter.h"
 
-typedef void (*ast_fn)(ast*, void*);
-typedef struct state state;
-typedef const char *(*state_parse_fn)(const state*, ast*, position*);
-struct state{
-	const ast *rule;
-	state_parse_fn parse;
-};
+struct{
+	size_t len, cap;
+	special_state *states;
+} special_states;
 
-const char *state_parse_rule(const state *self, ast*, position *p);
-const char *state_parse_special(const state *self, ast*, position *p);
+static const char *state_parse_rule(const state *self, ast*, position *p);
 
 void forall_ast_nodes_postorder(ast_fn f, ast *t, void *data){
 	for(size_t i = 0; i < t->size; ++i){
@@ -29,13 +29,45 @@ void forall_ast_nodes_preorder(ast_fn f, ast *t, void *data){
 	}
 }
 
-void ast_fn_count_outrules(const ast *n, size_t *c){
+static void ast_fn_count_outrules(const ast *n, size_t *c){
 	if((!strcmp("rule", n->name)) || (!strcmp("parens", n->name))){
 		++*c;
 	}
 }
 
-void make_state(state *fsa, ast *r, size_t *u){
+static int cmp_special_states(const void *a, const void *b){
+	return strcmp(*(const char*const*)a, *(const char*const*)b);
+}
+
+void _register_special_states(special_state s, ...){
+	va_list args;
+	va_start(args, s);
+	for(; s.parse; s = va_arg(args, special_state)){
+		if(special_states.len == special_states.cap){
+			size_t cap = special_states.cap ? 1.6*special_states.cap : 2;
+			special_state *tmp = realloc(special_states.states, cap*sizeof(special_state));
+			if(!tmp){
+				//TODO: handle memory error.
+			}else{
+				special_states.states = tmp;
+				special_states.cap = cap;
+			}
+		}
+		special_states.states[special_states.len++] = s;
+	}
+	va_end(args);
+	qsort(special_states.states, special_states.len, sizeof(special_state), cmp_special_states);
+}
+
+static special_state find_special_parse_fn(const char *name){
+	special_state *s = bsearch(&name, special_states.states, special_states.len, sizeof(special_state), cmp_special_states);
+	if(!s){
+		return (special_state){0};
+	}
+	return *s;
+}
+
+static int make_state(state *fsa, ast *r, size_t *u){
 	ast *pattern;
 	if(!strcmp("rule", r->name)){
 		pattern = r->children[2];
@@ -44,10 +76,15 @@ void make_state(state *fsa, ast *r, size_t *u){
 			if(group->size == 1){
 				const ast *option = group->children[0];
 				if(option->size == 1){
-					const ast *atom = option->children[0];
+					const ast *atom = option->children[0]->children[0];
 					if((!strcmp("name", atom->name)) && (!strncmp("special", atom->text, atom->length))){
-						fsa[(*u)++] = (state){.rule = r, .parse = state_parse_special};//TODO: find the actual special function to use
-						return;
+						special_state s = find_special_parse_fn(r->children[0]->text);
+						if(!s.parse){
+							printf("No special state is registered for \"%*s\".\n", (int)r->children[0]->length, r->children[0]->text);
+							return 0;
+						}
+						fsa[(*u)++] = (state){.rule = r, .parse = s.parse, .gen = s.gen};
+						return 1;
 					}
 				}
 			}
@@ -67,9 +104,10 @@ void make_state(state *fsa, ast *r, size_t *u){
 		}
 	}
 	fsa[(*u)++] = (state){.rule = r, .parse = state_parse_rule};
+	return 1;
 }
 
-void link_rule_calls(size_t num_states, state *fsa){
+static int link_rule_calls(size_t num_states, state *fsa){
 	for(state *s = fsa; s < fsa + num_states; ++s){
 		if(s->parse != state_parse_rule){
 			continue;
@@ -84,6 +122,7 @@ void link_rule_calls(size_t num_states, state *fsa){
 			for(ast **option = (*group)->children; option < (*group)->children + (*group)->size; ++option){
 				ast *atom = (*option)->children[0];
 				if(!strcmp("name", atom->children[0]->name)){
+					int linked = 0;
 					for(state *s = fsa; s < fsa + num_states; ++s){
 						if(strcmp("rule", s->rule->name)){
 							continue;
@@ -92,35 +131,94 @@ void link_rule_calls(size_t num_states, state *fsa){
 							continue;
 						}
 						if(!strncmp(atom->children[0]->text, s->rule->children[0]->text, atom->children[0]->length)){
+							free((void*)atom->children[0]->text);
 							*atom->children[0] = (ast){.name = "state", .text = (char*)s};
+							linked = 1;
 							break;
 						}
 					}
+					if((!linked) && strncmp("special", atom->children[0]->text, atom->children[0]->length)){
+						printf("No rule with name \"%*s\" found.\n", (int)atom->children[0]->length, atom->children[0]->text);
+						return 0;
+					}
+				}
+			}
+		}
+	}
+	return 1;
+}
+
+static void canonicalize_used_text(size_t num_states, state *fsa){
+	for(state *s = fsa; s < fsa + num_states; ++s){
+		if(s->parse != state_parse_rule){
+			continue;
+		}
+		ast *pattern;
+		if(!strcmp("rule", s->rule->name)){
+			pattern = s->rule->children[2];
+			size_t length = s->rule->children[0]->length + 1;
+			char *tmp = realloc((void*)s->rule->children[0]->text, length*sizeof(char));
+			if(!tmp){
+				//TODO: Handle memory error.
+				return;
+			}
+			tmp[length - 1] = '\0';
+			s->rule->children[0]->text = tmp;
+		}else{
+			pattern = s->rule->children[0];
+		}
+		for(ast **group = pattern->children; group < pattern->children + pattern->size; ++group){
+			for(ast **option = (*group)->children; option < (*group)->children + (*group)->size; ++option){
+				ast *atom = (*option)->children[0];
+				if(!strcmp("string", atom->children[0]->name)){
+					size_t length = atom->children[0]->length + 1;
+					char *tmp = realloc((void*)atom->children[0]->text, length*sizeof(char));
+					if(!tmp){
+						//TODO: Handle memory error.
+						return;
+					}
+					tmp[length - 1] = '\0';
+					atom->children[0]->text = tmp;
 				}
 			}
 		}
 	}
 }
 
-const state *ast_to_fsa(ast *r){
-	size_t num_states = 0;
-	forall_ast_nodes_postorder((ast_fn)ast_fn_count_outrules, r, (void*)&num_states);
-	state *fsa = malloc(num_states*sizeof(state));
+const state *ast_to_fsa(ast *r, size_t *num_states){
+	*num_states = 0;
+	forall_ast_nodes_postorder((ast_fn)ast_fn_count_outrules, r, num_states);
+	state *fsa = malloc(*num_states*sizeof(state));
+	if(!fsa){
+		return NULL;
+	}
 	size_t num_states_created = 0;
 	for(size_t i = 0; i < r->size; ++i){
-		make_state(fsa, r->children[i], &num_states_created);
+		if(!make_state(fsa, r->children[i], &num_states_created)){
+			memset(fsa + num_states_created, 0, (*num_states - num_states_created)*sizeof(state));
+			delete_nonroot_fsa(fsa, *num_states);
+			*num_states = 0;
+			return NULL;
+		}
 	}
-	link_rule_calls(num_states, fsa);
+	canonicalize_used_text(*num_states, fsa);
+	if(!link_rule_calls(*num_states, fsa)){
+		memset(fsa + num_states_created, 0, (*num_states - num_states_created)*sizeof(state));
+		delete_nonroot_fsa(fsa, *num_states);
+		*num_states = 0;
+		return NULL;
+	}
 	return fsa;
 }
 
-const char *parse_atom(const ast *atom, ast *t, position *p){
+static const char *parse_atom(const ast *atom, ast *t, position *p){
 	//state | string | charset | invset
 	if(!strcmp("state", atom->name)){
 		const state *s = (state*)atom->text;
 		ast *c;
 		const char *err;
-		switch(*s->rule->children[1]->text){
+		char assigner = s->rule->size == 3 ? *s->rule->children[1]->text : '<';
+		switch(assigner){
 			case '=':
 			c = alloc_ast();
 			err = s->parse(s, c, p);
@@ -136,17 +234,16 @@ const char *parse_atom(const ast *atom, ast *t, position *p){
 			break;
 		}
 		//case ':':
-		ast r;
+		ast r = {0};
 		err = s->parse(s, &r, p);
 		clear_ast(&r);
 		return err;
 	}else if(!strcmp("string", atom->name)){
-		char *s = malloc((atom->length + 1)*sizeof(char));
-		if(read_string(strncpy(s, atom->text, atom->length), NULL, p)){
+		if(read_string(atom->text, t, p)){
 			return NULL;
 		}
-		return s;
-	}else{
+		return atom->text;
+	}else{//invset or charset
 		if(is_end(p)){
 			return "charset char";
 		}
@@ -166,6 +263,7 @@ const char *parse_atom(const ast *atom, ast *t, position *p){
 			}
 		}
 		if(matches ^ !strcmp("invset", atom->name)){
+			add_text(t, p->curr, 1);
 			++p->curr;
 			return NULL;
 		}
@@ -173,10 +271,10 @@ const char *parse_atom(const ast *atom, ast *t, position *p){
 	}
 }
 
-const char *parse_option(const ast *option, ast *t, position *p){//TODO: Replace incorrect append_ast() calls with merge_ast() and maybe find a way to cut down on allocations.
+static const char *parse_option(const ast *option, ast *t, position *p){//TODO: Replace incorrect append_ast() calls with merge_ast() and maybe find a way to cut down on allocations.
 	position l = *p;
 	const char *err;
-	const ast *atom = option->children[0];
+	const ast *atom = option->children[0]->children[0];
 	if(option->size == 1){
 		return parse_atom(atom, t, p);
 	}else if(*option->children[1]->text == '?'){
@@ -187,7 +285,7 @@ const char *parse_option(const ast *option, ast *t, position *p){//TODO: Replace
 	}else if(*option->children[1]->text == '*'){
 		ast *c = alloc_ast();
 		while(!parse_atom(atom, t, p)){
-			append_ast(t, c);
+			merge_ast(t, c);
 			c = alloc_ast();
 			l = *p;
 		};
@@ -196,13 +294,13 @@ const char *parse_option(const ast *option, ast *t, position *p){//TODO: Replace
 		return NULL;
 	}else{//quantifier == "+"
 		ast *c = alloc_ast();
-		err = parse_atom(atom, t, p);
+		err = parse_atom(atom, c, p);
 		if(err){
 			delete_ast(c);
 			return err;
 		}
 		do{
-			append_ast(t, c);
+			merge_ast(t, c);
 			c = alloc_ast();
 			l = *p;
 		}while(!parse_atom(atom, c, p));
@@ -212,7 +310,7 @@ const char *parse_option(const ast *option, ast *t, position *p){//TODO: Replace
 	}
 }
 
-const char *parse_group(const ast *group, ast *t, position *p){
+static const char *parse_group(const ast *group, ast *t, position *p){
 	position s = *p, e;
 	const char *err = NULL, *terr = NULL;
 	for(size_t i = 0; i < group->size; ++i){
@@ -242,6 +340,7 @@ const char *state_parse_rule(const state *self, ast *t, position *p){//These two
 	const ast *pattern;
 	if(!strcmp("rule", self->rule->name)){//TODO: Remove this check by having two separate functions.
 		pattern = self->rule->children[2];
+		t->name = self->rule->children[0]->text;
 	}else{
 		pattern = self->rule->children[0];
 	}
@@ -258,17 +357,47 @@ const char *state_parse_rule(const state *self, ast *t, position *p){//These two
 			delete_ast(c);
 			return err;
 		}
+		merge_ast(t, c);
 	}
 	return NULL;
 }
 
-const char *state_parse_special(const state *self, ast *t, position *p){
-	return "NYI";
+const char *state_parse(const state *fsa, ast *t, position *p){
+	const char *err = fsa->parse(fsa, t, p);
+	if(err){
+		return err;
+	}else if(!is_end(p)){
+		return "EOF";
+	}
+	return NULL;
 }
 
-//TODO: Unit test this to bits, and be lenient on the extra layers generated by improper merging -- it's an error I anticipate and I've got bigger fish to fry.
-
-int main(void){
-	
+void delete_nonroot_fsa(state *fsa, size_t num_states){
+	for(state *s = fsa; s < fsa + num_states; ++s){
+		if(s->parse != state_parse_rule){
+			continue;
+		}
+		ast *pattern;
+		if(!strcmp("rule", s->rule->name)){
+			pattern = s->rule->children[2];
+		}else{
+			pattern = s->rule->children[0];
+		}
+		for(ast **group = pattern->children; group < pattern->children + pattern->size; ++group){
+			for(ast **option = (*group)->children; option < (*group)->children + (*group)->size; ++option){
+				ast *atom = (*option)->children[0];
+				if(!strcmp("state", atom->children[0]->name)){
+					atom->children[0]->text = NULL;
+				}
+			}
+		}
+		if(strcmp("rule", s->rule->name)){//s->rule->name == "parens"
+			delete_ast((ast*)s->rule);//discard const qualifier
+		}
+	}
+	free(special_states.states);
+	special_states.states = NULL;
+	special_states.cap = special_states.len = 0;
+	free(fsa);
 }
 

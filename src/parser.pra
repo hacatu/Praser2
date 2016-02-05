@@ -1,0 +1,27 @@
+start= rule*
+rule= name whitespace? assign whitespace? pattern newline
+name= [a-zA-Z0-9_]+
+assign= [:=<]
+pattern= group (whitespace? group)*
+group= option (whitespace? bar whitespace? option)*
+option= atom whitespace? quantifier?
+atom= parens | name | string | invset | charset
+quantifier= [+*?]
+parens= lparen whitespace? pattern whitespace? rparen
+invset= lbracket caret (setrange | setchar)* rbracket
+charset= lbracket (setrange | setchar)* rbracket
+setrange= setchar dash setchar
+setchar= [^\\\-\]] | esc_seq
+string= quote ([^\\"\n] | esc_seq)* quote
+whitespace: [ \t]+
+lparen: "("
+rparen: ")"
+lbracket: "["
+rbracket: "]"
+caret: "^"
+quote: "\""
+bar: "|"
+dash: "-"
+backslash: "\\"
+newline: "\n"
+esc_seq< special

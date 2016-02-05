@@ -1,4 +1,4 @@
-CFLAGS += -Iinclude -Llib
+CFLAGS += -Iinclude -Llib -g -Wall
 LDFLAGS += -Llib
 
 !cc = |> gcc $(CFLAGS) -c %f -o %o |>
