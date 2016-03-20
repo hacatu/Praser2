@@ -5,4 +5,5 @@ obj
 build.py
 umbrella.txt
 *.skip
+vgcore*
 

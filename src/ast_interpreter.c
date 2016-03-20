@@ -59,8 +59,14 @@ void _register_special_states(special_state s, ...){
 	qsort(special_states.states, special_states.len, sizeof(special_state), cmp_special_states);
 }
 
-static special_state find_special_parse_fn(const char *name){
+static special_state find_special_parse_fn(const ast *key){
+	char *name = calloc(key->length + 1, sizeof(char));
+	if(!name){
+		return (special_state){0};
+	}
+	memcpy(name, key->text, key->length*sizeof(char));
 	special_state *s = bsearch(&name, special_states.states, special_states.len, sizeof(special_state), cmp_special_states);
+	free(name);
 	if(!s){
 		return (special_state){0};
 	}
@@ -78,7 +84,7 @@ static int make_state(state *fsa, ast *r, size_t *u){
 				if(option->size == 1){
 					const ast *atom = option->children[0]->children[0];
 					if((!strcmp("name", atom->name)) && (!strncmp("special", atom->text, atom->length))){
-						special_state s = find_special_parse_fn(r->children[0]->text);
+						special_state s = find_special_parse_fn(r->children[0]);
 						if(!s.parse){
 							printf("No special state is registered for \"%*s\".\n", (int)r->children[0]->length, r->children[0]->text);
 							return 0;

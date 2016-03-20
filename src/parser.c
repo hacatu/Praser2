@@ -319,6 +319,8 @@ void clear_ast(ast *t){
 	free(t->children);
 	t->children = NULL;
 	t->size = 0;
+	free(t->text);
+	t->length = 0;
 }
 
 void log_err(const char *err, position p){
