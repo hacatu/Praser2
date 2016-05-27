@@ -1,7 +1,8 @@
-CFLAGS += -Iinclude -Llib -g -Wall
+CFLAGS += -Iinclude -Llib -g -Wall -fPIC
 LDFLAGS += -Llib
 
 !cc = |> gcc $(CFLAGS) -c %f -o %o |>
 !ld = |> gcc $(LDFLAGS) %f -o %o |>
 !ar = |> ar rcs %o %f |>
+!so = |> gcc -shared %f -o %o |>
 

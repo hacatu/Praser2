@@ -1,8 +1,12 @@
 include_rules
 
-: foreach src/*.c |> !cc |> obj/%B.o
-: obj/parser.o |> !ar |> lib/lib%B.a
-: obj/ast_interpreter.o |> !ar |> lib/lib%B.a
-: obj/parser_parser.o obj/parser_runner.o obj/ast_callback_print.o | lib/libparser.a |> gcc $(LDFLAGS) %f -o %o -lparser |> bin/run_parser_print
-: obj/parser_parser.o obj/parser_runner.o obj/ast_callback_interpret.o | lib/libparser.a lib/libast_interpreter.a |> gcc $(LDFLAGS) %f -o %o -lparser -last_interpreter |> bin/run_parser_interpret
+: foreach src/*.c |> !cc |> obj/%B.o {obj}
+: foreach src/modules/*.c |> !cc |> obj/modules/%B.o
+: foreach src/libs/*.c |> !cc |> obj/libs/%B.o
+: foreach obj/libs/*.o |> !ar |> lib/lib%B.a lib/<lib>
+: foreach obj/modules/*.o | lib/<lib> |> !so %<lib> |> lib/lib%B.so {mod}
+: obj/parser_runner.o | lib/<lib> {mod} |> gcc $(LDFLAGS) %f -o %o -Wl,-rpath=`pwd | sed -re "s&/.tup/mnt/@tupjob-[0-9]+([^/]|[/])*$&&"`/lib -lparser -last_compiler -last_interpreter -llanguage_generator -lavl -lsla -last_callback_stub -lstub_parser |> bin/parser_runner
+: src/parser.pra | bin/parser_runner {mod} |> ./parser_runner.sh parser compile %f %o |> src/modules/generated_parser.c
+: src/modules/generated_parser.c |> !cc |> obj/modules/%B.o
+: obj/modules/generated_parser.o | lib/<lib> |> !so %<lib> |> lib/lib%B.so
 

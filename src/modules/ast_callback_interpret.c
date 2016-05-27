@@ -18,7 +18,7 @@ int ast_callback(ast *r, int argc, char **argv){
 	}
 	size_t num_states;
 	register_special_states((special_state){"esc_seq", state_parse_esc_seq, NULL});
-	const state *fsa = ast_to_fsa(r, &num_states);
+	const state *fsa = ast_to_fsa(r, &num_states, 0);
 	if(!fsa){
 		fprintf(stderr, "ast_to_fsa failed.\n");
 		return 1;

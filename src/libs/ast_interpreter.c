@@ -13,8 +13,6 @@ struct{
 	special_state *states;
 } special_states;
 
-static const char *state_parse_rule(const state *self, ast*, position *p);
-
 void forall_ast_nodes_postorder(ast_fn f, ast *t, void *data){
 	for(size_t i = 0; i < t->size; ++i){
 		forall_ast_nodes_postorder(f, t->children[i], data);
@@ -73,7 +71,7 @@ static special_state find_special_parse_fn(const ast *key){
 	return *s;
 }
 
-static int make_state(state *fsa, ast *r, size_t *u){
+static int make_state(state *fsa, ast *r, size_t *u, int unbound_specials){
 	ast *pattern;
 	if(!strcmp("rule", r->name)){
 		pattern = r->children[2];
@@ -87,7 +85,9 @@ static int make_state(state *fsa, ast *r, size_t *u){
 						special_state s = find_special_parse_fn(r->children[0]);
 						if(!s.parse){
 							printf("No special state is registered for \"%*s\".\n", (int)r->children[0]->length, r->children[0]->text);
-							return 0;
+							if(!unbound_specials){
+								return 0;
+							}
 						}
 						fsa[(*u)++] = (state){.rule = r, .parse = s.parse, .gen = s.gen};
 						return 1;
@@ -104,7 +104,7 @@ static int make_state(state *fsa, ast *r, size_t *u){
 			if(!strcmp("parens", atom->children[0]->name)){
 				ast *newCall = alloc_ast();
 				*newCall = (ast){.name = "state", .text = (char*)(fsa + *u)};
-				make_state(fsa, atom->children[0], u);
+				make_state(fsa, atom->children[0], u, unbound_specials);
 				atom->children[0] = newCall;
 			}
 		}
@@ -191,7 +191,7 @@ static void canonicalize_used_text(size_t num_states, state *fsa){
 	}
 }
 
-const state *ast_to_fsa(ast *r, size_t *num_states){
+const state *ast_to_fsa(ast *r, size_t *num_states, int unbound_specials){
 	*num_states = 0;
 	forall_ast_nodes_postorder((ast_fn)ast_fn_count_outrules, r, num_states);
 	state *fsa = malloc(*num_states*sizeof(state));
@@ -200,7 +200,7 @@ const state *ast_to_fsa(ast *r, size_t *num_states){
 	}
 	size_t num_states_created = 0;
 	for(size_t i = 0; i < r->size; ++i){
-		if(!make_state(fsa, r->children[i], &num_states_created)){
+		if(!make_state(fsa, r->children[i], &num_states_created, unbound_specials)){
 			memset(fsa + num_states_created, 0, (*num_states - num_states_created)*sizeof(state));
 			delete_nonroot_fsa(fsa, *num_states);
 			*num_states = 0;
@@ -290,7 +290,7 @@ static const char *parse_option(const ast *option, ast *t, position *p){//TODO: 
 		return NULL;
 	}else if(*option->children[1]->text == '*'){
 		ast *c = alloc_ast();
-		while(!parse_atom(atom, t, p)){
+		while(!parse_atom(atom, c, p)){
 			merge_ast(t, c);
 			c = alloc_ast();
 			l = *p;

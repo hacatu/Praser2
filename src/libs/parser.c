@@ -189,6 +189,101 @@ int read_string(const char *a, ast *t, position *p){
 	add_text(t, s.curr, p->curr - s.curr);
 	return 1;
 }
+/*
+char str_getc_esc(const char **s){
+	if(*(*s)++ != '\\'){
+		return (*s)[-1];
+	}
+	char ret = 0;
+	switch(**s){
+	case 'a':
+		++*s;
+		return '\a';
+	case 'b':
+		++*s;
+		return '\b';
+	case 'e':
+		++*s;
+		return '\e';
+	case 'f':
+		++*s;
+		return '\f';
+	case 'n':
+		++*s;
+		return '\n';
+	case 'r':
+		++*s;
+		return '\r';
+	case 't':
+		++*s;
+		return '\t';
+	case 'v':
+		++*s;
+		return '\v';
+	case 'x':
+		++*s;
+		if('0' <= **s && **s <= '9'){
+			ret = (**s - '0') << 4;
+		}else if('A' <= **s && **s <= 'F'){
+			ret = (**s - 'A' + 10) << 4;
+		}else if('a' <= **s && **s <= 'f'){
+			ret = (**s - 'a' + 10) << 4;
+		}else{
+			return '\0';
+		}
+		++*s;
+		if('0' <= **s && **s <= '9'){
+			ret |= **s - '0';
+		}else if('A' <= **s && **s <= 'F'){
+			ret |= **s - 'A' + 10;
+		}else if('a' <= **s && **s <= 'f'){
+			ret |= **s - 'a' + 10;
+		}else{
+			return '\0';
+		}
+		++*s;
+		return ret;
+	default:
+		if('0' <= **s && **s <= '7'){
+			ret = (*(*s)++ - '0') << 6; 
+		}else{
+			return *(*s)++;
+		}
+		if('0' <= **s && **s <= '7'){
+			ret |= (*(*s)++ - '0') << 3;
+		}else{
+			return '\0';
+		}
+		return ('0' <= **s && **s <= '7') ? ret | (*(*s)++ - '0') : '\0';
+	}
+}
+*/
+int read_charset_prefix(const char *a, ast *t, position *p){
+	if(is_end(p)){
+		return 0;
+	}
+	int found = 0;
+	for(const char *s = a + 1; *s;){
+		++s;
+		if(s[-1] == '.'){
+			if(*p->curr == *s++){
+				found = 1;
+				break;
+			}
+		}else if(*s++ > *p->curr){
+			*s++;
+		}else if(*p->curr <= *s++){
+			found = 1;
+			break;
+		}
+	}
+	if(found ^ (*a == '-')){
+		add_text(t, p->curr, 1);
+		++p->curr;
+		return 1;
+	}
+	return 0;
+}
 
 int read_oneOf(const char *a, ast *t, position *p){
 	if(is_end(p)){

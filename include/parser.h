@@ -26,6 +26,8 @@ void add_text(ast *t, const char *a, size_t l);
 void set_tag(ast *t, const char *a);
 int read_setrange(char a, char b, ast *t, position *p);
 int read_string(const char *a, ast *t, position *p);
+char str_getc_esc(const char **s);
+int read_charset_prefix(const char *a, ast *t, position *p);
 int read_oneOf(const char *a, ast *t, position *p);
 int read_noneOf(const char *a, ast *t, position *p);
 int read_newline(position *p);

@@ -1,6 +1,8 @@
 #ifndef __SLA_H__
 #define __SLA_H__
 
+#include <stddef.h>
+
 typedef struct{
 	void **slabs, **elems;//slabs is an array of pointers to exponentially growing blocks; elems is an array used as a stack of pointers into them
 	size_t slabs_len, slab_size, elems_len, elems_cap, elem_size;

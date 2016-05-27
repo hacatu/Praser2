@@ -1,6 +1,7 @@
 #ifndef __AST_INTERPRETER_H__
 #define __AST_INTERPRETER_H__
 
+#include <stddef.h>
 #include <stdarg.h>
 #include "parser.h"
 
@@ -25,9 +26,11 @@ void forall_ast_nodes_postorder(ast_fn f, ast *t, void *data);
 
 void forall_ast_nodes_preorder(ast_fn f, ast *t, void *data);
 
-const state *ast_to_fsa(ast *r, size_t *num_states);
+const state *ast_to_fsa(ast *r, size_t *num_states, int unbound_specials);
 
 const char *state_parse(const state *fsa, ast*, position*);
+
+const char *state_parse_rule(const state *self, ast*, position *p);
 
 void delete_nonroot_fsa(state *fsa, size_t num_states);
 

@@ -1,6 +1,3 @@
-/* avl.c
- */
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "avl.h"
@@ -53,7 +50,8 @@ avl_node *avl_prev(avl_node *n){
 avl_node *avl_new(void *key, avl_node *left, avl_node *right, avl_node *parent, char balance, avl_ft *ft){
 	avl_node *ret = ft->alloc(ft->alloc_data);
 	if(ret){
-		*ret = (avl_node){key, left, right, parent, balance};
+		*ret = (avl_node){left, right, parent, balance};
+		memcpy(ret->data, key, ft->size);
 	}
 	return ret;
 }
@@ -380,7 +378,6 @@ void avl_delete(avl_node *r, avl_ft *ft){
 	if(!r)return;
 	avl_delete(r->left, ft);
 	avl_delete(r->right, ft);
-	ft->del(r->data);
 	ft->free(ft->alloc_data, r);
 }
 

@@ -1,24 +1,20 @@
 #ifndef __AVL_H__
 #define __AVL_H__
 
-typedef int (*avl_cmp_fn)(const void*, const void*);
-typedef void (*avl_del_fn)(void*);
-typedef void *(*avl_alloc_fn)(void*);//Types for allocator methods
-typedef void (*avl_free_fn)(void*, void*);//This typedef is named for what it should do; free does not match this signature.
+#include <stddef.h>
 
 typedef struct avl_node avl_node;
 struct avl_node{
-	void *data;
 	avl_node *left, *right, *parent;
 	signed char balance;
+	char data[];
 };
 
 typedef struct{//function table to hold function pointers and related data
-	avl_cmp_fn cmp;
-	avl_del_fn del;
-	avl_alloc_fn alloc;
-	avl_free_fn free;
-	avl_del_fn alloc_free;
+	size_t size;
+	int (*cmp)(const void*, const void*);
+	void *(*alloc)(void*);
+	void (*free)(void*, void*);
 	void *alloc_data;
 } avl_ft;
 
