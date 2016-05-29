@@ -11,12 +11,12 @@ const char *name_parser(ast*, position*);
 static const char name_tag[] = "name";
 const char *assign_parser(ast*, position*);
 static const char assign_tag[] = "assign";
-const char *gen0XFFFF8007D73BA08C_parser(ast*, position*);
-static const char gen0XFFFF8007D73BA08C_tag[] = "gen0XFFFF8007D73BA08C";
+const char *gen0XFFFF801CB899373C_parser(ast*, position*);
+static const char gen0XFFFF801CB899373C_tag[] = "gen0XFFFF801CB899373C";
 const char *pattern_parser(ast*, position*);
 static const char pattern_tag[] = "pattern";
-const char *gen0XFFFF8007D73BA0BC_parser(ast*, position*);
-static const char gen0XFFFF8007D73BA0BC_tag[] = "gen0XFFFF8007D73BA0BC";
+const char *gen0XFFFF801CB899376C_parser(ast*, position*);
+static const char gen0XFFFF801CB899376C_tag[] = "gen0XFFFF801CB899376C";
 const char *group_parser(ast*, position*);
 static const char group_tag[] = "group";
 const char *option_parser(ast*, position*);
@@ -27,20 +27,20 @@ const char *quantifier_parser(ast*, position*);
 static const char quantifier_tag[] = "quantifier";
 const char *parens_parser(ast*, position*);
 static const char parens_tag[] = "parens";
-const char *gen0XFFFF8007D73BA14C_parser(ast*, position*);
-static const char gen0XFFFF8007D73BA14C_tag[] = "gen0XFFFF8007D73BA14C";
+const char *gen0XFFFF801CB89937FC_parser(ast*, position*);
+static const char gen0XFFFF801CB89937FC_tag[] = "gen0XFFFF801CB89937FC";
 const char *invset_parser(ast*, position*);
 static const char invset_tag[] = "invset";
-const char *gen0XFFFF8007D73BA17C_parser(ast*, position*);
-static const char gen0XFFFF8007D73BA17C_tag[] = "gen0XFFFF8007D73BA17C";
+const char *gen0XFFFF801CB899382C_parser(ast*, position*);
+static const char gen0XFFFF801CB899382C_tag[] = "gen0XFFFF801CB899382C";
 const char *charset_parser(ast*, position*);
 static const char charset_tag[] = "charset";
 const char *setrange_parser(ast*, position*);
 static const char setrange_tag[] = "setrange";
 const char *setchar_parser(ast*, position*);
 static const char setchar_tag[] = "setchar";
-const char *gen0XFFFF8007D73BA1DC_parser(ast*, position*);
-static const char gen0XFFFF8007D73BA1DC_tag[] = "gen0XFFFF8007D73BA1DC";
+const char *gen0XFFFF801CB899388C_parser(ast*, position*);
+static const char gen0XFFFF801CB899388C_tag[] = "gen0XFFFF801CB899388C";
 const char *string_parser(ast*, position*);
 static const char string_tag[] = "string";
 const char *whitespace_parser(ast*, position*);
@@ -70,7 +70,6 @@ const char *start_parser(ast *t, position *p){
 	set_tag(t, start_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
@@ -102,7 +101,6 @@ const char *rule_parser(ast *t, position *p){
 	set_tag(t, rule_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = name_parser(r, p);
@@ -118,7 +116,6 @@ const char *rule_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -135,7 +132,6 @@ const char *rule_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = assign_parser(r, p);
@@ -151,7 +147,6 @@ const char *rule_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -168,7 +163,6 @@ const char *rule_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = pattern_parser(r, p);
@@ -184,7 +178,6 @@ const char *rule_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = newline_parser(r, p);
@@ -201,7 +194,6 @@ const char *name_parser(ast *t, position *p){
 	set_tag(t, name_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
@@ -231,7 +223,6 @@ const char *assign_parser(ast *t, position *p){
 	set_tag(t, assign_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_charset_prefix("+.:.=.<", t, p) ? NULL : "+.:.=.<";
 		}
@@ -242,11 +233,10 @@ const char *assign_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8007D73BA08C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8007D73BA08C_tag);
+const char *gen0XFFFF801CB899373C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF801CB899373C_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -263,7 +253,6 @@ const char *gen0XFFFF8007D73BA08C_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = group_parser(r, p);
@@ -284,7 +273,6 @@ const char *pattern_parser(ast *t, position *p){
 	set_tag(t, pattern_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = group_parser(r, p);
@@ -300,14 +288,13 @@ const char *pattern_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8007D73BA08C_parser(c, p);
+				err = gen0XFFFF801CB899373C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -322,11 +309,10 @@ const char *pattern_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8007D73BA0BC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8007D73BA0BC_tag);
+const char *gen0XFFFF801CB899376C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF801CB899376C_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -343,7 +329,6 @@ const char *gen0XFFFF8007D73BA0BC_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = bar_parser(r, p);
@@ -355,7 +340,6 @@ const char *gen0XFFFF8007D73BA0BC_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -372,7 +356,6 @@ const char *gen0XFFFF8007D73BA0BC_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = option_parser(r, p);
@@ -393,7 +376,6 @@ const char *group_parser(ast *t, position *p){
 	set_tag(t, group_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = option_parser(r, p);
@@ -409,14 +391,13 @@ const char *group_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8007D73BA0BC_parser(c, p);
+				err = gen0XFFFF801CB899376C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -435,7 +416,6 @@ const char *option_parser(ast *t, position *p){
 	set_tag(t, option_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = atom_parser(r, p);
@@ -451,7 +431,6 @@ const char *option_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -468,7 +447,6 @@ const char *option_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = alloc_ast();
@@ -583,7 +561,6 @@ const char *quantifier_parser(ast *t, position *p){
 	set_tag(t, quantifier_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_charset_prefix("+.+.*.?", t, p) ? NULL : "+.+.*.?";
 		}
@@ -598,7 +575,6 @@ const char *parens_parser(ast *t, position *p){
 	set_tag(t, parens_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = lparen_parser(r, p);
@@ -610,7 +586,6 @@ const char *parens_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -627,7 +602,6 @@ const char *parens_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = pattern_parser(r, p);
@@ -643,7 +617,6 @@ const char *parens_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l = *p;
 				ast *r = &(ast){0};
@@ -660,7 +633,6 @@ const char *parens_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = rparen_parser(r, p);
@@ -673,8 +645,8 @@ const char *parens_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8007D73BA14C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8007D73BA14C_tag);
+const char *gen0XFFFF801CB89937FC_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF801CB89937FC_tag);
 	do{
 		const char *err, *terr;
 		position s = *p, e;
@@ -721,7 +693,6 @@ const char *invset_parser(ast *t, position *p){
 	set_tag(t, invset_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = lbracket_parser(r, p);
@@ -733,7 +704,6 @@ const char *invset_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = caret_parser(r, p);
@@ -745,14 +715,13 @@ const char *invset_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8007D73BA14C_parser(c, p);
+				err = gen0XFFFF801CB89937FC_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -766,7 +735,6 @@ const char *invset_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = rbracket_parser(r, p);
@@ -779,8 +747,8 @@ const char *invset_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8007D73BA17C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8007D73BA17C_tag);
+const char *gen0XFFFF801CB899382C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF801CB899382C_tag);
 	do{
 		const char *err, *terr;
 		position s = *p, e;
@@ -827,7 +795,6 @@ const char *charset_parser(ast *t, position *p){
 	set_tag(t, charset_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = lbracket_parser(r, p);
@@ -839,14 +806,13 @@ const char *charset_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8007D73BA17C_parser(c, p);
+				err = gen0XFFFF801CB899382C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -860,7 +826,6 @@ const char *charset_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = rbracket_parser(r, p);
@@ -877,7 +842,6 @@ const char *setrange_parser(ast *t, position *p){
 	set_tag(t, setrange_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = setchar_parser(r, p);
@@ -893,7 +857,6 @@ const char *setrange_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = dash_parser(r, p);
@@ -905,7 +868,6 @@ const char *setrange_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = alloc_ast();
 				err = setchar_parser(r, p);
@@ -954,8 +916,8 @@ const char *setchar_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8007D73BA1DC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8007D73BA1DC_tag);
+const char *gen0XFFFF801CB899388C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF801CB899388C_tag);
 	do{
 		const char *err, *terr;
 		position s = *p, e;
@@ -990,7 +952,6 @@ const char *string_parser(ast *t, position *p){
 	set_tag(t, string_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = quote_parser(r, p);
@@ -1002,14 +963,13 @@ const char *string_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8007D73BA1DC_parser(c, p);
+				err = gen0XFFFF801CB899388C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1023,7 +983,6 @@ const char *string_parser(ast *t, position *p){
 	}
 	{
 		const char *err;
-		position s = *p;
 		{
 				ast *r = &(ast){0};
 				err = quote_parser(r, p);
@@ -1040,7 +999,6 @@ const char *whitespace_parser(ast *t, position *p){
 	set_tag(t, whitespace_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 			position l;
 			ast *c;
@@ -1070,7 +1028,6 @@ const char *lparen_parser(ast *t, position *p){
 	set_tag(t, lparen_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("(", t, p) ? NULL : "(";
 		}
@@ -1085,7 +1042,6 @@ const char *rparen_parser(ast *t, position *p){
 	set_tag(t, rparen_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string(")", t, p) ? NULL : ")";
 		}
@@ -1100,7 +1056,6 @@ const char *lbracket_parser(ast *t, position *p){
 	set_tag(t, lbracket_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("[", t, p) ? NULL : "[";
 		}
@@ -1115,7 +1070,6 @@ const char *rbracket_parser(ast *t, position *p){
 	set_tag(t, rbracket_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("]", t, p) ? NULL : "]";
 		}
@@ -1130,7 +1084,6 @@ const char *caret_parser(ast *t, position *p){
 	set_tag(t, caret_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("^", t, p) ? NULL : "^";
 		}
@@ -1145,7 +1098,6 @@ const char *quote_parser(ast *t, position *p){
 	set_tag(t, quote_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("\"", t, p) ? NULL : "\"";
 		}
@@ -1160,7 +1112,6 @@ const char *bar_parser(ast *t, position *p){
 	set_tag(t, bar_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("|", t, p) ? NULL : "|";
 		}
@@ -1175,7 +1126,6 @@ const char *dash_parser(ast *t, position *p){
 	set_tag(t, dash_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("-", t, p) ? NULL : "-";
 		}
@@ -1190,7 +1140,6 @@ const char *backslash_parser(ast *t, position *p){
 	set_tag(t, backslash_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("\\", t, p) ? NULL : "\\";
 		}
@@ -1205,7 +1154,6 @@ const char *newline_parser(ast *t, position *p){
 	set_tag(t, newline_tag);
 	{
 		const char *err;
-		position s = *p;
 		{
 				err = read_string("\n", t, p) ? NULL : "\n";
 		}

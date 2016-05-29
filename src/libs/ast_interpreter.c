@@ -40,7 +40,7 @@ static int cmp_special_states(const void *a, const void *b){
 void _register_special_states(special_state s, ...){
 	va_list args;
 	va_start(args, s);
-	for(; s.parse; s = va_arg(args, special_state)){
+	for(; s.name; s = va_arg(args, special_state)){
 		if(special_states.len == special_states.cap){
 			size_t cap = special_states.cap ? 1.6*special_states.cap : 2;
 			special_state *tmp = realloc(special_states.states, cap*sizeof(special_state));
@@ -83,7 +83,7 @@ static int make_state(state *fsa, ast *r, size_t *u, int unbound_specials){
 					const ast *atom = option->children[0]->children[0];
 					if((!strcmp("name", atom->name)) && (!strncmp("special", atom->text, atom->length))){
 						special_state s = find_special_parse_fn(r->children[0]);
-						if(!s.parse){
+						if(!s.name){
 							printf("No special state is registered for \"%*s\".\n", (int)r->children[0]->length, r->children[0]->text);
 							if(!unbound_specials){
 								return 0;
@@ -109,7 +109,7 @@ static int make_state(state *fsa, ast *r, size_t *u, int unbound_specials){
 			}
 		}
 	}
-	fsa[(*u)++] = (state){.rule = r, .parse = state_parse_rule};
+	fsa[(*u)++] = (state){.rule = r, .parse = state_parse_rule, .gen = state_gen_rule};
 	return 1;
 }
 

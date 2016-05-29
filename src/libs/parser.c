@@ -271,7 +271,7 @@ int read_charset_prefix(const char *a, ast *t, position *p){
 				break;
 			}
 		}else if(*s++ > *p->curr){
-			*s++;
+			s++;
 		}else if(*p->curr <= *s++){
 			found = 1;
 			break;
@@ -414,7 +414,8 @@ void clear_ast(ast *t){
 	free(t->children);
 	t->children = NULL;
 	t->size = 0;
-	free(t->text);
+	free((char*)t->text);
+	t->text = NULL;
 	t->length = 0;
 }
 

@@ -3,12 +3,13 @@
 
 #include <stddef.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include "parser.h"
 
 typedef void (*ast_fn)(ast*, void*);
 typedef struct state state;
 typedef const char *(*state_parse_fn)(const state*, ast*, position*);
-typedef void (*state_gen_fn)(const state*, position*);
+typedef void (*state_gen_fn)(const state*, FILE*);
 
 typedef struct{
 	const char *name;
@@ -31,6 +32,8 @@ const state *ast_to_fsa(ast *r, size_t *num_states, int unbound_specials);
 const char *state_parse(const state *fsa, ast*, position*);
 
 const char *state_parse_rule(const state *self, ast*, position *p);
+
+void state_gen_rule(const state *self, FILE *out);
 
 void delete_nonroot_fsa(state *fsa, size_t num_states);
 

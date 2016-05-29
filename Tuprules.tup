@@ -1,4 +1,4 @@
-CFLAGS += -Iinclude -Llib -g -Wall -fPIC
+CFLAGS += -Iinclude -Llib -g -Wall -Wno-switch -fPIC
 LDFLAGS += -Llib
 
 !cc = |> gcc $(CFLAGS) -c %f -o %o |>

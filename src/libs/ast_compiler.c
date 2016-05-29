@@ -184,8 +184,7 @@ group_post2_fmt[] =
 	"\t}while(0);\n",
 group_singular_pre_fmt[] =
 	"\t{\n"
-		"\t\tconst char *err;\n"
-		"\t\tposition s = *p;\n",
+		"\t\tconst char *err;\n",
 		//[atom_quantified (err=err)]
 group_singular_post_fmt[] =
 		"\t\tif(err){\n"
@@ -496,7 +495,7 @@ static char *charset_spec_add(char *s, char c){
 
 void write_atom_string(FILE *f, const ast *atom, const char *err, const char *t){
 	char *buf = calloc(1 + 4*strlen(atom->text), sizeof(char));
-	for(const char *c = atom->text, *out = buf; *c; ++c){
+	for(char *c = (char*)atom->text, *out = buf; *c; ++c){
 		out = charset_spec_add(out, *c);
 	}
 	fprintf(f, atom_string_fmt, err, t, buf);//WARNING: text might not be null terminated.  It isn't normally but I think I fix the strings in ast_interpreter
