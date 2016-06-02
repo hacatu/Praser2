@@ -2,27 +2,13 @@ start= statement*
 statement= label_tag? bare_statement whitespace? semicolon
 bare_statement= (expr whitespace? comma)* expr?
 label_tag= whitespace? identifier whitespace? colon colon whitespace?
-expr= whitespace? expr10
-expr10= expr9 (whitespace? op10 whitespace? expr9)*
-op10< "->" | "=" | "$=" | "*=" | "/=" | "%=" | "<<=" | ">>=" | "+=" | "-=" | "&=" | "|=" | "^=" | "~&=" | "~|=" | "~^=" | "&&=" | "||=" | "^^=" | "!&&=" | "!||=" | "!^^="
-expr9= expr8 (whitespace? op9 whitespace? expr8)*
-op9< "&&" | "||" | "^^" | "!&&" | "!||" | "!^^"
-expr8= expr7 (whitespace? op8 whitespace? expr7)*
-op8< "<=>" | ">=" | "<=" | "==" | "!=" | "<-" | ">" | "<"
-expr7= expr6 (whitespace? op7 whitespace? expr6)*
-op7< "&" | "|" | "^" | "~&" | "~|" "~^"
-expr6= expr5 (whitespace? op6 whitespace? expr5)*
-op6< "+" | "-"
-expr5= expr4 (whitespace? op5 whitespace? expr4)*
-op5< "<<" | ">>"
-expr4= expr3 (whitespace? op4 whitespace? expr3)*
-op4< "*" | "/" | "%"
-expr3= expr2 (whitespace? op3 whitespace? expr2)*
-op3< "$" | ":"
-expr2= (whitespace? op2)* whitespace? expr1
-op2< "++" | "--" | "+" | "-" | "!" | "~" | "*" | "&"
-expr1= expr0 (whitespace? op1)* whitespace?
-op1< "++" | "--" | ".." | "?" | param_parens | list | access | declaration
+expr= whitespace? expr_infix
+expr_infix= expr_prefix (whitespace? op_infix whitespace? expr_prefix)*
+op_infix< "->"|"$="|"*="|"/="|"%="|"<<="|">>="|"+="|"-="|"&="|"|="|"^="|"~&="|"~|="| "~^="|"&&="|"||="|"^^="|"!&&="|"!||="|"!^^="|"&&"|"||"|"^^"|"!&&"|"!||"|"!^^"|"<<"|">>"|"<=>"|">="|"<="|"=="|"!="|"<-"|">"|"<"|"="|"&"|"|"|"^"|"~&"|"~|"|"~^"|"+"|"-"|"*"|"/"|"%"|"$"|":"
+expr_prefix= (whitespace? op_prefix)* whitespace? expr_postfix
+op_prefix< "++"|"--"|"+"|"-"|"!"|"~"|"*"|"&"
+expr_postfix= expr0 (whitespace? op_postfix)* whitespace?
+op_postfix< "++"|"--"|".."|"?"|param_parens|list|access|declaration
 expr0< declaration | atom
 access= dot identifier
 declaration= at atom

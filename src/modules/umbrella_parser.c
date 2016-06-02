@@ -7,74 +7,32 @@ const char *start_parser(ast*, position*);
 static const char start_tag[] = "start";
 const char *statement_parser(ast*, position*);
 static const char statement_tag[] = "statement";
-const char *gen0XFFFF8090FFA2705C_parser(ast*, position*);
-static const char gen0XFFFF8090FFA2705C_tag[] = "gen0XFFFF8090FFA2705C";
+const char *gen0XFFFF8092F3835F2C_parser(ast*, position*);
+static const char gen0XFFFF8092F3835F2C_tag[] = "gen0XFFFF8092F3835F2C";
 const char *bare_statement_parser(ast*, position*);
 static const char bare_statement_tag[] = "bare_statement";
 const char *label_tag_parser(ast*, position*);
 static const char label_tag_tag[] = "label_tag";
 const char *expr_parser(ast*, position*);
 static const char expr_tag[] = "expr";
-const char *gen0XFFFF8090FFA270BC_parser(ast*, position*);
-static const char gen0XFFFF8090FFA270BC_tag[] = "gen0XFFFF8090FFA270BC";
-const char *expr10_parser(ast*, position*);
-static const char expr10_tag[] = "expr10";
-const char *op10_parser(ast*, position*);
-static const char op10_tag[] = "op10";
-const char *gen0XFFFF8090FFA27104_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27104_tag[] = "gen0XFFFF8090FFA27104";
-const char *expr9_parser(ast*, position*);
-static const char expr9_tag[] = "expr9";
-const char *op9_parser(ast*, position*);
-static const char op9_tag[] = "op9";
-const char *gen0XFFFF8090FFA2714C_parser(ast*, position*);
-static const char gen0XFFFF8090FFA2714C_tag[] = "gen0XFFFF8090FFA2714C";
-const char *expr8_parser(ast*, position*);
-static const char expr8_tag[] = "expr8";
-const char *op8_parser(ast*, position*);
-static const char op8_tag[] = "op8";
-const char *gen0XFFFF8090FFA27194_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27194_tag[] = "gen0XFFFF8090FFA27194";
-const char *expr7_parser(ast*, position*);
-static const char expr7_tag[] = "expr7";
-const char *op7_parser(ast*, position*);
-static const char op7_tag[] = "op7";
-const char *gen0XFFFF8090FFA271DC_parser(ast*, position*);
-static const char gen0XFFFF8090FFA271DC_tag[] = "gen0XFFFF8090FFA271DC";
-const char *expr6_parser(ast*, position*);
-static const char expr6_tag[] = "expr6";
-const char *op6_parser(ast*, position*);
-static const char op6_tag[] = "op6";
-const char *gen0XFFFF8090FFA27224_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27224_tag[] = "gen0XFFFF8090FFA27224";
-const char *expr5_parser(ast*, position*);
-static const char expr5_tag[] = "expr5";
-const char *op5_parser(ast*, position*);
-static const char op5_tag[] = "op5";
-const char *gen0XFFFF8090FFA2726C_parser(ast*, position*);
-static const char gen0XFFFF8090FFA2726C_tag[] = "gen0XFFFF8090FFA2726C";
-const char *expr4_parser(ast*, position*);
-static const char expr4_tag[] = "expr4";
-const char *op4_parser(ast*, position*);
-static const char op4_tag[] = "op4";
-const char *gen0XFFFF8090FFA272B4_parser(ast*, position*);
-static const char gen0XFFFF8090FFA272B4_tag[] = "gen0XFFFF8090FFA272B4";
-const char *expr3_parser(ast*, position*);
-static const char expr3_tag[] = "expr3";
-const char *op3_parser(ast*, position*);
-static const char op3_tag[] = "op3";
-const char *gen0XFFFF8090FFA272FC_parser(ast*, position*);
-static const char gen0XFFFF8090FFA272FC_tag[] = "gen0XFFFF8090FFA272FC";
-const char *expr2_parser(ast*, position*);
-static const char expr2_tag[] = "expr2";
-const char *op2_parser(ast*, position*);
-static const char op2_tag[] = "op2";
-const char *gen0XFFFF8090FFA27344_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27344_tag[] = "gen0XFFFF8090FFA27344";
-const char *expr1_parser(ast*, position*);
-static const char expr1_tag[] = "expr1";
-const char *op1_parser(ast*, position*);
-static const char op1_tag[] = "op1";
+const char *gen0XFFFF8092F3835F8C_parser(ast*, position*);
+static const char gen0XFFFF8092F3835F8C_tag[] = "gen0XFFFF8092F3835F8C";
+const char *expr_infix_parser(ast*, position*);
+static const char expr_infix_tag[] = "expr_infix";
+const char *op_infix_parser(ast*, position*);
+static const char op_infix_tag[] = "op_infix";
+const char *gen0XFFFF8092F3835FD4_parser(ast*, position*);
+static const char gen0XFFFF8092F3835FD4_tag[] = "gen0XFFFF8092F3835FD4";
+const char *expr_prefix_parser(ast*, position*);
+static const char expr_prefix_tag[] = "expr_prefix";
+const char *op_prefix_parser(ast*, position*);
+static const char op_prefix_tag[] = "op_prefix";
+const char *gen0XFFFF8092F383601C_parser(ast*, position*);
+static const char gen0XFFFF8092F383601C_tag[] = "gen0XFFFF8092F383601C";
+const char *expr_postfix_parser(ast*, position*);
+static const char expr_postfix_tag[] = "expr_postfix";
+const char *op_postfix_parser(ast*, position*);
+static const char op_postfix_tag[] = "op_postfix";
 const char *expr0_parser(ast*, position*);
 static const char expr0_tag[] = "expr0";
 const char *access_parser(ast*, position*);
@@ -95,8 +53,8 @@ const char *literal_parser(ast*, position*);
 static const char literal_tag[] = "literal";
 const char *parens_parser(ast*, position*);
 static const char parens_tag[] = "parens";
-const char *gen0XFFFF8090FFA2747C_parser(ast*, position*);
-static const char gen0XFFFF8090FFA2747C_tag[] = "gen0XFFFF8090FFA2747C";
+const char *gen0XFFFF8092F3836154_parser(ast*, position*);
+static const char gen0XFFFF8092F3836154_tag[] = "gen0XFFFF8092F3836154";
 const char *compound_statement_parser(ast*, position*);
 static const char compound_statement_tag[] = "compound_statement";
 const char *dict_parser(ast*, position*);
@@ -105,20 +63,20 @@ const char *block_parser(ast*, position*);
 static const char block_tag[] = "block";
 const char *int_parser(ast*, position*);
 static const char int_tag[] = "int";
-const char *gen0XFFFF8090FFA274F4_parser(ast*, position*);
-static const char gen0XFFFF8090FFA274F4_tag[] = "gen0XFFFF8090FFA274F4";
+const char *gen0XFFFF8092F38361CC_parser(ast*, position*);
+static const char gen0XFFFF8092F38361CC_tag[] = "gen0XFFFF8092F38361CC";
 const char *int_b_parser(ast*, position*);
 static const char int_b_tag[] = "int_b";
-const char *gen0XFFFF8090FFA27524_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27524_tag[] = "gen0XFFFF8090FFA27524";
+const char *gen0XFFFF8092F38361FC_parser(ast*, position*);
+static const char gen0XFFFF8092F38361FC_tag[] = "gen0XFFFF8092F38361FC";
 const char *int_o_parser(ast*, position*);
 static const char int_o_tag[] = "int_o";
-const char *gen0XFFFF8090FFA27554_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27554_tag[] = "gen0XFFFF8090FFA27554";
+const char *gen0XFFFF8092F383622C_parser(ast*, position*);
+static const char gen0XFFFF8092F383622C_tag[] = "gen0XFFFF8092F383622C";
 const char *int_h_parser(ast*, position*);
 static const char int_h_tag[] = "int_h";
-const char *gen0XFFFF8090FFA27584_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27584_tag[] = "gen0XFFFF8090FFA27584";
+const char *gen0XFFFF8092F383625C_parser(ast*, position*);
+static const char gen0XFFFF8092F383625C_tag[] = "gen0XFFFF8092F383625C";
 const char *int_d_parser(ast*, position*);
 static const char int_d_tag[] = "int_d";
 const char *float_parser(ast*, position*);
@@ -129,18 +87,18 @@ const char *subnormal_parser(ast*, position*);
 static const char subnormal_tag[] = "subnormal";
 const char *normal_parser(ast*, position*);
 static const char normal_tag[] = "normal";
-const char *gen0XFFFF8090FFA27614_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27614_tag[] = "gen0XFFFF8090FFA27614";
-const char *gen0XFFFF8090FFA2762C_parser(ast*, position*);
-static const char gen0XFFFF8090FFA2762C_tag[] = "gen0XFFFF8090FFA2762C";
+const char *gen0XFFFF8092F38362EC_parser(ast*, position*);
+static const char gen0XFFFF8092F38362EC_tag[] = "gen0XFFFF8092F38362EC";
+const char *gen0XFFFF8092F3836304_parser(ast*, position*);
+static const char gen0XFFFF8092F3836304_tag[] = "gen0XFFFF8092F3836304";
 const char *complex_parser(ast*, position*);
 static const char complex_tag[] = "complex";
 const char *string_parser(ast*, position*);
 static const char string_tag[] = "string";
 const char *char_parser(ast*, position*);
 static const char char_tag[] = "char";
-const char *gen0XFFFF8090FFA2768C_parser(ast*, position*);
-static const char gen0XFFFF8090FFA2768C_tag[] = "gen0XFFFF8090FFA2768C";
+const char *gen0XFFFF8092F3836364_parser(ast*, position*);
+static const char gen0XFFFF8092F3836364_tag[] = "gen0XFFFF8092F3836364";
 const char *whitespace_parser(ast*, position*);
 static const char whitespace_tag[] = "whitespace";
 const char *space_parser(ast*, position*);
@@ -149,8 +107,8 @@ const char *single_comment_parser(ast*, position*);
 static const char single_comment_tag[] = "single_comment";
 const char *multi_comment_parser(ast*, position*);
 static const char multi_comment_tag[] = "multi_comment";
-const char *gen0XFFFF8090FFA27704_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27704_tag[] = "gen0XFFFF8090FFA27704";
+const char *gen0XFFFF8092F38363DC_parser(ast*, position*);
+static const char gen0XFFFF8092F38363DC_tag[] = "gen0XFFFF8092F38363DC";
 const char *block_comment_parser(ast*, position*);
 static const char block_comment_tag[] = "block_comment";
 const char *semicolon_parser(ast*, position*);
@@ -193,8 +151,8 @@ const char *E_parser(ast*, position*);
 static const char E_tag[] = "E";
 const char *pound_parser(ast*, position*);
 static const char pound_tag[] = "pound";
-const char *gen0XFFFF8090FFA27914_parser(ast*, position*);
-static const char gen0XFFFF8090FFA27914_tag[] = "gen0XFFFF8090FFA27914";
+const char *gen0XFFFF8092F38365EC_parser(ast*, position*);
+static const char gen0XFFFF8092F38365EC_tag[] = "gen0XFFFF8092F38365EC";
 const char *schar_parser(ast*, position*);
 static const char schar_tag[] = "schar";
 const char *_implicit___parser(ast*, position*);
@@ -298,8 +256,8 @@ const char *statement_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA2705C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA2705C_tag);
+const char *gen0XFFFF8092F3835F2C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F3835F2C_tag);
 	{
 		const char *err = NULL;
 		{
@@ -355,7 +313,7 @@ const char *bare_statement_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA2705C_parser(c, p);
+				err = gen0XFFFF8092F3835F2C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -502,7 +460,7 @@ const char *expr_parser(ast *t, position *p){
 		const char *err = NULL;
 		{
 				ast *r = alloc_ast();
-				err = expr10_parser(r, p);
+				err = expr_infix_parser(r, p);
 				if(err){
 					delete_ast(r);
 				}else{
@@ -516,8 +474,8 @@ const char *expr_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA270BC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA270BC_tag);
+const char *gen0XFFFF8092F3835F8C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F3835F8C_tag);
 	{
 		const char *err = NULL;
 		{
@@ -537,7 +495,7 @@ const char *gen0XFFFF8090FFA270BC_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				err = op10_parser(t, p);
+				err = op_infix_parser(t, p);
 		}
 		if(err){
 			return err;
@@ -563,7 +521,7 @@ const char *gen0XFFFF8090FFA270BC_parser(ast *t, position *p){
 		const char *err = NULL;
 		{
 				ast *r = alloc_ast();
-				err = expr9_parser(r, p);
+				err = expr_prefix_parser(r, p);
 				if(err){
 					delete_ast(r);
 				}else{
@@ -577,13 +535,13 @@ const char *gen0XFFFF8090FFA270BC_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *expr10_parser(ast *t, position *p){
-	set_tag(t, expr10_tag);
+const char *expr_infix_parser(ast *t, position *p){
+	set_tag(t, expr_infix_tag);
 	{
 		const char *err = NULL;
 		{
 				ast *r = alloc_ast();
-				err = expr9_parser(r, p);
+				err = expr_prefix_parser(r, p);
 				if(err){
 					delete_ast(r);
 				}else{
@@ -602,7 +560,7 @@ const char *expr10_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA270BC_parser(c, p);
+				err = gen0XFFFF8092F3835F8C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -617,22 +575,13 @@ const char *expr10_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *op10_parser(ast *t, position *p){
-	set_tag(t, op10_tag);
+const char *op_infix_parser(ast *t, position *p){
+	set_tag(t, op_infix_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
 		{
 				terr = read_string("->", t, p) ? NULL : "->";
-		}
-		if(!terr){break;}
-		if(p->curr > s.curr){
-			err = terr;
-			e = *p;
-			*p = s;
-		}
-		{
-				terr = read_string("=", t, p) ? NULL : "=";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
@@ -820,121 +769,6 @@ const char *op10_parser(ast *t, position *p){
 			e = *p;
 			*p = s;
 		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA27104_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27104_tag);
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				err = op9_parser(t, p);
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr8_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr9_parser(ast *t, position *p){
-	set_tag(t, expr9_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr8_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA27104_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op9_parser(ast *t, position *p){
-	set_tag(t, op9_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
 		{
 				terr = read_string("&&", t, p) ? NULL : "&&";
 		}
@@ -989,121 +823,24 @@ const char *op9_parser(ast *t, position *p){
 			e = *p;
 			*p = s;
 		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA2714C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA2714C_tag);
-	{
-		const char *err = NULL;
 		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
+				terr = read_string("<<", t, p) ? NULL : "<<";
 		}
-		if(err){
-			return err;
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			err = terr;
+			e = *p;
+			*p = s;
 		}
-	}
-	{
-		const char *err = NULL;
 		{
-				err = op8_parser(t, p);
+				terr = read_string(">>", t, p) ? NULL : ">>";
 		}
-		if(err){
-			return err;
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			err = terr;
+			e = *p;
+			*p = s;
 		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr7_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr8_parser(ast *t, position *p){
-	set_tag(t, expr8_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr7_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA2714C_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op8_parser(ast *t, position *p){
-	set_tag(t, op8_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
 		{
 				terr = read_string("<=>", t, p) ? NULL : "<=>";
 		}
@@ -1176,121 +913,15 @@ const char *op8_parser(ast *t, position *p){
 			e = *p;
 			*p = s;
 		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA27194_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27194_tag);
-	{
-		const char *err = NULL;
 		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
+				terr = read_string("=", t, p) ? NULL : "=";
 		}
-		if(err){
-			return err;
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			err = terr;
+			e = *p;
+			*p = s;
 		}
-	}
-	{
-		const char *err = NULL;
-		{
-				err = op7_parser(t, p);
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr6_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr7_parser(ast *t, position *p){
-	set_tag(t, expr7_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr6_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA27194_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op7_parser(ast *t, position *p){
-	set_tag(t, op7_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
 		{
 				terr = read_string("&", t, p) ? NULL : "&";
 		}
@@ -1336,130 +967,15 @@ const char *op7_parser(ast *t, position *p){
 			e = *p;
 			*p = s;
 		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	{
-		const char *err = NULL;
 		{
-				err = read_string("~^", t, p) ? NULL : "~^";
+				terr = read_string("~^", t, p) ? NULL : "~^";
 		}
-		if(err){
-			return err;
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			err = terr;
+			e = *p;
+			*p = s;
 		}
-	}
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA271DC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA271DC_tag);
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				err = op6_parser(t, p);
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr5_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr6_parser(ast *t, position *p){
-	set_tag(t, expr6_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr5_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA271DC_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op6_parser(ast *t, position *p){
-	set_tag(t, op6_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
 		{
 				terr = read_string("+", t, p) ? NULL : "+";
 		}
@@ -1478,254 +994,6 @@ const char *op6_parser(ast *t, position *p){
 			e = *p;
 			*p = s;
 		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA27224_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27224_tag);
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				err = op5_parser(t, p);
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr4_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr5_parser(ast *t, position *p){
-	set_tag(t, expr5_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr4_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA27224_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op5_parser(ast *t, position *p){
-	set_tag(t, op5_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
-		{
-				terr = read_string("<<", t, p) ? NULL : "<<";
-		}
-		if(!terr){break;}
-		if(p->curr > s.curr){
-			err = terr;
-			e = *p;
-			*p = s;
-		}
-		{
-				terr = read_string(">>", t, p) ? NULL : ">>";
-		}
-		if(!terr){break;}
-		if(p->curr > s.curr){
-			err = terr;
-			e = *p;
-			*p = s;
-		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA2726C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA2726C_tag);
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				err = op4_parser(t, p);
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr3_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr4_parser(ast *t, position *p){
-	set_tag(t, expr4_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr3_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA2726C_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op4_parser(ast *t, position *p){
-	set_tag(t, op4_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
 		{
 				terr = read_string("*", t, p) ? NULL : "*";
 		}
@@ -1753,121 +1021,6 @@ const char *op4_parser(ast *t, position *p){
 			e = *p;
 			*p = s;
 		}
-		if(e.curr > s.curr){
-			*p = e;
-			return err;
-		}
-		return "<option of group>";
-	}while(0);
-	return NULL;
-}
-
-const char *gen0XFFFF8090FFA272B4_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA272B4_tag);
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				err = op3_parser(t, p);
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l = *p;
-				ast *r = &(ast){0};
-				err = whitespace_parser(r, p);
-				clear_ast(r);
-			if(err){
-				*p = l;
-				err = NULL;
-			}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr2_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *expr3_parser(ast *t, position *p){
-	set_tag(t, expr3_tag);
-	{
-		const char *err = NULL;
-		{
-				ast *r = alloc_ast();
-				err = expr2_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(err){
-			return err;
-		}
-	}
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFF8090FFA272B4_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
-const char *op3_parser(ast *t, position *p){
-	set_tag(t, op3_tag);
-	do{
-		const char *err = NULL, *terr = NULL;
-		position s = *p, e = s;
 		{
 				terr = read_string("$", t, p) ? NULL : "$";
 		}
@@ -1895,8 +1048,8 @@ const char *op3_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA272FC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA272FC_tag);
+const char *gen0XFFFF8092F3835FD4_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F3835FD4_tag);
 	{
 		const char *err = NULL;
 		{
@@ -1916,7 +1069,7 @@ const char *gen0XFFFF8090FFA272FC_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				err = op2_parser(t, p);
+				err = op_prefix_parser(t, p);
 		}
 		if(err){
 			return err;
@@ -1925,8 +1078,8 @@ const char *gen0XFFFF8090FFA272FC_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *expr2_parser(ast *t, position *p){
-	set_tag(t, expr2_tag);
+const char *expr_prefix_parser(ast *t, position *p){
+	set_tag(t, expr_prefix_tag);
 	{
 		const char *err = NULL;
 		{
@@ -1935,7 +1088,7 @@ const char *expr2_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA272FC_parser(c, p);
+				err = gen0XFFFF8092F3835FD4_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1967,7 +1120,7 @@ const char *expr2_parser(ast *t, position *p){
 		const char *err = NULL;
 		{
 				ast *r = alloc_ast();
-				err = expr1_parser(r, p);
+				err = expr_postfix_parser(r, p);
 				if(err){
 					delete_ast(r);
 				}else{
@@ -1981,8 +1134,8 @@ const char *expr2_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *op2_parser(ast *t, position *p){
-	set_tag(t, op2_tag);
+const char *op_prefix_parser(ast *t, position *p){
+	set_tag(t, op_prefix_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -2067,8 +1220,8 @@ const char *op2_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27344_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27344_tag);
+const char *gen0XFFFF8092F383601C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F383601C_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2088,7 +1241,7 @@ const char *gen0XFFFF8090FFA27344_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				err = op1_parser(t, p);
+				err = op_postfix_parser(t, p);
 		}
 		if(err){
 			return err;
@@ -2097,8 +1250,8 @@ const char *gen0XFFFF8090FFA27344_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *expr1_parser(ast *t, position *p){
-	set_tag(t, expr1_tag);
+const char *expr_postfix_parser(ast *t, position *p){
+	set_tag(t, expr_postfix_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2116,7 +1269,7 @@ const char *expr1_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA27344_parser(c, p);
+				err = gen0XFFFF8092F383601C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2147,8 +1300,8 @@ const char *expr1_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *op1_parser(ast *t, position *p){
-	set_tag(t, op1_tag);
+const char *op_postfix_parser(ast *t, position *p){
+	set_tag(t, op_postfix_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -2812,8 +1965,8 @@ const char *parens_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA2747C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA2747C_tag);
+const char *gen0XFFFF8092F3836154_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F3836154_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2965,7 +2118,7 @@ const char *compound_statement_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA2747C_parser(c, p);
+				err = gen0XFFFF8092F3836154_parser(c, p);
 				if(err)break;
 				matched = 1;
 				merge_ast(t, c);
@@ -3224,8 +2377,8 @@ const char *int_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA274F4_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA274F4_tag);
+const char *gen0XFFFF8092F38361CC_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F38361CC_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3309,7 +2462,7 @@ const char *int_b_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA274F4_parser(c, p);
+				err = gen0XFFFF8092F38361CC_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -3324,8 +2477,8 @@ const char *int_b_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27524_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27524_tag);
+const char *gen0XFFFF8092F38361FC_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F38361FC_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3409,7 +2562,7 @@ const char *int_o_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA27524_parser(c, p);
+				err = gen0XFFFF8092F38361FC_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -3424,8 +2577,8 @@ const char *int_o_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27554_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27554_tag);
+const char *gen0XFFFF8092F383622C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F383622C_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3509,7 +2662,7 @@ const char *int_h_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA27554_parser(c, p);
+				err = gen0XFFFF8092F383622C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -3524,8 +2677,8 @@ const char *int_h_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27584_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27584_tag);
+const char *gen0XFFFF8092F383625C_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F383625C_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3598,7 +2751,7 @@ const char *int_d_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA27584_parser(c, p);
+				err = gen0XFFFF8092F383625C_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -3855,8 +3008,8 @@ const char *normal_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27614_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27614_tag);
+const char *gen0XFFFF8092F38362EC_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F38362EC_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3902,8 +3055,8 @@ const char *gen0XFFFF8090FFA27614_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA2762C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA2762C_tag);
+const char *gen0XFFFF8092F3836304_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F3836304_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3995,7 +3148,7 @@ const char *complex_parser(ast *t, position *p){
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
 		{
-				terr = gen0XFFFF8090FFA27614_parser(t, p);
+				terr = gen0XFFFF8092F38362EC_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
@@ -4004,7 +3157,7 @@ const char *complex_parser(ast *t, position *p){
 			*p = s;
 		}
 		{
-				terr = gen0XFFFF8090FFA2762C_parser(t, p);
+				terr = gen0XFFFF8092F3836304_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
@@ -4104,8 +3257,8 @@ const char *char_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA2768C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA2768C_tag);
+const char *gen0XFFFF8092F3836364_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F3836364_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -4158,7 +3311,7 @@ const char *whitespace_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA2768C_parser(c, p);
+				err = gen0XFFFF8092F3836364_parser(c, p);
 				if(err)break;
 				matched = 1;
 				merge_ast(t, c);
@@ -4251,8 +3404,8 @@ const char *multi_comment_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27704_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27704_tag);
+const char *gen0XFFFF8092F38363DC_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F38363DC_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -4304,7 +3457,7 @@ const char *block_comment_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA27704_parser(c, p);
+				err = gen0XFFFF8092F38363DC_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -4637,8 +3790,8 @@ const char *pound_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8090FFA27914_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8090FFA27914_tag);
+const char *gen0XFFFF8092F38365EC_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFF8092F38365EC_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -4679,7 +3832,7 @@ const char *schar_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8090FFA27914_parser(c, p);
+				err = gen0XFFFF8092F38365EC_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
