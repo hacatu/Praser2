@@ -1,0 +1,79 @@
+start= statement*
+statement= label_tag? bare_statement whitespace? semicolon
+bare_statement= (expr whitespace? comma)* expr?
+label_tag= whitespace? identifier whitespace? colon colon whitespace?
+expr= whitespace? expr10
+expr10= expr9 (whitespace? op10 whitespace? expr9)*
+op10< "->" | "=" | "$=" | "*=" | "/=" | "%=" | "<<=" | ">>=" | "+=" | "-=" | "&=" | "|=" | "^=" | "~&=" | "~|=" | "~^=" | "&&=" | "||=" | "^^=" | "!&&=" | "!||=" | "!^^="
+expr9= expr8 (whitespace? op9 whitespace? expr8)*
+op9< "&&" | "||" | "^^" | "!&&" | "!||" | "!^^"
+expr8= expr7 (whitespace? op8 whitespace? expr7)*
+op8< "<=>" | ">=" | "<=" | "==" | "!=" | "<-" | ">" | "<"
+expr7= expr6 (whitespace? op7 whitespace? expr6)*
+op7< "&" | "|" | "^" | "~&" | "~|" "~^"
+expr6= expr5 (whitespace? op6 whitespace? expr5)*
+op6< "+" | "-"
+expr5= expr4 (whitespace? op5 whitespace? expr4)*
+op5< "<<" | ">>"
+expr4= expr3 (whitespace? op4 whitespace? expr3)*
+op4< "*" | "/" | "%"
+expr3= expr2 (whitespace? op3 whitespace? expr2)*
+op3< "$" | ":"
+expr2= (whitespace? op2)* whitespace? expr1
+op2< "++" | "--" | "+" | "-" | "!" | "~" | "*" | "&"
+expr1= expr0 (whitespace? op1)* whitespace?
+op1< "++" | "--" | ".." | "?" | param_parens | list | access | declaration
+expr0< declaration | atom
+access= dot identifier
+declaration= at atom
+atom= compound_statement | identifier | literal | parens | implicit__
+implicit__= _implicit__
+param_parens= lparen bare_statement whitespace? rparen
+list= label_tag? lbrace bare_statement rbrace
+identifier= [a-zA-Z_] [a-zA-Z_0-9]*
+literal= list | dict | block | int | float | complex | string | char
+parens= lparen expr whitespace? rparen
+compound_statement= (whitespace? identifier | literal | parens whitespace? param_parens? whitespace? block)+
+dict= label_tag? lbracket bare_statement rbracket
+block= label_tag? whitespace? lbracket statement* whitespace? rbracket
+int= int_b | int_o | int_h | int_d
+int_b= b_pre [01]+ (squote [01]+)*
+int_o= o_pre [0-7]+ (squote [0-7]+)*
+int_h= h_pre [0-9a-fA-F]+ (squote [0-9a-fA-F]+)*
+int_d= [0-9]+ (squote [0-9]+)*
+float= scientific | subnormal | normal
+scientific< subnormal | normal | [0-9]+ E [+\-]? [0-9]+
+subnormal< "." [0-9]+
+normal< [0-9]+ "." [0-9]*
+complex= (float whitespace? I) | (float whitespace? [+\-] float whitespace? I)
+string= dquote schar* dquote
+char= squote schar squote
+whitespace: (space | multi_comment | single_comment)+
+space: [\t\f\r\n\v ]
+single_comment< pound [^\n\r]*
+multi_comment< pound block_comment
+block_comment< lbracket ([^{}] | block_comment)* rbracket
+semicolon: ";"
+colon: ":"
+dot: "."
+at: "@"
+lparen: "("
+rparen: ")"
+lbrace: "["
+rbrace: "]"
+lbracket: "{"
+rbracket: "}"
+comma: ","
+equals: "="
+squote: "'"
+dquote: "\""
+b_pre: "0" [bB]
+o_pre: "0" [oO]
+h_pre: "0" [xX]
+I: [iIjJ]
+E: [eE]
+pound: "#"
+schar< ([^\\"\n] | esc_seq)*
+esc_seq< special
+_implicit__< always_fail
+always_fail< special

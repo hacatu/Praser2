@@ -107,6 +107,10 @@ const char *esc_seq_parser(ast *t, position *p){
 	return "esc_seq";
 }
 
+const char *always_fail_parser(ast *t, position *p){
+	return "to fail";
+}
+
 void append_ast(ast *t, ast *c){
 	if(!t){
 		delete_ast(c);

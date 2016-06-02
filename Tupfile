@@ -9,4 +9,7 @@ include_rules
 : src/parser.pra | bin/parser_runner {mod} |> ./parser_runner.sh parser compile %f %o |> src/modules/generated_parser.c
 : src/modules/generated_parser.c |> !cc |> obj/modules/%B.o
 : obj/modules/generated_parser.o | lib/<lib> |> !so %<lib> |> lib/lib%B.so
+: src/umbrella.pra | bin/parser_runner {mod} lib/libgenerated_parser.so |> ./parser_runner.sh generated compile %f %o |> src/modules/umbrella_parser.c
+: src/modules/umbrella_parser.c |> !cc |> obj/modules/%B.o
+: obj/modules/umbrella_parser.o | lib/<lib> |> !so %<lib> |> lib/lib%B.so
 

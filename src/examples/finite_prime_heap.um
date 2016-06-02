@@ -1,0 +1,21 @@
+p = [
+	do{
+		g = heap:[[4, 2]];
+		n = 2;
+		loop{
+			if(n >= 100){
+				break;
+			}match(o = n <=> g[0, 0]){
+			}case(o == GT){
+				g[0, 0] += g[0, 1];
+			}case(o == LT){
+				g += [n*n, n];
+				n++,;
+			}case(o == EQ){
+				g[0, 0] += g[0, 1];
+				++n;
+			};
+		};
+	}
+];
+

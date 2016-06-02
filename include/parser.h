@@ -52,6 +52,7 @@ const char *mmap_open(const char *name, position *out);
 void mmap_close(const position *p);
 
 const char *esc_seq_parser(ast*, position*);
+const char *always_fail_parser(ast*, position*);
 
 #endif
 

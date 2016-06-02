@@ -23,8 +23,8 @@ const char *parse_<rule_name>(ast *t, position *p){
 
 ======group[>1]======
 do{
-	const char *err, *terr;
-	position s = *p, e;
+	const char *err = NULL, *terr = NULL;
+	position s = *p, e = s;
 	[option (err=terr)]...
 	if(e.curr > s.curr){
 		*p = e;
@@ -170,8 +170,8 @@ pattern_post_fmt[] =
 "}\n\n",
 group_pre_fmt[] =
 	"\tdo{\n"
-		"\t\tconst char *err, *terr;\n"
-		"\t\tposition s = *p, e;\n",
+		"\t\tconst char *err = NULL, *terr = NULL;\n"
+		"\t\tposition s = *p, e = s;\n",
 		//[option]...
 group_post1_fmt[] =
 		"\t\tif(e.curr > s.curr){\n"
@@ -184,7 +184,7 @@ group_post2_fmt[] =
 	"\t}while(0);\n",
 group_singular_pre_fmt[] =
 	"\t{\n"
-		"\t\tconst char *err;\n",
+		"\t\tconst char *err = NULL;\n",
 		//[atom_quantified (err=err)]
 group_singular_post_fmt[] =
 		"\t\tif(err){\n"
