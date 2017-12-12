@@ -41,22 +41,22 @@ newline: "\n"//needs to be specially defined
 
 //TODO: When I rewrite the generator in Umbrella, specify parse rules and output rules more separately and use CYK so that there is no merge_ast and stuff can happen faster.  The first ast should have all input output in some node or another.  Not deferring the next stage of processing is a good idea, but it might not be feasable.
 
-const char const
-*start_tag = "start",
-*rule_tag = "rule",
-*name_tag = "name",
-*assign_tag = "assign",
-*pattern_tag = "pattern",
-*group_tag = "group",
-*option_tag = "option",
-*atom_tag = "atom",
-*quantifier_tag = "quantifier",
-*parens_tag = "parens",
-*invset_tag = "invset",
-*charset_tag = "charset",
-*setrange_tag = "setrange",
-*setchar_tag = "setchar",
-*string_tag = "string";
+const char
+*const start_tag = "start",
+*const rule_tag = "rule",
+*const name_tag = "name",
+*const assign_tag = "assign",
+*const pattern_tag = "pattern",
+*const group_tag = "group",
+*const option_tag = "option",
+*const atom_tag = "atom",
+*const quantifier_tag = "quantifier",
+*const parens_tag = "parens",
+*const invset_tag = "invset",
+*const charset_tag = "charset",
+*const setrange_tag = "setrange",
+*const setchar_tag = "setchar",
+*const string_tag = "string";
 
 const char *start_parser(ast *t, position *p){
 	const char *err = NULL;

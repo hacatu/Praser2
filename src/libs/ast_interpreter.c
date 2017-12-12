@@ -83,11 +83,9 @@ static int make_state(state *fsa, ast *r, size_t *u, int unbound_specials){
 					const ast *atom = option->children[0]->children[0];
 					if((!strcmp("name", atom->name)) && (!strncmp("special", atom->text, atom->length))){
 						special_state s = find_special_parse_fn(r->children[0]);
-						if(!s.name){
+						if(!s.name && !unbound_specials){
 							printf("No special state is registered for \"%*s\".\n", (int)r->children[0]->length, r->children[0]->text);
-							if(!unbound_specials){
-								return 0;
-							}
+							return 0;
 						}
 						fsa[(*u)++] = (state){.rule = r, .parse = s.parse, .gen = s.gen};
 						return 1;

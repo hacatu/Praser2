@@ -10,4 +10,3 @@ then
 	exit 1
 fi
 LD_PRELOAD="lib/libast_callback_$2.so lib/lib$1_parser.so" bin/parser_runner ${@:3}
-

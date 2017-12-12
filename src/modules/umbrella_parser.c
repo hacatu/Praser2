@@ -7,28 +7,28 @@ const char *start_parser(ast*, position*);
 static const char start_tag[] = "start";
 const char *statement_parser(ast*, position*);
 static const char statement_tag[] = "statement";
-const char *gen0XFFFF8092F3835F2C_parser(ast*, position*);
-static const char gen0XFFFF8092F3835F2C_tag[] = "gen0XFFFF8092F3835F2C";
+const char *gen0XFFFFD69F48BA52DF_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA52DF_tag[] = "gen0XFFFFD69F48BA52DF";
 const char *bare_statement_parser(ast*, position*);
 static const char bare_statement_tag[] = "bare_statement";
 const char *label_tag_parser(ast*, position*);
 static const char label_tag_tag[] = "label_tag";
 const char *expr_parser(ast*, position*);
 static const char expr_tag[] = "expr";
-const char *gen0XFFFF8092F3835F8C_parser(ast*, position*);
-static const char gen0XFFFF8092F3835F8C_tag[] = "gen0XFFFF8092F3835F8C";
+const char *gen0XFFFFD69F48BA533F_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA533F_tag[] = "gen0XFFFFD69F48BA533F";
 const char *expr_infix_parser(ast*, position*);
 static const char expr_infix_tag[] = "expr_infix";
 const char *op_infix_parser(ast*, position*);
 static const char op_infix_tag[] = "op_infix";
-const char *gen0XFFFF8092F3835FD4_parser(ast*, position*);
-static const char gen0XFFFF8092F3835FD4_tag[] = "gen0XFFFF8092F3835FD4";
+const char *gen0XFFFFD69F48BA5387_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA5387_tag[] = "gen0XFFFFD69F48BA5387";
 const char *expr_prefix_parser(ast*, position*);
 static const char expr_prefix_tag[] = "expr_prefix";
 const char *op_prefix_parser(ast*, position*);
 static const char op_prefix_tag[] = "op_prefix";
-const char *gen0XFFFF8092F383601C_parser(ast*, position*);
-static const char gen0XFFFF8092F383601C_tag[] = "gen0XFFFF8092F383601C";
+const char *gen0XFFFFD69F48BA53CF_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA53CF_tag[] = "gen0XFFFFD69F48BA53CF";
 const char *expr_postfix_parser(ast*, position*);
 static const char expr_postfix_tag[] = "expr_postfix";
 const char *op_postfix_parser(ast*, position*);
@@ -53,8 +53,8 @@ const char *literal_parser(ast*, position*);
 static const char literal_tag[] = "literal";
 const char *parens_parser(ast*, position*);
 static const char parens_tag[] = "parens";
-const char *gen0XFFFF8092F3836154_parser(ast*, position*);
-static const char gen0XFFFF8092F3836154_tag[] = "gen0XFFFF8092F3836154";
+const char *gen0XFFFFD69F48BA5507_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA5507_tag[] = "gen0XFFFFD69F48BA5507";
 const char *compound_statement_parser(ast*, position*);
 static const char compound_statement_tag[] = "compound_statement";
 const char *dict_parser(ast*, position*);
@@ -63,20 +63,20 @@ const char *block_parser(ast*, position*);
 static const char block_tag[] = "block";
 const char *int_parser(ast*, position*);
 static const char int_tag[] = "int";
-const char *gen0XFFFF8092F38361CC_parser(ast*, position*);
-static const char gen0XFFFF8092F38361CC_tag[] = "gen0XFFFF8092F38361CC";
+const char *gen0XFFFFD69F48BA557F_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA557F_tag[] = "gen0XFFFFD69F48BA557F";
 const char *int_b_parser(ast*, position*);
 static const char int_b_tag[] = "int_b";
-const char *gen0XFFFF8092F38361FC_parser(ast*, position*);
-static const char gen0XFFFF8092F38361FC_tag[] = "gen0XFFFF8092F38361FC";
+const char *gen0XFFFFD69F48BA55AF_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA55AF_tag[] = "gen0XFFFFD69F48BA55AF";
 const char *int_o_parser(ast*, position*);
 static const char int_o_tag[] = "int_o";
-const char *gen0XFFFF8092F383622C_parser(ast*, position*);
-static const char gen0XFFFF8092F383622C_tag[] = "gen0XFFFF8092F383622C";
+const char *gen0XFFFFD69F48BA55DF_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA55DF_tag[] = "gen0XFFFFD69F48BA55DF";
 const char *int_h_parser(ast*, position*);
 static const char int_h_tag[] = "int_h";
-const char *gen0XFFFF8092F383625C_parser(ast*, position*);
-static const char gen0XFFFF8092F383625C_tag[] = "gen0XFFFF8092F383625C";
+const char *gen0XFFFFD69F48BA560F_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA560F_tag[] = "gen0XFFFFD69F48BA560F";
 const char *int_d_parser(ast*, position*);
 static const char int_d_tag[] = "int_d";
 const char *float_parser(ast*, position*);
@@ -87,18 +87,18 @@ const char *subnormal_parser(ast*, position*);
 static const char subnormal_tag[] = "subnormal";
 const char *normal_parser(ast*, position*);
 static const char normal_tag[] = "normal";
-const char *gen0XFFFF8092F38362EC_parser(ast*, position*);
-static const char gen0XFFFF8092F38362EC_tag[] = "gen0XFFFF8092F38362EC";
-const char *gen0XFFFF8092F3836304_parser(ast*, position*);
-static const char gen0XFFFF8092F3836304_tag[] = "gen0XFFFF8092F3836304";
+const char *gen0XFFFFD69F48BA569F_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA569F_tag[] = "gen0XFFFFD69F48BA569F";
+const char *gen0XFFFFD69F48BA56B7_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA56B7_tag[] = "gen0XFFFFD69F48BA56B7";
 const char *complex_parser(ast*, position*);
 static const char complex_tag[] = "complex";
 const char *string_parser(ast*, position*);
 static const char string_tag[] = "string";
 const char *char_parser(ast*, position*);
 static const char char_tag[] = "char";
-const char *gen0XFFFF8092F3836364_parser(ast*, position*);
-static const char gen0XFFFF8092F3836364_tag[] = "gen0XFFFF8092F3836364";
+const char *gen0XFFFFD69F48BA5717_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA5717_tag[] = "gen0XFFFFD69F48BA5717";
 const char *whitespace_parser(ast*, position*);
 static const char whitespace_tag[] = "whitespace";
 const char *space_parser(ast*, position*);
@@ -107,8 +107,8 @@ const char *single_comment_parser(ast*, position*);
 static const char single_comment_tag[] = "single_comment";
 const char *multi_comment_parser(ast*, position*);
 static const char multi_comment_tag[] = "multi_comment";
-const char *gen0XFFFF8092F38363DC_parser(ast*, position*);
-static const char gen0XFFFF8092F38363DC_tag[] = "gen0XFFFF8092F38363DC";
+const char *gen0XFFFFD69F48BA578F_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA578F_tag[] = "gen0XFFFFD69F48BA578F";
 const char *block_comment_parser(ast*, position*);
 static const char block_comment_tag[] = "block_comment";
 const char *semicolon_parser(ast*, position*);
@@ -147,12 +147,10 @@ const char *h_pre_parser(ast*, position*);
 static const char h_pre_tag[] = "h_pre";
 const char *I_parser(ast*, position*);
 static const char I_tag[] = "I";
-const char *E_parser(ast*, position*);
-static const char E_tag[] = "E";
 const char *pound_parser(ast*, position*);
 static const char pound_tag[] = "pound";
-const char *gen0XFFFF8092F38365EC_parser(ast*, position*);
-static const char gen0XFFFF8092F38365EC_tag[] = "gen0XFFFF8092F38365EC";
+const char *gen0XFFFFD69F48BA5987_parser(ast*, position*);
+static const char gen0XFFFFD69F48BA5987_tag[] = "gen0XFFFFD69F48BA5987";
 const char *schar_parser(ast*, position*);
 static const char schar_tag[] = "schar";
 const char *_implicit___parser(ast*, position*);
@@ -256,8 +254,8 @@ const char *statement_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F3835F2C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F3835F2C_tag);
+const char *gen0XFFFFD69F48BA52DF_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA52DF_tag);
 	{
 		const char *err = NULL;
 		{
@@ -313,7 +311,7 @@ const char *bare_statement_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F3835F2C_parser(c, p);
+				err = gen0XFFFFD69F48BA52DF_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -474,8 +472,8 @@ const char *expr_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F3835F8C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F3835F8C_tag);
+const char *gen0XFFFFD69F48BA533F_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA533F_tag);
 	{
 		const char *err = NULL;
 		{
@@ -495,7 +493,13 @@ const char *gen0XFFFF8092F3835F8C_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				err = op_infix_parser(t, p);
+				ast *r = alloc_ast();
+				err = op_infix_parser(r, p);
+				if(err){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
 		}
 		if(err){
 			return err;
@@ -560,7 +564,7 @@ const char *expr_infix_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F3835F8C_parser(c, p);
+				err = gen0XFFFFD69F48BA533F_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1048,8 +1052,8 @@ const char *op_infix_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F3835FD4_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F3835FD4_tag);
+const char *gen0XFFFFD69F48BA5387_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA5387_tag);
 	{
 		const char *err = NULL;
 		{
@@ -1069,7 +1073,13 @@ const char *gen0XFFFF8092F3835FD4_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				err = op_prefix_parser(t, p);
+				ast *r = alloc_ast();
+				err = op_prefix_parser(r, p);
+				if(err){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
 		}
 		if(err){
 			return err;
@@ -1088,7 +1098,7 @@ const char *expr_prefix_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F3835FD4_parser(c, p);
+				err = gen0XFFFFD69F48BA5387_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1220,8 +1230,8 @@ const char *op_prefix_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F383601C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F383601C_tag);
+const char *gen0XFFFFD69F48BA53CF_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA53CF_tag);
 	{
 		const char *err = NULL;
 		{
@@ -1241,7 +1251,13 @@ const char *gen0XFFFF8092F383601C_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				err = op_postfix_parser(t, p);
+				ast *r = alloc_ast();
+				err = op_postfix_parser(r, p);
+				if(err){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
 		}
 		if(err){
 			return err;
@@ -1269,7 +1285,7 @@ const char *expr_postfix_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F383601C_parser(c, p);
+				err = gen0XFFFFD69F48BA53CF_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1965,8 +1981,8 @@ const char *parens_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F3836154_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F3836154_tag);
+const char *gen0XFFFFD69F48BA5507_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA5507_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2118,7 +2134,7 @@ const char *compound_statement_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F3836154_parser(c, p);
+				err = gen0XFFFFD69F48BA5507_parser(c, p);
 				if(err)break;
 				matched = 1;
 				merge_ast(t, c);
@@ -2377,8 +2393,8 @@ const char *int_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F38361CC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F38361CC_tag);
+const char *gen0XFFFFD69F48BA557F_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA557F_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2462,7 +2478,7 @@ const char *int_b_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F38361CC_parser(c, p);
+				err = gen0XFFFFD69F48BA557F_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2477,8 +2493,8 @@ const char *int_b_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F38361FC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F38361FC_tag);
+const char *gen0XFFFFD69F48BA55AF_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA55AF_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2562,7 +2578,7 @@ const char *int_o_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F38361FC_parser(c, p);
+				err = gen0XFFFFD69F48BA55AF_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2577,8 +2593,8 @@ const char *int_o_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F383622C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F383622C_tag);
+const char *gen0XFFFFD69F48BA55DF_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA55DF_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2662,7 +2678,7 @@ const char *int_h_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F383622C_parser(c, p);
+				err = gen0XFFFFD69F48BA55DF_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2677,8 +2693,8 @@ const char *int_h_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F383625C_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F383625C_tag);
+const char *gen0XFFFFD69F48BA560F_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA560F_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2751,7 +2767,7 @@ const char *int_d_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F383625C_parser(c, p);
+				err = gen0XFFFFD69F48BA560F_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2863,9 +2879,7 @@ const char *scientific_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				ast *r = &(ast){0};
-				err = E_parser(r, p);
-				clear_ast(r);
+				err = read_charset_prefix("+.E.e", t, p) ? NULL : "+.E.e";
 		}
 		if(err){
 			return err;
@@ -3008,8 +3022,8 @@ const char *normal_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F38362EC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F38362EC_tag);
+const char *gen0XFFFFD69F48BA569F_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA569F_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3055,8 +3069,8 @@ const char *gen0XFFFF8092F38362EC_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F3836304_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F3836304_tag);
+const char *gen0XFFFFD69F48BA56B7_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA56B7_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3148,7 +3162,7 @@ const char *complex_parser(ast *t, position *p){
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
 		{
-				terr = gen0XFFFF8092F38362EC_parser(t, p);
+				terr = gen0XFFFFD69F48BA569F_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
@@ -3157,7 +3171,7 @@ const char *complex_parser(ast *t, position *p){
 			*p = s;
 		}
 		{
-				terr = gen0XFFFF8092F3836304_parser(t, p);
+				terr = gen0XFFFFD69F48BA56B7_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
@@ -3257,8 +3271,8 @@ const char *char_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F3836364_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F3836364_tag);
+const char *gen0XFFFFD69F48BA5717_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA5717_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -3311,7 +3325,7 @@ const char *whitespace_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F3836364_parser(c, p);
+				err = gen0XFFFFD69F48BA5717_parser(c, p);
 				if(err)break;
 				matched = 1;
 				merge_ast(t, c);
@@ -3404,8 +3418,8 @@ const char *multi_comment_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F38363DC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F38363DC_tag);
+const char *gen0XFFFFD69F48BA578F_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA578F_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -3457,7 +3471,7 @@ const char *block_comment_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F38363DC_parser(c, p);
+				err = gen0XFFFFD69F48BA578F_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -3762,20 +3776,6 @@ const char *I_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *E_parser(ast *t, position *p){
-	set_tag(t, E_tag);
-	{
-		const char *err = NULL;
-		{
-				err = read_charset_prefix("+.e.E", t, p) ? NULL : "+.e.E";
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
 const char *pound_parser(ast *t, position *p){
 	set_tag(t, pound_tag);
 	{
@@ -3790,8 +3790,8 @@ const char *pound_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFF8092F38365EC_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFF8092F38365EC_tag);
+const char *gen0XFFFFD69F48BA5987_parser(ast *t, position *p){
+	set_tag(t, gen0XFFFFD69F48BA5987_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
@@ -3832,7 +3832,7 @@ const char *schar_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFF8092F38365EC_parser(c, p);
+				err = gen0XFFFFD69F48BA5987_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}

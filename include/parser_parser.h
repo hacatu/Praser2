@@ -3,22 +3,22 @@
 
 #include "parser.h"
 
-extern const char const
-*start_tag,
-*rule_tag,
-*name_tag,
-*assign_tag,
-*pattern_tag,
-*group_tag,
-*option_tag,
-*atom_tag,
-*quantifier_tag,
-*parens_tag,
-*invset_tag,
-*charset_tag,
-*setrange_tag,
-*setchar_tag,
-*string_tag;
+extern const char
+*const start_tag,
+*const rule_tag,
+*const name_tag,
+*const assign_tag,
+*const pattern_tag,
+*const group_tag,
+*const option_tag,
+*const atom_tag,
+*const quantifier_tag,
+*const parens_tag,
+*const invset_tag,
+*const charset_tag,
+*const setrange_tag,
+*const setchar_tag,
+*const string_tag;
 
 const char *start_parser(ast*, position*);
 const char *rule_parser(ast*, position*);

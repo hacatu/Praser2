@@ -4,11 +4,11 @@ bare_statement= (expr whitespace? comma)* expr?
 label_tag= whitespace? identifier whitespace? colon colon whitespace?
 expr= whitespace? expr_infix
 expr_infix= expr_prefix (whitespace? op_infix whitespace? expr_prefix)*
-op_infix< "->"|"$="|"*="|"/="|"%="|"<<="|">>="|"+="|"-="|"&="|"|="|"^="|"~&="|"~|="| "~^="|"&&="|"||="|"^^="|"!&&="|"!||="|"!^^="|"&&"|"||"|"^^"|"!&&"|"!||"|"!^^"|"<<"|">>"|"<=>"|">="|"<="|"=="|"!="|"<-"|">"|"<"|"="|"&"|"|"|"^"|"~&"|"~|"|"~^"|"+"|"-"|"*"|"/"|"%"|"$"|":"
+op_infix= "->"|"$="|"*="|"/="|"%="|"<<="|">>="|"+="|"-="|"&="|"|="|"^="|"~&="|"~|="|"~^="|"&&="|"||="|"^^="|"!&&="|"!||="|"!^^="|"&&"|"||"|"^^"|"!&&"|"!||"|"!^^"|"<<"|">>"|"<=>"|">="|"<="|"=="|"!="|"<-"|">"|"<"|"="|"&"|"|"|"^"|"~&"|"~|"|"~^"|"+"|"-"|"*"|"/"|"%"|"$"|":"
 expr_prefix= (whitespace? op_prefix)* whitespace? expr_postfix
-op_prefix< "++"|"--"|"+"|"-"|"!"|"~"|"*"|"&"
+op_prefix= "++"|"--"|"+"|"-"|"!"|"~"|"*"|"&"
 expr_postfix= expr0 (whitespace? op_postfix)* whitespace?
-op_postfix< "++"|"--"|".."|"?"|param_parens|list|access|declaration
+op_postfix= "++"|"--"|".."|"?"|param_parens|list|access|declaration
 expr0< declaration | atom
 access= dot identifier
 declaration= at atom
@@ -28,7 +28,7 @@ int_o= o_pre [0-7]+ (squote [0-7]+)*
 int_h= h_pre [0-9a-fA-F]+ (squote [0-9a-fA-F]+)*
 int_d= [0-9]+ (squote [0-9]+)*
 float= scientific | subnormal | normal
-scientific< subnormal | normal | [0-9]+ E [+\-]? [0-9]+
+scientific< subnormal | normal | [0-9]+ [Ee] [+\-]? [0-9]+
 subnormal< "." [0-9]+
 normal< [0-9]+ "." [0-9]*
 complex= (float whitespace? I) | (float whitespace? [+\-] float whitespace? I)
@@ -57,7 +57,6 @@ b_pre: "0" [bB]
 o_pre: "0" [oO]
 h_pre: "0" [xX]
 I: [iIjJ]
-E: [eE]
 pound: "#"
 schar< ([^\\"\n] | esc_seq)*
 esc_seq< special

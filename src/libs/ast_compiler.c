@@ -270,6 +270,8 @@ atom_skip_fmt[] =//1$<err>, 2$[name]
 				"\t\t\t\tclear_ast(r);\n",
 state_name_fmt[] =//1$[name]
 "%1$s",
+state_name_fmt_trunc[] =//1$[name], 2$[len]
+"%1$.*2$s",
 state_name_generated_fmt[] =//1$[offset]
 "gen%1$#"PRIXPTR;
 
@@ -348,7 +350,7 @@ char *get_parser_name(const ast *atom){
 char *get_state_name(const state *s){
 	char *ret;
 	if(!strcmp("rule", s->rule->name)){//explicit rule, use the name
-		asprintf(&ret, state_name_fmt, s->rule->children[0]->text);
+		asprintf(&ret, state_name_fmt_trunc, s->rule->children[0]->text, (int)s->rule->children[0]->length);
 	}else{
 		asprintf(&ret, state_name_generated_fmt, (uintptr_t)((void*)s - (void*)get_state_name));
 	}
