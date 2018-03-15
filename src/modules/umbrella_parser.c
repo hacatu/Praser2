@@ -7,28 +7,28 @@ const char *start_parser(ast*, position*);
 static const char start_tag[] = "start";
 const char *statement_parser(ast*, position*);
 static const char statement_tag[] = "statement";
-const char *gen0XFFFFD69F48BA52DF_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA52DF_tag[] = "gen0XFFFFD69F48BA52DF";
+const char *gen0XFFFFD6228DE5CC9A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CC9A_tag[] = "gen0XFFFFD6228DE5CC9A";
 const char *bare_statement_parser(ast*, position*);
 static const char bare_statement_tag[] = "bare_statement";
 const char *label_tag_parser(ast*, position*);
 static const char label_tag_tag[] = "label_tag";
 const char *expr_parser(ast*, position*);
 static const char expr_tag[] = "expr";
-const char *gen0XFFFFD69F48BA533F_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA533F_tag[] = "gen0XFFFFD69F48BA533F";
+const char *gen0XFFFFD6228DE5CCFA_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CCFA_tag[] = "gen0XFFFFD6228DE5CCFA";
 const char *expr_infix_parser(ast*, position*);
 static const char expr_infix_tag[] = "expr_infix";
 const char *op_infix_parser(ast*, position*);
 static const char op_infix_tag[] = "op_infix";
-const char *gen0XFFFFD69F48BA5387_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA5387_tag[] = "gen0XFFFFD69F48BA5387";
+const char *gen0XFFFFD6228DE5CD42_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CD42_tag[] = "gen0XFFFFD6228DE5CD42";
 const char *expr_prefix_parser(ast*, position*);
 static const char expr_prefix_tag[] = "expr_prefix";
 const char *op_prefix_parser(ast*, position*);
 static const char op_prefix_tag[] = "op_prefix";
-const char *gen0XFFFFD69F48BA53CF_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA53CF_tag[] = "gen0XFFFFD69F48BA53CF";
+const char *gen0XFFFFD6228DE5CD8A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CD8A_tag[] = "gen0XFFFFD6228DE5CD8A";
 const char *expr_postfix_parser(ast*, position*);
 static const char expr_postfix_tag[] = "expr_postfix";
 const char *op_postfix_parser(ast*, position*);
@@ -53,8 +53,8 @@ const char *literal_parser(ast*, position*);
 static const char literal_tag[] = "literal";
 const char *parens_parser(ast*, position*);
 static const char parens_tag[] = "parens";
-const char *gen0XFFFFD69F48BA5507_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA5507_tag[] = "gen0XFFFFD69F48BA5507";
+const char *gen0XFFFFD6228DE5CEC2_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CEC2_tag[] = "gen0XFFFFD6228DE5CEC2";
 const char *compound_statement_parser(ast*, position*);
 static const char compound_statement_tag[] = "compound_statement";
 const char *dict_parser(ast*, position*);
@@ -63,20 +63,20 @@ const char *block_parser(ast*, position*);
 static const char block_tag[] = "block";
 const char *int_parser(ast*, position*);
 static const char int_tag[] = "int";
-const char *gen0XFFFFD69F48BA557F_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA557F_tag[] = "gen0XFFFFD69F48BA557F";
+const char *gen0XFFFFD6228DE5CF3A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CF3A_tag[] = "gen0XFFFFD6228DE5CF3A";
 const char *int_b_parser(ast*, position*);
 static const char int_b_tag[] = "int_b";
-const char *gen0XFFFFD69F48BA55AF_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA55AF_tag[] = "gen0XFFFFD69F48BA55AF";
+const char *gen0XFFFFD6228DE5CF6A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CF6A_tag[] = "gen0XFFFFD6228DE5CF6A";
 const char *int_o_parser(ast*, position*);
 static const char int_o_tag[] = "int_o";
-const char *gen0XFFFFD69F48BA55DF_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA55DF_tag[] = "gen0XFFFFD69F48BA55DF";
+const char *gen0XFFFFD6228DE5CF9A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CF9A_tag[] = "gen0XFFFFD6228DE5CF9A";
 const char *int_h_parser(ast*, position*);
 static const char int_h_tag[] = "int_h";
-const char *gen0XFFFFD69F48BA560F_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA560F_tag[] = "gen0XFFFFD69F48BA560F";
+const char *gen0XFFFFD6228DE5CFCA_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5CFCA_tag[] = "gen0XFFFFD6228DE5CFCA";
 const char *int_d_parser(ast*, position*);
 static const char int_d_tag[] = "int_d";
 const char *float_parser(ast*, position*);
@@ -87,18 +87,24 @@ const char *subnormal_parser(ast*, position*);
 static const char subnormal_tag[] = "subnormal";
 const char *normal_parser(ast*, position*);
 static const char normal_tag[] = "normal";
-const char *gen0XFFFFD69F48BA569F_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA569F_tag[] = "gen0XFFFFD69F48BA569F";
-const char *gen0XFFFFD69F48BA56B7_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA56B7_tag[] = "gen0XFFFFD69F48BA56B7";
+const char *gen0XFFFFD6228DE5D05A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D05A_tag[] = "gen0XFFFFD6228DE5D05A";
+const char *gen0XFFFFD6228DE5D072_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D072_tag[] = "gen0XFFFFD6228DE5D072";
+const char *gen0XFFFFD6228DE5D08A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D08A_tag[] = "gen0XFFFFD6228DE5D08A";
+const char *gen0XFFFFD6228DE5D0A2_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D0A2_tag[] = "gen0XFFFFD6228DE5D0A2";
+const char *gen0XFFFFD6228DE5D0BA_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D0BA_tag[] = "gen0XFFFFD6228DE5D0BA";
 const char *complex_parser(ast*, position*);
 static const char complex_tag[] = "complex";
 const char *string_parser(ast*, position*);
 static const char string_tag[] = "string";
 const char *char_parser(ast*, position*);
 static const char char_tag[] = "char";
-const char *gen0XFFFFD69F48BA5717_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA5717_tag[] = "gen0XFFFFD69F48BA5717";
+const char *gen0XFFFFD6228DE5D11A_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D11A_tag[] = "gen0XFFFFD6228DE5D11A";
 const char *whitespace_parser(ast*, position*);
 static const char whitespace_tag[] = "whitespace";
 const char *space_parser(ast*, position*);
@@ -107,8 +113,8 @@ const char *single_comment_parser(ast*, position*);
 static const char single_comment_tag[] = "single_comment";
 const char *multi_comment_parser(ast*, position*);
 static const char multi_comment_tag[] = "multi_comment";
-const char *gen0XFFFFD69F48BA578F_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA578F_tag[] = "gen0XFFFFD69F48BA578F";
+const char *gen0XFFFFD6228DE5D192_parser(ast*, position*);
+static const char gen0XFFFFD6228DE5D192_tag[] = "gen0XFFFFD6228DE5D192";
 const char *block_comment_parser(ast*, position*);
 static const char block_comment_tag[] = "block_comment";
 const char *semicolon_parser(ast*, position*);
@@ -149,8 +155,6 @@ const char *I_parser(ast*, position*);
 static const char I_tag[] = "I";
 const char *pound_parser(ast*, position*);
 static const char pound_tag[] = "pound";
-const char *gen0XFFFFD69F48BA5987_parser(ast*, position*);
-static const char gen0XFFFFD69F48BA5987_tag[] = "gen0XFFFFD69F48BA5987";
 const char *schar_parser(ast*, position*);
 static const char schar_tag[] = "schar";
 const char *_implicit___parser(ast*, position*);
@@ -254,8 +258,7 @@ const char *statement_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA52DF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA52DF_tag);
+const char *gen0XFFFFD6228DE5CC9A_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -311,7 +314,7 @@ const char *bare_statement_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA52DF_parser(c, p);
+				err = gen0XFFFFD6228DE5CC9A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -472,8 +475,7 @@ const char *expr_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA533F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA533F_tag);
+const char *gen0XFFFFD6228DE5CCFA_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -564,7 +566,7 @@ const char *expr_infix_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA533F_parser(c, p);
+				err = gen0XFFFFD6228DE5CCFA_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -584,11 +586,13 @@ const char *op_infix_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_string("->", t, p) ? NULL : "->";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -598,6 +602,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -607,6 +612,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -616,6 +622,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -625,6 +632,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -634,6 +642,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -643,6 +652,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -652,6 +662,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -661,6 +672,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -670,6 +682,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -679,6 +692,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -688,6 +702,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -697,6 +712,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -706,6 +722,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -715,6 +732,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -724,6 +742,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -733,6 +752,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -742,6 +762,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -751,6 +772,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -760,6 +782,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -769,6 +792,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -778,6 +802,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -787,6 +812,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -796,6 +822,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -805,6 +832,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -814,6 +842,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -823,6 +852,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -832,6 +862,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -841,6 +872,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -850,6 +882,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -859,6 +892,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -868,6 +902,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -877,6 +912,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -886,6 +922,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -895,6 +932,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -904,6 +942,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -913,6 +952,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -922,6 +962,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -931,6 +972,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -940,6 +982,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -949,6 +992,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -958,6 +1002,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -967,6 +1012,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -976,6 +1022,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -985,6 +1032,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -994,6 +1042,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1003,6 +1052,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1012,6 +1062,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1021,6 +1072,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1030,6 +1082,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1039,6 +1092,7 @@ const char *op_infix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1052,8 +1106,7 @@ const char *op_infix_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA5387_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA5387_tag);
+const char *gen0XFFFFD6228DE5CD42_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -1098,7 +1151,7 @@ const char *expr_prefix_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA5387_parser(c, p);
+				err = gen0XFFFFD6228DE5CD42_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1149,11 +1202,13 @@ const char *op_prefix_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_string("++", t, p) ? NULL : "++";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1163,6 +1218,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1172,6 +1228,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1181,6 +1238,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1190,6 +1248,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1199,6 +1258,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1208,6 +1268,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1217,6 +1278,7 @@ const char *op_prefix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1230,8 +1292,7 @@ const char *op_prefix_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA53CF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA53CF_tag);
+const char *gen0XFFFFD6228DE5CD8A_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -1285,7 +1346,7 @@ const char *expr_postfix_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA53CF_parser(c, p);
+				err = gen0XFFFFD6228DE5CD8A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -1321,11 +1382,13 @@ const char *op_postfix_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_string("++", t, p) ? NULL : "++";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1335,6 +1398,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1344,6 +1408,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1353,6 +1418,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1368,6 +1434,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1383,6 +1450,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1398,6 +1466,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1413,6 +1482,7 @@ const char *op_postfix_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1427,10 +1497,10 @@ const char *op_postfix_parser(ast *t, position *p){
 }
 
 const char *expr0_parser(ast *t, position *p){
-	set_tag(t, expr0_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = declaration_parser(r, p);
@@ -1442,6 +1512,7 @@ const char *expr0_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1457,6 +1528,7 @@ const char *expr0_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1537,6 +1609,7 @@ const char *atom_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = compound_statement_parser(r, p);
@@ -1548,6 +1621,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1563,6 +1637,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1578,6 +1653,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1593,6 +1669,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1608,6 +1685,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1794,6 +1872,7 @@ const char *literal_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = list_parser(r, p);
@@ -1805,6 +1884,7 @@ const char *literal_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1820,6 +1900,7 @@ const char *literal_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1835,36 +1916,7 @@ const char *literal_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
-			err = terr;
-			e = *p;
-			*p = s;
-		}
-		{
-				ast *r = alloc_ast();
-				terr = int_parser(r, p);
-				if(terr){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(!terr){break;}
-		if(p->curr > s.curr){
-			err = terr;
-			e = *p;
-			*p = s;
-		}
-		{
-				ast *r = alloc_ast();
-				terr = float_parser(r, p);
-				if(terr){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
-		}
-		if(!terr){break;}
-		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1880,6 +1932,39 @@ const char *literal_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		{
+				ast *r = alloc_ast();
+				terr = float_parser(r, p);
+				if(terr){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		{
+				ast *r = alloc_ast();
+				terr = int_parser(r, p);
+				if(terr){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1895,6 +1980,7 @@ const char *literal_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1910,6 +1996,7 @@ const char *literal_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -1981,8 +2068,7 @@ const char *parens_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA5507_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA5507_tag);
+const char *gen0XFFFFD6228DE5CEC2_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -2002,6 +2088,7 @@ const char *gen0XFFFFD69F48BA5507_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = identifier_parser(r, p);
@@ -2013,6 +2100,7 @@ const char *gen0XFFFFD69F48BA5507_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2028,6 +2116,7 @@ const char *gen0XFFFFD69F48BA5507_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2043,6 +2132,7 @@ const char *gen0XFFFFD69F48BA5507_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2134,7 +2224,7 @@ const char *compound_statement_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA5507_parser(c, p);
+				err = gen0XFFFFD6228DE5CEC2_parser(c, p);
 				if(err)break;
 				matched = 1;
 				merge_ast(t, c);
@@ -2324,6 +2414,7 @@ const char *int_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = int_b_parser(r, p);
@@ -2335,6 +2426,7 @@ const char *int_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2350,6 +2442,7 @@ const char *int_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2365,6 +2458,7 @@ const char *int_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2380,6 +2474,7 @@ const char *int_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2393,8 +2488,7 @@ const char *int_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA557F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA557F_tag);
+const char *gen0XFFFFD6228DE5CF3A_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -2478,7 +2572,7 @@ const char *int_b_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA557F_parser(c, p);
+				err = gen0XFFFFD6228DE5CF3A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2493,8 +2587,7 @@ const char *int_b_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA55AF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA55AF_tag);
+const char *gen0XFFFFD6228DE5CF6A_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -2578,7 +2671,7 @@ const char *int_o_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA55AF_parser(c, p);
+				err = gen0XFFFFD6228DE5CF6A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2593,8 +2686,7 @@ const char *int_o_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA55DF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA55DF_tag);
+const char *gen0XFFFFD6228DE5CF9A_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -2678,7 +2770,7 @@ const char *int_h_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA55DF_parser(c, p);
+				err = gen0XFFFFD6228DE5CF9A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2693,8 +2785,7 @@ const char *int_h_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA560F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA560F_tag);
+const char *gen0XFFFFD6228DE5CFCA_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -2767,7 +2858,7 @@ const char *int_d_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA560F_parser(c, p);
+				err = gen0XFFFFD6228DE5CFCA_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -2787,11 +2878,13 @@ const char *float_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = scientific_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2801,6 +2894,7 @@ const char *float_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2810,6 +2904,7 @@ const char *float_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2824,15 +2919,16 @@ const char *float_parser(ast *t, position *p){
 }
 
 const char *scientific_parser(ast *t, position *p){
-	set_tag(t, scientific_tag);
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = subnormal_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2842,6 +2938,7 @@ const char *scientific_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2866,6 +2963,7 @@ const char *scientific_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -2927,7 +3025,6 @@ const char *scientific_parser(ast *t, position *p){
 }
 
 const char *subnormal_parser(ast *t, position *p){
-	set_tag(t, subnormal_tag);
 	{
 		const char *err = NULL;
 		{
@@ -2965,7 +3062,6 @@ const char *subnormal_parser(ast *t, position *p){
 }
 
 const char *normal_parser(ast *t, position *p){
-	set_tag(t, normal_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3022,18 +3118,57 @@ const char *normal_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA569F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA569F_tag);
-	{
-		const char *err = NULL;
+const char *gen0XFFFFD6228DE5D05A_parser(ast *t, position *p){
+	do{
+		const char *err = NULL, *terr = NULL;
+		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
-				err = float_parser(r, p);
-				if(err){
+				terr = float_parser(r, p);
+				if(terr){
 					delete_ast(r);
 				}else{
 					append_ast(t, r);
 				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		{
+				ast *r = alloc_ast();
+				terr = int_parser(r, p);
+				if(terr){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		if(e.curr > s.curr){
+			*p = e;
+			return err;
+		}
+		return "<option of group>";
+	}while(0);
+	return NULL;
+}
+
+const char *gen0XFFFFD6228DE5D072_parser(ast *t, position *p){
+	{
+		const char *err = NULL;
+		{
+				err = gen0XFFFFD6228DE5D05A_parser(t, p);
 		}
 		if(err){
 			return err;
@@ -3069,18 +3204,103 @@ const char *gen0XFFFFD69F48BA569F_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA56B7_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA56B7_tag);
-	{
-		const char *err = NULL;
+const char *gen0XFFFFD6228DE5D08A_parser(ast *t, position *p){
+	do{
+		const char *err = NULL, *terr = NULL;
+		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
-				err = float_parser(r, p);
-				if(err){
+				terr = float_parser(r, p);
+				if(terr){
 					delete_ast(r);
 				}else{
 					append_ast(t, r);
 				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		{
+				ast *r = alloc_ast();
+				terr = int_parser(r, p);
+				if(terr){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		if(e.curr > s.curr){
+			*p = e;
+			return err;
+		}
+		return "<option of group>";
+	}while(0);
+	return NULL;
+}
+
+const char *gen0XFFFFD6228DE5D0A2_parser(ast *t, position *p){
+	do{
+		const char *err = NULL, *terr = NULL;
+		position s = *p, e = s;
+		size_t length_a = t->length;
+		{
+				ast *r = alloc_ast();
+				terr = float_parser(r, p);
+				if(terr){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		{
+				ast *r = alloc_ast();
+				terr = int_parser(r, p);
+				if(terr){
+					delete_ast(r);
+				}else{
+					append_ast(t, r);
+				}
+		}
+		if(!terr){break;}
+		if(p->curr > s.curr){
+			t->length = length_a;
+			err = terr;
+			e = *p;
+			*p = s;
+		}
+		if(e.curr > s.curr){
+			*p = e;
+			return err;
+		}
+		return "<option of group>";
+	}while(0);
+	return NULL;
+}
+
+const char *gen0XFFFFD6228DE5D0BA_parser(ast *t, position *p){
+	{
+		const char *err = NULL;
+		{
+				err = gen0XFFFFD6228DE5D08A_parser(t, p);
 		}
 		if(err){
 			return err;
@@ -3114,13 +3334,7 @@ const char *gen0XFFFFD69F48BA56B7_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
-				ast *r = alloc_ast();
-				err = float_parser(r, p);
-				if(err){
-					delete_ast(r);
-				}else{
-					append_ast(t, r);
-				}
+				err = gen0XFFFFD6228DE5D0A2_parser(t, p);
 		}
 		if(err){
 			return err;
@@ -3161,20 +3375,23 @@ const char *complex_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
-				terr = gen0XFFFFD69F48BA569F_parser(t, p);
+				terr = gen0XFFFFD6228DE5D05A_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
 		}
 		{
-				terr = gen0XFFFFD69F48BA56B7_parser(t, p);
+				terr = gen0XFFFFD6228DE5D08A_parser(t, p);
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3271,11 +3488,11 @@ const char *char_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA5717_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA5717_tag);
+const char *gen0XFFFFD6228DE5D11A_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = &(ast){0};
 				terr = space_parser(r, p);
@@ -3283,6 +3500,7 @@ const char *gen0XFFFFD69F48BA5717_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3292,6 +3510,7 @@ const char *gen0XFFFFD69F48BA5717_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3301,6 +3520,7 @@ const char *gen0XFFFFD69F48BA5717_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3325,7 +3545,7 @@ const char *whitespace_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA5717_parser(c, p);
+				err = gen0XFFFFD6228DE5D11A_parser(c, p);
 				if(err)break;
 				matched = 1;
 				merge_ast(t, c);
@@ -3358,7 +3578,6 @@ const char *space_parser(ast *t, position *p){
 }
 
 const char *single_comment_parser(ast *t, position *p){
-	set_tag(t, single_comment_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3394,7 +3613,6 @@ const char *single_comment_parser(ast *t, position *p){
 }
 
 const char *multi_comment_parser(ast *t, position *p){
-	set_tag(t, multi_comment_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3418,16 +3636,17 @@ const char *multi_comment_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA578F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA578F_tag);
+const char *gen0XFFFFD6228DE5D192_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_charset_prefix("-.{.}", t, p) ? NULL : "-.{.}";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3437,6 +3656,7 @@ const char *gen0XFFFFD69F48BA578F_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3451,7 +3671,6 @@ const char *gen0XFFFFD69F48BA578F_parser(ast *t, position *p){
 }
 
 const char *block_comment_parser(ast *t, position *p){
-	set_tag(t, block_comment_tag);
 	{
 		const char *err = NULL;
 		{
@@ -3471,7 +3690,7 @@ const char *block_comment_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD69F48BA578F_parser(c, p);
+				err = gen0XFFFFD6228DE5D192_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -3790,16 +4009,17 @@ const char *pound_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD69F48BA5987_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD69F48BA5987_tag);
+const char *schar_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_charset_prefix("-.\\.\".\n", t, p) ? NULL : "-.\\.\".\n";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3809,6 +4029,7 @@ const char *gen0XFFFFD69F48BA5987_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -3822,33 +4043,7 @@ const char *gen0XFFFFD69F48BA5987_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *schar_parser(ast *t, position *p){
-	set_tag(t, schar_tag);
-	{
-		const char *err = NULL;
-		{
-			position l;
-			ast *c;
-			while(1){
-				l = *p;
-				c = alloc_ast();
-				err = gen0XFFFFD69F48BA5987_parser(c, p);
-				if(err)break;
-				merge_ast(t, c);
-			}
-			delete_ast(c);
-			*p = l;
-			err = NULL;
-		}
-		if(err){
-			return err;
-		}
-	}
-	return NULL;
-}
-
 const char *_implicit___parser(ast *t, position *p){
-	set_tag(t, _implicit___tag);
 	{
 		const char *err = NULL;
 		{

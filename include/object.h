@@ -3,22 +3,29 @@
 
 #include <stddef.h>
 #include <inttypes.h>
+#include <complex.h>
 #include "avl.h"
+#include "ll.h"
 
 typedef enum{
 	VTYPE_VOID,
-	VTYPE_I,
-	VTYPE_Z,
-	VTYPE_Q,
-	VTYPE_R,
-	VTYPE_CI,
-	VTYPE_CZ,
-	VTYPE_CQ,
-	VTYPE_CR,
-	VTYPE_STR,
-	VTYPE_OBJ,
-	VTYPE_BLOCK,
+	VTYPE_I,//natural number
+	VTYPE_Z,//integer
+	VTYPE_Q,//rational number
+	VTYPE_R,//double
+	VTYPE_CZ,//complex integer
+	VTYPE_CQ,//complex rational
+	VTYPE_CR,//complex double
+	VTYPE_CH,//char
+	VTYPE_STR,//string
+	VTYPE_OBJ,//object
+	VTYPE_BLOCK,//code block
 } vtype;
+
+typedef struct{
+	size_t len;
+	char buf[];
+} vstr;
 
 typedef struct object object;
 struct object{

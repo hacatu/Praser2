@@ -17,7 +17,7 @@ implicit__= _implicit__
 param_parens= lparen bare_statement whitespace? rparen
 list= label_tag? lbrace bare_statement rbrace
 identifier= [a-zA-Z_] [a-zA-Z_0-9]*
-literal= list | dict | block | int | float | complex | string | char
+literal= list | dict | block | complex | float | int | string | char
 parens= lparen expr whitespace? rparen
 compound_statement= (whitespace? identifier | literal | parens whitespace? param_parens? whitespace? block)+
 dict= label_tag? lbracket bare_statement rbracket
@@ -31,7 +31,7 @@ float= scientific | subnormal | normal
 scientific< subnormal | normal | [0-9]+ [Ee] [+\-]? [0-9]+
 subnormal< "." [0-9]+
 normal< [0-9]+ "." [0-9]*
-complex= (float whitespace? I) | (float whitespace? [+\-] float whitespace? I)
+complex= ((float | int) whitespace? I) | ((float | int) whitespace? [+\-] (float | int) whitespace? I)
 string= dquote schar* dquote
 char= squote schar squote
 whitespace: (space | multi_comment | single_comment)+
@@ -58,7 +58,7 @@ o_pre: "0" [oO]
 h_pre: "0" [xX]
 I: [iIjJ]
 pound: "#"
-schar< ([^\\"\n] | esc_seq)*
+schar< [^\\"\n] | esc_seq
 esc_seq< special
 _implicit__< always_fail
 always_fail< special

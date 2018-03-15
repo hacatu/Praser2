@@ -472,6 +472,11 @@ ast *flatten_ast(ast *t){
 	return ret;
 }
 
+void init_position_from_str(position *self, const char *str){
+	self->curr = self->start = str;
+	self->end = str + strlen(str);
+}
+
 position canonicalize_indents(const position *p, size_t tab_spaces){//note this does not currently produce multiple indent/dedent characters in a row even if multiple indents or dedents are performed because this is a problem with mixed tabs and spaces.  If you promise not to mix tabs and spaces I might fix this.
 	position ret = {0};
 	ret.start = malloc(sizeof(char)*(p->end - p->start));

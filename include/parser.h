@@ -18,6 +18,7 @@ typedef struct{
 	const char *curr;
 } position;
 
+void init_position_from_str(position *, const char *str);
 position canonicalize_indents(const position *p, size_t tab_spaces);
 
 void append_ast(ast *t, ast *c);

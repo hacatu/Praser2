@@ -2,7 +2,10 @@ CFLAGS += -Iinclude -Llib -g -Wall -Wno-switch -fPIC
 LDFLAGS += -Llib
 
 !cc = |> gcc $(CFLAGS) -c %f -o %o |>
+!cccov = |> gcc $(CFLAGS) --coverage -c %f -o %o && mv %O.gcno notes/ |>
 !ld = |> gcc $(LDFLAGS) %f -o %o |>
+!ldcov = |> gcc $(LDFLAGS) --coverage %f -o %o |>
 !ar = |> ar rcs %o %f |>
 !so = |> gcc -shared %f -o %o |>
+!socov = |> gcc -shared --coverage %f -o %o |>
 

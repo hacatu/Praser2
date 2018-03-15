@@ -78,7 +78,8 @@ typedef enum{
 	OP_CSTMT_ARGS,//indicates arguments for compound statement
 } operator;
 
-operator str_to_op(const char *s);
+operator str_prefix_to_op(const char *s);
+operator str_infix_to_op(const char *s);
 
 extern const unsigned op_precedence[OP_ENUM_COUNT];
 extern const int op_associativity[OPERATOR_PRECEDENCE_LEVELS];

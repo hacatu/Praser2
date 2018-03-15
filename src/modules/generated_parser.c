@@ -11,12 +11,12 @@ const char *name_parser(ast*, position*);
 static const char name_tag[] = "name";
 const char *assign_parser(ast*, position*);
 static const char assign_tag[] = "assign";
-const char *gen0XFFFFD676C14C0DAF_parser(ast*, position*);
-static const char gen0XFFFFD676C14C0DAF_tag[] = "gen0XFFFFD676C14C0DAF";
+const char *gen0XFFFFD5C1D1C1E1CA_parser(ast*, position*);
+static const char gen0XFFFFD5C1D1C1E1CA_tag[] = "gen0XFFFFD5C1D1C1E1CA";
 const char *pattern_parser(ast*, position*);
 static const char pattern_tag[] = "pattern";
-const char *gen0XFFFFD676C14C0DDF_parser(ast*, position*);
-static const char gen0XFFFFD676C14C0DDF_tag[] = "gen0XFFFFD676C14C0DDF";
+const char *gen0XFFFFD5C1D1C1E1FA_parser(ast*, position*);
+static const char gen0XFFFFD5C1D1C1E1FA_tag[] = "gen0XFFFFD5C1D1C1E1FA";
 const char *group_parser(ast*, position*);
 static const char group_tag[] = "group";
 const char *option_parser(ast*, position*);
@@ -27,20 +27,20 @@ const char *quantifier_parser(ast*, position*);
 static const char quantifier_tag[] = "quantifier";
 const char *parens_parser(ast*, position*);
 static const char parens_tag[] = "parens";
-const char *gen0XFFFFD676C14C0E6F_parser(ast*, position*);
-static const char gen0XFFFFD676C14C0E6F_tag[] = "gen0XFFFFD676C14C0E6F";
+const char *gen0XFFFFD5C1D1C1E28A_parser(ast*, position*);
+static const char gen0XFFFFD5C1D1C1E28A_tag[] = "gen0XFFFFD5C1D1C1E28A";
 const char *invset_parser(ast*, position*);
 static const char invset_tag[] = "invset";
-const char *gen0XFFFFD676C14C0E9F_parser(ast*, position*);
-static const char gen0XFFFFD676C14C0E9F_tag[] = "gen0XFFFFD676C14C0E9F";
+const char *gen0XFFFFD5C1D1C1E2BA_parser(ast*, position*);
+static const char gen0XFFFFD5C1D1C1E2BA_tag[] = "gen0XFFFFD5C1D1C1E2BA";
 const char *charset_parser(ast*, position*);
 static const char charset_tag[] = "charset";
 const char *setrange_parser(ast*, position*);
 static const char setrange_tag[] = "setrange";
 const char *setchar_parser(ast*, position*);
 static const char setchar_tag[] = "setchar";
-const char *gen0XFFFFD676C14C0EFF_parser(ast*, position*);
-static const char gen0XFFFFD676C14C0EFF_tag[] = "gen0XFFFFD676C14C0EFF";
+const char *gen0XFFFFD5C1D1C1E31A_parser(ast*, position*);
+static const char gen0XFFFFD5C1D1C1E31A_tag[] = "gen0XFFFFD5C1D1C1E31A";
 const char *string_parser(ast*, position*);
 static const char string_tag[] = "string";
 const char *whitespace_parser(ast*, position*);
@@ -233,8 +233,7 @@ const char *assign_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD676C14C0DAF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD676C14C0DAF_tag);
+const char *gen0XFFFFD5C1D1C1E1CA_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -294,7 +293,7 @@ const char *pattern_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD676C14C0DAF_parser(c, p);
+				err = gen0XFFFFD5C1D1C1E1CA_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -309,8 +308,7 @@ const char *pattern_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD676C14C0DDF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD676C14C0DDF_tag);
+const char *gen0XFFFFD5C1D1C1E1FA_parser(ast *t, position *p){
 	{
 		const char *err = NULL;
 		{
@@ -397,7 +395,7 @@ const char *group_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD676C14C0DDF_parser(c, p);
+				err = gen0XFFFFD5C1D1C1E1FA_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -473,6 +471,7 @@ const char *atom_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = parens_parser(r, p);
@@ -484,6 +483,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -499,6 +499,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -514,6 +515,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -529,6 +531,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -544,6 +547,7 @@ const char *atom_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -645,11 +649,11 @@ const char *parens_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD676C14C0E6F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD676C14C0E6F_tag);
+const char *gen0XFFFFD5C1D1C1E28A_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = setrange_parser(r, p);
@@ -661,6 +665,7 @@ const char *gen0XFFFFD676C14C0E6F_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -676,6 +681,7 @@ const char *gen0XFFFFD676C14C0E6F_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -721,7 +727,7 @@ const char *invset_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD676C14C0E6F_parser(c, p);
+				err = gen0XFFFFD5C1D1C1E28A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -747,11 +753,11 @@ const char *invset_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD676C14C0E9F_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD676C14C0E9F_tag);
+const char *gen0XFFFFD5C1D1C1E2BA_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				ast *r = alloc_ast();
 				terr = setrange_parser(r, p);
@@ -763,6 +769,7 @@ const char *gen0XFFFFD676C14C0E9F_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -778,6 +785,7 @@ const char *gen0XFFFFD676C14C0E9F_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -812,7 +820,7 @@ const char *charset_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD676C14C0E9F_parser(c, p);
+				err = gen0XFFFFD5C1D1C1E2BA_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}
@@ -889,11 +897,13 @@ const char *setchar_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_charset_prefix("-.\\.-.]", t, p) ? NULL : "-.\\.-.]";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -903,6 +913,7 @@ const char *setchar_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -916,16 +927,17 @@ const char *setchar_parser(ast *t, position *p){
 	return NULL;
 }
 
-const char *gen0XFFFFD676C14C0EFF_parser(ast *t, position *p){
-	set_tag(t, gen0XFFFFD676C14C0EFF_tag);
+const char *gen0XFFFFD5C1D1C1E31A_parser(ast *t, position *p){
 	do{
 		const char *err = NULL, *terr = NULL;
 		position s = *p, e = s;
+		size_t length_a = t->length;
 		{
 				terr = read_charset_prefix("-.\\.\".\n", t, p) ? NULL : "-.\\.\".\n";
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -935,6 +947,7 @@ const char *gen0XFFFFD676C14C0EFF_parser(ast *t, position *p){
 		}
 		if(!terr){break;}
 		if(p->curr > s.curr){
+			t->length = length_a;
 			err = terr;
 			e = *p;
 			*p = s;
@@ -969,7 +982,7 @@ const char *string_parser(ast *t, position *p){
 			while(1){
 				l = *p;
 				c = alloc_ast();
-				err = gen0XFFFFD676C14C0EFF_parser(c, p);
+				err = gen0XFFFFD5C1D1C1E31A_parser(c, p);
 				if(err)break;
 				merge_ast(t, c);
 			}

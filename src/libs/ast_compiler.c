@@ -159,7 +159,7 @@ src_mid_fmt[] =
 pattern_decl_fmt[] =//1$<rule_name>
 "const char *%1$s_parser(ast*, position*);\n"
 "static const char %1$s_tag[] = \"%1$s\";\n",
-pattern_pre_generated_fmt[] =//1$<rule_name>
+pattern_pre_merge_fmt[] =//1$<rule_name>
 "const char *%1$s_parser(ast *t, position *p){\n",
 pattern_pre_fmt[] =//1$<rule_name>
 "const char *%1$s_parser(ast *t, position *p){\n"
@@ -171,7 +171,8 @@ pattern_post_fmt[] =
 group_pre_fmt[] =
 	"\tdo{\n"
 		"\t\tconst char *err = NULL, *terr = NULL;\n"
-		"\t\tposition s = *p, e = s;\n",
+		"\t\tposition s = *p, e = s;\n"
+		"\t\tsize_t length_a = t->length;\n",
 		//[option]...
 group_post1_fmt[] =
 		"\t\tif(e.curr > s.curr){\n"
@@ -195,6 +196,7 @@ option_fmt[] =
 		//[atom_quantified (err=terr)]
 		"\t\tif(!terr){break;}\n"
 		"\t\tif(p->curr > s.curr){\n"
+			"\t\t\tt->length = length_a;\n"
 			"\t\t\terr = terr;\n"
 			"\t\t\te = *p;\n"
 			"\t\t\t*p = s;\n"
@@ -328,13 +330,20 @@ void write_all(FILE *f, const state *fsm, size_t num_states){
 			continue;
 		}
 		ast *pattern;
+		int is_merge_rule = 1;
 		if(!strcmp("rule", s->rule->name)){
 			pattern = s->rule->children[2];
+			is_merge_rule = *s->rule->children[1]->text == '<';
 		}else{
-			pattern = s->rule->children[0];
+			pattern = s->rule->children[0];//only generated rules do not have name equals "rule", and generated rules are merge rules
 		}
 		char *name = get_state_name(s);
-		write_rule(f, pattern, name);
+		//printf("\e[1;32m\"%s\" is %sa merge rule\e[0m\n", name, is_merge_rule ? "" : "NOT ");
+		if(is_merge_rule){
+			write_generated_rule(f, pattern, name);
+		}else{
+			write_rule(f, pattern, name);
+		}
 		free(name);
 	}
 }
@@ -366,7 +375,7 @@ void write_rule(FILE *f, const ast *pattern, const char *name){
 }
 
 void write_generated_rule(FILE *f, const ast *pattern, const char *name){
-	fprintf(f, pattern_pre_generated_fmt, name);
+	fprintf(f, pattern_pre_merge_fmt, name);
 	for(size_t i = 0; i < pattern->size; ++i){
 		write_group(f, pattern->children[i]);
 	}

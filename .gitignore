@@ -8,4 +8,7 @@ umbrella.txt
 *.skip
 vgcore*
 *.ast
+__pycache__
+builddeps.png
+notes
 
