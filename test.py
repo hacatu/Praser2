@@ -8,18 +8,20 @@ class PraserPosition(ctypes.Structure):
 		("curr", ctypes.c_char_p)
 	]
 	
-	def __init__(self, s):
-		self.start = ctypes.c_char_p(s)
-		self.end = self.start + len(s)
-		self.pos = self.start
+	@staticmethod
+	def make(s):
+		start = ctypes.c_char_p(s.encode())
+		return PraserPosition(start, ctypes.c_char_p(ctypes.addressof(start) + len(s)), start)
 
 clibs = B.bind_libraries("betest_imports.json")
 
 @B.unit()
 def parse_hex2():
 	print("Allocating ast")
+	clibs["alloc_ast"].restype = ctypes.c_void_p
 	ast = clibs["alloc_ast"]()
-	pos = PraserPosition("x41")
+	print("initializing parser position")
+	pos = PraserPosition.make("x41")
 	print("parsing 2 digit hex string")
 	if clibs["parse_hex2"](ast, ctypes.byref(pos)) == 0:
 		raise AssertionError("parse_hex2 failed to parse \"x41\"")

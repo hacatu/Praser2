@@ -444,21 +444,36 @@ void transform_complex_literal(value *out, ast *r){
 	//complex= (float whitespace? I) | (float whitespace? [+\-] float whitespace? I)
 	out->type = VTYPE_CR;
 	out->data = malloc(sizeof(double complex));
-	size_t buf_len = r->children[0]->length;
-	if(r->size != 3 && r->children[r->size - 3]->length > buf_len){
-		buf_len = r->children[r->size - 3]->length;
-	}
-	char buf[buf_len + 1];
-	buf[buf_len] = '\0';
-	memcpy(buf, r->children[0]->text, r->children[0]->length);
+	value _val_r;
 	double val_r, val_i;
-	if(r->size == 3){//pure imaginary
-		val_r = 0, val_i = strtod(buf, NULL);
+	if(r->size == 1){//pure imaginary
+		val_r = 0;
+		if(!strcmp("float", r->children[0]->name)){//TODO: yo can we like use variables for the tags
+			transform_float_literal(&_val_r, r->children[0]);
+			val_i = *(double*)&_val_r.data;
+		}else{
+			transform_int_literal(&_val_r, r->children[0]);
+			val_i = (double)(intptr_t)_val_r.data;
+		}
+		
 	}else{//real and imaginary components
-		val_r = strtod(buf, NULL);
-		memcpy(buf, r->children[r->size - 3]->text, r->children[r->size - 3]->length);
-		buf[r->children[r->size - 3]->length] = '\0';
-		val_i = strtod(buf, NULL);
+		if(!strcmp("float", r->children[0]->name)){
+			transform_float_literal(&_val_r, r->children[0]);
+			val_r = *(double*)&_val_r.data;
+		}else{
+			transform_int_literal(&_val_r, r->children[0]);
+			val_r = (double)(intptr_t)_val_r.data;
+		}
+		if(!strcmp("float", r->children[1]->name)){
+			transform_float_literal(&_val_r, r->children[1]);
+			val_i = *(double*)&_val_r.data;
+		}else{
+			transform_int_literal(&_val_r, r->children[1]);
+			val_i = (double)(intptr_t)_val_r.data;
+		}
+		if(r->text[0] == '-'){
+			val_i = -val_i;
+		}
 	}
 	*(double complex*)out->data = CMPLX(val_r, val_i);
 }
@@ -467,12 +482,10 @@ void transform_string_literal(value *out, ast *r){
 	//string= dquote schar* dquote
 	//schar< [^\\"\n] | esc_seq
 	out->type = VTYPE_STR;
-	out->data = malloc(sizeof(vstr) + r->size*sizeof(char));
+	out->data = malloc(sizeof(vstr) + r->length);
 	vstr *str = out->data;
-	str->len = r->size;
-	for(size_t i = 0; i < r->size; ++i){
-		str->buf[i] = r->children[i]->text[0];
-	}
+	str->len = r->length;
+	memcpy(str->buf, r->text, r->length);
 }
 
 void transform_char_literal(value *out, ast *r){

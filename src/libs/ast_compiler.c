@@ -153,6 +153,8 @@ src_pre_fmt[] =
 "#include <stdlib.h>\n"
 "#include <string.h>\n"
 "#include \"parser.h\"\n"
+"\n"
+"#pragma GCC diagnostic ignored \"-Wunused-const-variable\"\n"
 "\n",
 src_mid_fmt[] =
 "\n",
@@ -172,7 +174,7 @@ group_pre_fmt[] =
 	"\tdo{\n"
 		"\t\tconst char *err = NULL, *terr = NULL;\n"
 		"\t\tposition s = *p, e = s;\n"
-		"\t\tsize_t length_a = t->length;\n",
+		"\t\tsize_t length_a = t->length, size_a = t->size;\n",
 		//[option]...
 group_post1_fmt[] =
 		"\t\tif(e.curr > s.curr){\n"
@@ -196,7 +198,7 @@ option_fmt[] =
 		//[atom_quantified (err=terr)]
 		"\t\tif(!terr){break;}\n"
 		"\t\tif(p->curr > s.curr){\n"
-			"\t\t\tt->length = length_a;\n"
+			"\t\t\tt->length = length_a, t->size = size_a;\n"
 			"\t\t\terr = terr;\n"
 			"\t\t\te = *p;\n"
 			"\t\t\t*p = s;\n"

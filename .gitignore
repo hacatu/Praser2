@@ -11,4 +11,8 @@ vgcore*
 __pycache__
 builddeps.png
 notes
+cov
+test
+src/modules/generated_parser.c
+src/modules/umbrella_parser.c
 

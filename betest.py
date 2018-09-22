@@ -2,6 +2,27 @@ import json
 import ctypes
 import random
 import os
+import atexit
+import subprocess
+
+wrapped_libs = []
+def remove_wrapped_libs():
+	for lib in wrapped_libs:
+		os.remove(lib)
+
+#atexit.register(remove_wrapped_libs)
+
+def open_obj_f(obj_f_name):
+	if obj_f_name.endswith(".a"):
+		wrapped_name = obj_f_name[:-1] + "so"
+		print("Wrapping static library")
+		if 0 == subprocess.call(["gcc", "--coverage", "-shared", "-o", wrapped_name, "-Wl,--whole-archive", obj_f_name, "-Wl,--no-whole-archive"]):
+			wrapped_libs.append(wrapped_name)
+			return ctypes.CDLL(wrapped_name)
+		raise ValueError("Couldn't make static library shared")
+	return ctypes.CDLL(obj_f_name)
+
+FUNCTION_PTR = ctypes.POINTER(ctypes.CFUNCTYPE(ctypes.c_int))
 
 def bind_libraries(in_f_path):
 	with open(in_f_path, "r") as in_f:
@@ -10,9 +31,10 @@ def bind_libraries(in_f_path):
 	obj_fs = dict()
 	for obj_f_name in imports:
 		try:
-			obj_f = ctypes.CDLL(os.path.abspath(obj_f_name))
-		except:
+			obj_f = open_obj_f(os.path.abspath(obj_f_name))
+		except Exception as e:
 			print("Could not open \"{}\"".format(obj_f_name))
+			print(e)
 			continue
 		obj_fs[obj_f_name] = obj_f
 
@@ -21,9 +43,13 @@ def bind_libraries(in_f_path):
 		obj_f = obj_fs[obj_f_name]
 		for func_name, bound_name in these_bindings.items():
 			try:
-				func = obj_f[func_name]
-			except:
+				if func_name.startswith("*"):
+					func = FUNCTION_PTR(obj_f[func_name[1:]]).contents
+				else:
+					func = obj_f[func_name]
+			except Exception as e:
 				print("Could not find function \"{}\" in \"{}\"".format(func_name, obj_f_name))
+				print(e)
 				continue
 			bindings[bound_name] = func
 	
@@ -65,8 +91,9 @@ def unit(suite=None, result=None):
 			try:
 				res = func(*args, **kwargs)
 			except Exception as e:
-				if isinstance(e, result[1]):
+				if result[1] is not None and isinstance(e, result[1]):
 					return True
+				print("Test threw a(n) {}: \"{}\"".format(type(e), e))
 				return False
 			return result[1] is None and res == result[0]
 		closure.__annotations__ = func.__annotations__

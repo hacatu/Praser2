@@ -12,8 +12,8 @@
 		"read_indent":"read_indent",
 		"read_dedent":"read_dedent",
 		"clear_ast":"clear_ast",
-		"alloc_ast":"alloc_ast",
-		"delete_ast":"delete_ast",
+		"_alloc_ast":"alloc_ast",
+		"_delete_ast":"delete_ast",
 		"print_ast":"print_ast"
 	}
 }

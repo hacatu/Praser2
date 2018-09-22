@@ -437,10 +437,6 @@ const char *dash_parser(ast *t, position *p){
 	return read_string("-", NULL, p) ? NULL : "\"?\"";
 }
 
-const char *backslash_parser(ast *t, position *p){
-	return read_string("\\", NULL, p) ? NULL : "\"\\\\\"";
-}
-
 const char *newline_parser(ast *t, position *p){
 	return read_newline(p) ? NULL : "newline";
 }

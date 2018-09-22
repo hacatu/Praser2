@@ -22,6 +22,5 @@ caret: "^"
 quote: "\""
 bar: "|"
 dash: "-"
-backslash: "\\"
 newline: "\n"
 esc_seq< special

@@ -12,9 +12,9 @@
 #include <fcntl.h>
 #include "parser.h"
 
-static ast *_alloc_ast(void);
-static void _delete_ast(ast*);
-static void _free_ast(ast*);
+ast *_alloc_ast(void);
+void _delete_ast(ast*);
+void _free_ast(ast*);
 
 ast *(*alloc_ast)(void) = _alloc_ast;
 void (*delete_ast)(ast*) = _delete_ast;
@@ -68,7 +68,7 @@ const char *esc_seq_parser(ast *t, position *p){
 		return "esc_seq";
 	}
 	if(parse_hex2(t, p) || parse_hex4(t, p)){
-		NULL;
+		return NULL;
 	}
 	//abfnrtv
 	if(!is_end(p)){
@@ -394,11 +394,11 @@ void print_ast(const ast *t){
 	print_ast_helper(t, 0, 1);
 }
 
-static ast *_alloc_ast(void){
+ast *_alloc_ast(void){
 	return calloc(1, sizeof(ast));
 }
 
-static void _delete_ast(ast *t){
+void _delete_ast(ast *t){
 	for(size_t i = 0; i < t->size; ++i){
 		_delete_ast(t->children[i]);
 	}
@@ -407,7 +407,7 @@ static void _delete_ast(ast *t){
 	free_ast(t);
 }
 
-static void _free_ast(ast *t){
+void _free_ast(ast *t){
 	free(t);
 }
 
