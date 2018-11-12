@@ -1,27 +1,27 @@
-start= statement*
-statement= label_tag? bare_statement whitespace? semicolon
-bare_statement= (expr whitespace? comma)* expr?
+start= whitespace? statements?
+statements= (label_tag? whitespace? expr post_comma* semicolon)* label_tag? expr post_comma*
 label_tag= whitespace? identifier whitespace? colon colon whitespace?
-expr= whitespace? expr_infix
-expr_infix= expr_prefix (whitespace? op_infix whitespace? expr_prefix)*
-op_infix= "->"|"$="|"*="|"/="|"%="|"<<="|">>="|"+="|"-="|"&="|"|="|"^="|"~&="|"~|="|"~^="|"&&="|"||="|"^^="|"!&&="|"!||="|"!^^="|"&&"|"||"|"^^"|"!&&"|"!||"|"!^^"|"<<"|">>"|"<=>"|">="|"<="|"=="|"!="|"<-"|">"|"<"|"="|"&"|"|"|"^"|"~&"|"~|"|"~^"|"+"|"-"|"*"|"/"|"%"|"$"|":"
+post_comma= comma whitespace?
+expr= expr_prefix (whitespace? ocommas_op_infix whitespace? expr_prefix)*
+ocommas_op_infix= commas_op_infix | op_infix
+commas_op_infix< post_comma+ op_infix?
+op_infix< "->"|"$="|"**="|"*="|"/="|"%="|"<<="|">>="|"+="|"-="|"&="|"|="|"^="|"~&="|"~|="|"~^="|"&&="|"||="|"^^="|"!&&="|"!||="|"!^^="|"&&"|"||"|"^^"|"!&&"|"!||"|"!^^"|"<<"|">>"|"<=>"|">="|"<="|"=="|"!="|"<-"|">"|"<"|"="|","|"&"|"|"|"^"|"~&"|"~|"|"~^"|"+"|"-"|"**"|"*"|"/"|"%"|"$"|":"
 expr_prefix= (whitespace? op_prefix)* whitespace? expr_postfix
 op_prefix= "++"|"--"|"+"|"-"|"!"|"~"|"*"|"&"
-expr_postfix= expr0 (whitespace? op_postfix)* whitespace?
-op_postfix= "++"|"--"|".."|"?"|param_parens|list|access|declaration
+expr_postfix= expr0 (whitespace? post_comma* op_postfix)* whitespace?
+op_postfix= "++"|"--"|".."|"?"|bare_block|bare_list|access|declaration
 expr0< declaration | atom
 access= dot identifier
 declaration= at atom
-atom= compound_statement | identifier | literal | parens | implicit__
-implicit__= _implicit__
-param_parens= lparen bare_statement whitespace? rparen
-list= label_tag? lbrace bare_statement rbrace
+atom= bare_block | literal | identifier
+block= label_tag? bare_block
+bare_block= lparen whitespace? statements? rparen
+list= label_tag? bare_list
+bare_list= lbrace whitespace? statements? rbrace
 identifier= [a-zA-Z_] [a-zA-Z_0-9]*
-literal= list | dict | block | complex | real_numeric | string | char
-parens= lparen expr whitespace? rparen
-compound_statement= (whitespace? identifier | literal | parens whitespace? param_parens? whitespace? block)+
-dict= label_tag? lbracket bare_statement rbracket
-block= label_tag? whitespace? lbracket statement* whitespace? rbracket
+literal= empty_tuple | list | dict | block | complex | real_numeric | string | char
+dict= label_tag? lbracket whitespace? statements? whitespace? rbracket
+empty_tuple= lparen whitespace? rparen
 int= int_b | int_o | int_h | int_d
 int_b= b_pre [01]+ (squote [01]+)*
 int_o= o_pre [0-7]+ (squote [0-7]+)*
@@ -61,5 +61,3 @@ I: [iIjJ]
 pound: "#"
 schar< [^\\"\n] | esc_seq
 esc_seq< special
-_implicit__< always_fail
-always_fail< special

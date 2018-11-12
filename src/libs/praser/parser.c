@@ -385,7 +385,7 @@ static void print_ast_helper(const ast *r, size_t id, size_t di){
 	}else{
 		printf("%*s%s: %.*s\n", (int)id, "", r->name, (int)r->length, r->text);
 	}
-	for(int i = 0; i < r->size; ++i){
+	for(size_t i = 0; i < r->size; ++i){
 		print_ast_helper(r->children[i], id + di, di);
 	}
 }

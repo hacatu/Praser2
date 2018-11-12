@@ -1,7 +1,9 @@
 #ifndef __UM_OPERATOR_H__
 #define __UM_OPERATOR_H__
 
-#define OPERATOR_PRECEDENCE_LEVELS 13
+#define MIN_INFIX_PRECEDENCE 3
+#define COMPARISON_PRECEDENCE 9
+#define MAX_PRECEDENCE 14
 
 typedef enum{
 	OP_ID,//no operator
@@ -24,36 +26,39 @@ typedef enum{
 	OP_DREF,//*a
 	OP_CURRY,//a$b
 	OP_CAST,//a:b
-	OP_MUL,//a*b
+	OP_EXP,//a**b
+	OP_MUL,//a*b		this operator takes 2+ arguments
 	OP_DIV,//a/b
 	OP_MOD,//a%b
 	OP_SMS,//a<<b
 	OP_SLS,//a>>b
-	OP_ADD,//a+b
+	OP_ADD,//a+b		this operator takes 2+ arguments
 	OP_SUB,//a-b
-	OP_BAND,//a&b
-	OP_BOR,//a|b
-	OP_BXOR,//a^b
+	OP_BAND,//a&b		this operator takes 2+ arguments
+	OP_BOR,//a|b		this operator takes 2+ arguments
+	OP_BXOR,//a^b		this operator takes 2+ arguments
 	OP_BNAND,//a~&b
 	OP_BNOR,//a~|b
 	OP_BXNOR,//a~^b
+	OP_TUPLE,//a,b		this operator takes 1+ arguments
 	OP_GT,//a>b
 	OP_LT,//a<b
 	OP_GTE,//a>=b
 	OP_LTE,//a<=b
-	OP_EQ,//a==b
+	OP_EQ,//a==b		this operator takes 2+ arguments
 	OP_NEQ,//a!=b
 	OP_ORD,//a<=>b
 	OP_IN,//a<-b
-	OP_LAND,//a&&b
-	OP_LOR,//a||b
-	OP_LXOR,//a^^b
+	OP_LAND,//a&&b		this operator takes 2+ arguments
+	OP_LOR,//a||b		this operator takes 2+ arguments
+	OP_LXOR,//a^^b		this operator takes 2+ arguments
 	OP_LNAND,//a!&&b
 	OP_LNOR,//a!||b
 	OP_LXNOR,//a!^^b
 	OP_FUN,//a->b
 	OP_SET,//a=b
 	OP_CCURRY,//a$=b
+	OP_CEXP,//**=
 	OP_CMUL,//a*=b
 	OP_CDIV,//a/=b
 	OP_CMOD,//a%=b
@@ -73,16 +78,31 @@ typedef enum{
 	OP_CLNAND,//a!&&=b
 	OP_CLNOR,//a!||=b
 	OP_CLXNOR,//a!^^=b
-	OP_ENUM_COUNT,//enum constant equal to the number of actual operators.  operarors after this are synthetic
-	OP_CSTMT,//indicates compound statement name (eg if, while, ...)
-	OP_CSTMT_ARGS,//indicates arguments for compound statement
+	OP_ENUM_COUNT,//operarors after this are synthetic
 } operator;
 
-operator str_prefix_to_op(const char *s);
-operator str_infix_to_op(const char *s);
+typedef enum{
+	OP_ASSOC_COMPOUND = 0,
+	OP_ASSOC_LEFT = 1,
+	OP_ASSOC_RIGHT = 2,
+	OP_ASSOC_BOTH = 3,
+} operator_assoc;
 
-extern const unsigned op_precedence[OP_ENUM_COUNT];
-extern const int op_associativity[OPERATOR_PRECEDENCE_LEVELS];
+typedef struct{
+	const char *name;
+	const char *example;
+	const char *symbol;
+	size_t precedence;
+	operator_assoc assoc;
+	size_t min_args;
+	size_t max_args;
+	operator inverse;
+} operator_traits;
+
+operator str_prefix_to_op(const char *s);
+operator str_infix_to_op(const char *s, size_t len);
+
+extern operator_traits op_traits[OP_ENUM_COUNT];
 
 #endif
 

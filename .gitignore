@@ -1,18 +1,14 @@
-.tup
 bin
 lib
 obj
-gen
-build.py
 umbrella.txt
 *.skip
 vgcore*
 *.ast
+*.skip.*
+*.gen.*
 __pycache__
-builddeps.png
 notes
 cov
 test
-src/modules/generated_parser.c
-src/modules/umbrella_parser.c
 

@@ -8,11 +8,10 @@
 
 typedef enum{
 	//atom= compound_statement | identifier | literal | parens | implicit__
-	ATOM_CSTMT,
 	ATOM_IDENT,
 	ATOM_VALUE,
 	ATOM_EXPR,
-	ATOM_I_,
+	ATOM_BLOCK,
 } atom_type;
 
 typedef enum{
@@ -24,7 +23,6 @@ typedef struct expression expression;
 struct expression{
 	operator op;
 	size_t len;
-	char assign_undesignated;
 	atom_type type;
 	void *args[2];
 };
@@ -48,6 +46,9 @@ struct frame{
 
 typedef struct{char *key; expression *val;} avl_node_char__expression_;
 extern avl_ft avl_ft_char__expression_;
+
+void print_expression(const expression *expr, size_t indent);
+void print_block(const block *b, size_t indent);
 
 #endif
 

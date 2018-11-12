@@ -20,6 +20,8 @@ typedef enum{
 	VTYPE_STR,//string
 	VTYPE_OBJ,//object
 	VTYPE_BLOCK,//code block
+	VTYPE_LIST,//list block
+	VTYPE_DICT,//dict block
 } vtype;
 
 typedef struct{
@@ -52,6 +54,8 @@ typedef struct{size_t key; value val;} avl_node_size_value;
 extern avl_ft avl_ft_size_value;
 typedef struct{value key; value val;} avl_node_value_value;
 extern avl_ft avl_ft_value_value;
+
+void print_value(const value *val, size_t indent);
 
 #endif
 

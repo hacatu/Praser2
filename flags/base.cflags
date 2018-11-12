@@ -1,0 +1,8 @@
+-Iinclude
+-Wextra
+-std=c11
+-Wno-switch
+-Wno-unused-parameter
+-fno-strict-aliasing
+-fwrapv
+-fPIC

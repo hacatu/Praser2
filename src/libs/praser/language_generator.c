@@ -3,6 +3,7 @@
  * Uses an fsa as from ast_interpreter.ast_to_fsa to generate text matching a language description for testing.
  * Note that this will require special functions to provide generators, which is nyi.  But then again neither are any of these functions.
  */
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
