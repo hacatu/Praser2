@@ -103,6 +103,7 @@ operator str_prefix_to_op(const char *s);
 operator str_infix_to_op(const char *s, size_t len);
 
 extern operator_traits op_traits[OP_ENUM_COUNT];
+extern operator_assoc op_prec_assocs[MAX_PRECEDENCE];
 
 #endif
 

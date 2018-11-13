@@ -103,6 +103,17 @@ static void make_nested_singletons(expression *out, size_t n){
 	};
 }
 
+static size_t compute_max_prec_in_range(size_t n, ast *head[static n]){
+	size_t max_prec = 0;
+	for(size_t i = 1; i < n; i += 2){
+		size_t prec = op_traits[compute_operator(head[i])].precedence;
+		if(prec > max_prec){
+			max_prec = prec;
+		}
+	}
+	return max_prec;
+}
+
 static void transform_expr_rec(expression*, size_t n, ast *[static n], size_t);
 
 static void transform_expr_rec_compound(expression *out, size_t n, ast *head[static n], size_t prec){
@@ -158,7 +169,7 @@ static void transform_expr_rec_left(expression *out, size_t n, ast *head[static 
 		}
 	}
 	head = base;
-	return transform_expr_rec(stem, b - 1, head, prec - 1);
+	return transform_expr_rec(stem, b, head, prec - 1);
 }
 
 static void transform_expr_rec(expression *out, size_t n, ast *head[static n], size_t prec){
@@ -182,11 +193,11 @@ static void transform_expr_rec(expression *out, size_t n, ast *head[static n], s
 	//recomputed a lot since we aren't smashing the input in this version
 	if(prec - 1 == COMPARISON_PRECEDENCE){
 		//transform_expr_rec_compound(buf, n, head);
-		transform_expr_rec_right(out, n, head, prec - 1);
+		transform_expr_rec_right(out, n, head, prec);
 	}else if(op_traits[compute_operator(head[1])].assoc & OP_ASSOC_LEFT){//the transform_expr_rec_left/right functions are named the opposite of OP_ASSOC_LEFT/RIGHT
-		transform_expr_rec_right(out, n, head, prec - 1);
-	}else{
-		transform_expr_rec_left(out, n, head, prec - 1);
+		transform_expr_rec_right(out, n, head, prec);
+	}else if(op_traits[compute_operator(head[n - 2])].assoc & OP_ASSOC_RIGHT){
+		transform_expr_rec_left(out, n, head, prec);
 	}
 }
 
@@ -253,7 +264,7 @@ void transform_expr_prefix(expression *out, ast *r){
 			.args[0]= tail + i
 		};
 	}
-	transform_expr_postfix(tail + r->size - 1, r->children[r->size - 1]);
+	transform_expr_postfix(tail + r->size - 2, r->children[r->size - 1]);
 }
 
 static void transform_expr_postfix2(expression *out, ast *r){

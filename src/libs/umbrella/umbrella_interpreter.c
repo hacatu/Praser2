@@ -312,3 +312,11 @@ operator_traits op_traits[OP_ENUM_COUNT] = {
 	[OP_CLXNOR]={"OP_CLXNOR", "a!^^=b", "!^^=", 13, OP_ASSOC_RIGHT, 2, 2, OP_ENUM_COUNT},
 };
 
+operator_assoc op_prec_assocs[MAX_PRECEDENCE] = {
+	[0]=OP_ASSOC_COMPOUND,
+	[1]=OP_ASSOC_RIGHT,
+	[2]=OP_ASSOC_LEFT,
+	[3]=OP_ASSOC_LEFT,
+	[4]=OP_ASSOC_RIGHT,
+}
+

@@ -1,4 +1,5 @@
 bin
+!src/bin
 lib
 obj
 umbrella.txt

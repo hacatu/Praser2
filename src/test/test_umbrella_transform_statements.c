@@ -18,7 +18,6 @@
  * make_empty_block
  * transform_statements with labels
  * make_nested_singletons with nonzero nesting
- * transform_expr_rec_left with left associative operators
  * transform_expr_rec with comparison operators
  * transform_expr with in_operator || has_comma
  * transform_expr_postfix2 with OP_GET (_._)
@@ -28,7 +27,7 @@
 
 const char *(*expr_postfix_parser)(ast*, position*);
 const char *(*expr_prefix_parser)(ast*, position*);
-
+const char *(*expr_parser)(ast*, position*);
 
 int main(){
 	void *parser_so_handle = dlopen("lib/libumbrella_parser.so", RTLD_LAZY);
@@ -38,6 +37,7 @@ int main(){
 	}
 	*(void**)&expr_postfix_parser = dlsym_or_exit(parser_so_handle, "expr_postfix_parser");
 	*(void**)&expr_prefix_parser = dlsym_or_exit(parser_so_handle, "expr_prefix_parser");
+	*(void**)&expr_parser = dlsym_or_exit(parser_so_handle, "expr_parser");
 	const char *err = NULL;
 	position p;
 	expression _res = {};
@@ -64,6 +64,28 @@ int main(){
 			log_err(err, p);
 		}else{
 			transform_expr_prefix(&_res, t);
+			printf("Result: <expression>\n");
+		}
+		clear_ast(t);
+	}
+	const char *lassoc_expr_test_strings[] = {"1", "1=1", "1=1 = 1"};
+	for(size_t i = 0; i < sizeof(lassoc_expr_test_strings)/sizeof(const char*); ++i){
+		init_position_from_str(&p, lassoc_expr_test_strings[i]);
+		if((err = expr_parser(t, &p))){
+			log_err(err, p);
+		}else{
+			transform_expr(&_res, t, 0, 0);
+			printf("Result: <expression>\n");
+		}
+		clear_ast(t);
+	}
+	const char *cassoc_expr_test_strings[] = {"1 <=1", "1>1>1"};
+	for(size_t i = 0; i < sizeof(cassoc_expr_test_strings)/sizeof(const char*); ++i){
+		init_position_from_str(&p, cassoc_expr_test_strings[i]);
+		if((err = expr_parser(t, &p))){
+			log_err(err, p);
+		}else{
+			transform_expr(&_res, t, 0, 0);
 			printf("Result: <expression>\n");
 		}
 		clear_ast(t);
