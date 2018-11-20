@@ -10,7 +10,7 @@ BUILD_ROOT := $(shell pwd)
 PARSER_DESCS := $(shell find src/parsers -name '*.pra')
 
 
-LIB_SOURCES := $(shell find src/libs -name '*.c')
+LIB_SOURCES := $(shell find src/libs -name '*.c' ! -path '*/mixins/*')
 MODULE_SOURCES := $(shell find src/modules -name '*.c' ! -name '*.gen.c')
 TEST_SOURCES := $(shell find src/test -name '*.c')
 BINARY_SOURCES := $(shell find src/bin -name '*.c')
@@ -36,9 +36,9 @@ BINARY_OBJS := $(patsubst src/bin/%.c,obj/bin/%.o,$(BINARY_SOURCES))
 
 GEN_OBJS := $(patsubst src/parsers/%.pra,obj/modules/%_parser.gen.o,$(PARSER_DESCS))
 
-MODULE_LDFLAGS := $(LDFLAGS) --coverage -shared -lpraser -lhac -lumbrella
-TEST_LDFLAGS := $(LDFLAGS) --coverage -Wl,-rpath=$(BUILD_ROOT)/lib -lpraser -lumbrella -lhac -ldl
-BINARY_LDFLAGS := $(LDFLAGS) --coverage -Wl,-rpath=$(BUILD_ROOT)/lib -lpraser -lumbrella -lhac -ldl
+MODULE_LDFLAGS := $(LDFLAGS) --coverage -shared -lpraser
+TEST_LDFLAGS := $(LDFLAGS) --coverage -Wl,-rpath=$(BUILD_ROOT)/lib -lpraser -ldl
+BINARY_LDFLAGS := $(LDFLAGS) --coverage -Wl,-rpath=$(BUILD_ROOT)/lib -lpraser -ldl
 GEN_LDFLAGS := $(LDFLAGS) --coverage -shared -lpraser
 
 

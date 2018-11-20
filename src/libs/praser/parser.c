@@ -400,7 +400,7 @@ ast *_alloc_ast(void){
 
 void _delete_ast(ast *t){
 	for(size_t i = 0; i < t->size; ++i){
-		_delete_ast(t->children[i]);
+		delete_ast(t->children[i]);
 	}
 	free((char*)t->text);//discard const qualifier
 	free(t->children);
