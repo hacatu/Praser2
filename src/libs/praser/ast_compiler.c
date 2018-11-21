@@ -5,150 +5,42 @@
 #include <string.h>
 #include <inttypes.h>
 #include <ctype.h>
+#include <dlfcn.h>
 #include "parser.h"
 #include "ast_compiler.h"
 
-/*
-pattern = group+
-group = option+
-option = atom quantifier?
-atom = state | string | charset | invset
+#define _STRINGIFY(z) #z
+#define STRINGIFY(z) _STRINGIFY(z)
 
-======pattern======
-const char *parse_<rule_name>(ast *t, position *p){
-	[if not a generated rule] set_tag(t, <rule_name>_tag);
-	[group]...
-	return NULL;
-}
-
-======group[>1]======
-do{
-	const char *err = NULL, *terr = NULL;
-	position s = *p, e = s;
-	[option (err=terr)]...
-	if(e.curr > s.curr){
-		*p = e;
-		return err;
-	}
-	return "[options_spec]";
-}while(0);
-
-======group[1]======
-{
-	const char *err;
-	position s = *p;
-	[atom_quantified (err=err)]
-	if(err){
-		return err;
-	}
-}
-
-======option======
-[atom_quantified]
-if(!terr){
-	break;
-}
-if(p->curr > s.curr){
-	err = terr;
-	e = *p;
-	*p = s;
-}
-
-======atom_quantified======
-[if not quantified: atom_once]
-[if quantifier is "?": atom_optional]
-[if quantifier is "*": atom_multiple]
-[if quantifier is "+": atom_repeated]
-
-======atom_once======
-[atom (t=t)]
-
-======atom_optional======
-{
-	position l = *p;
-	[atom (t=t)]
-	if(<err>){
-		*p = l;
-		<err> = NULL;
-	}
-}
-
-======atom_multiple======
-{
-	position l;
-	ast *c;
-	while(1){
-		l = *p;
-		c = alloc_ast();
-		[atom (t=c)]
-		if(<err>)break;
-		merge_ast(t, c);
-	}
-	delete_ast(c);
-	*p = l;
-	<err> = NULL;
-}
-
-======atom_repeated======
-{
-	position l;
-	ast *c;
-	char matched = 0;
-	while(1){
-		l = *p;
-		c = alloc_ast();
-		[atom (t=c)]
-		if(<err>)break;
-		matched = 1;
-		merge_ast(t, c);
-	}
-	delete_ast(c);
-	*p = l;
-	if(matched){
-		<err> = NULL;
-	}
-}
-
-======atom======
-[if state: atom_state]
-[if string: atom_string]
-[if charset: atom_charset]
-[if invset: atom_invset]
-
-======atom_string======
-<err> = read_string(<atom->text>, <t>, p) ? NULL : "<atom->text>";
-
-======atom_charset======
-<err> = read_charset([charset_spec], <t>, p) ? NULL : "[[charset_spec]]";
-
-======atom_invset======
-<err> = read_invset([invset_spec], <t>, p) ? NULL : "[[invset_spec]]";
-
-======atom_state======
-[if assigner is "=": atom_append]
-[if assigner is "<": atom_merge]
-[if assigner is ":": atom_skip]
-
-======atom_append======
-ast *r = alloc_ast();
-<err> = [name](s, r, p);
-if(<err>){
-	delete_ast(r);
-}else{
-	append_ast(<t>, r);
-}
-
-======atom_merge======
-<err> = [name](s, <t>, p);
-
-======atom_skip======
-ast *r = &(ast){0};
-<err> = [name](s, r, p);
-clear_ast(r);
-*/
-
-//#include "mixins/c_backend_fmts.c"
-#include "mixins/cxx_backend_fmts.c"
+const char
+*src_pre_fmt,
+*src_mid_fmt,
+*pattern_decl_fmt,//1$<rule_name>
+*pattern_pre_merge_fmt,//1$<rule_name>
+*pattern_pre_fmt,//1$<rule_name>
+*pattern_post_fmt,
+*group_pre_fmt,
+*group_post1_fmt,
+*group_post2_fmt,
+*group_singular_pre_fmt,
+*group_singular_post_fmt,
+*option_fmt,
+*atom_once_pre_fmt,
+*atom_once_post_fmt,
+*atom_optional_pre_fmt,
+*atom_optional_post_fmt,//1$<err>
+*atom_multiple_pre_fmt,
+*atom_multiple_post_fmt,//1$<err>
+*atom_repeated_pre_fmt,
+*atom_repeated_post_fmt,//1$<err>
+*atom_string_fmt,//1$<err>, 2$<t>, 3$<atom->text>
+*atom_charset_fmt,//1$<err>, 2$<t>, 3$[charset_spec]
+*atom_append_fmt,//1$<err>, 2$<t>, 3$[name]
+*atom_merge_fmt,//1$<err>, 2$<t>, 3$[name]
+*atom_skip_fmt,//1$<err>, 2$[name]
+*state_name_fmt,//1$[name]
+*state_name_fmt_trunc,//1$[name], 2$[len]
+*state_name_generated_fmt;//1$[offset]
 
 char *get_parser_name(const ast *atom);
 char *get_state_name(const state *s);
@@ -176,6 +68,90 @@ void write_atom_special(FILE *f, const ast *atom, const char *err, const char *t
 void write_atom_append(FILE *f, const ast *atom, const char *err, const char *t);
 void write_atom_merge(FILE *f, const ast *atom, const char *err, const char *t);
 void write_atom_skip(FILE *f, const ast *atom, const char *err);
+
+int read_symbol(void *dest, size_t size, void *handle, const char *name){
+	void *src = dlsym(handle, name);
+	if(!src){
+		return 0;
+	}
+	memcpy(dest, &src, size);
+	return 1;
+}
+
+void *read_fmts(const char *filename){
+	void *handle = dlopen(filename, RTLD_LAZY);
+	if(!handle){
+		fprintf(stderr, "dlopen failed for library \"%s\": %s\n", filename, dlerror());
+		return NULL;
+	}
+#define READ_SYMBOL(name) read_symbol(&name, sizeof(name), handle, STRINGIFY(name))
+	if(!(READ_SYMBOL(src_pre_fmt) ||
+		READ_SYMBOL(src_mid_fmt) ||
+		READ_SYMBOL(pattern_decl_fmt) ||
+		READ_SYMBOL(pattern_pre_merge_fmt) ||
+		READ_SYMBOL(pattern_pre_fmt) ||
+		READ_SYMBOL(pattern_post_fmt) ||
+		READ_SYMBOL(group_pre_fmt) ||
+		READ_SYMBOL(group_post1_fmt) ||
+		READ_SYMBOL(group_post2_fmt) ||
+		READ_SYMBOL(group_singular_pre_fmt) ||
+		READ_SYMBOL(group_singular_post_fmt) ||
+		READ_SYMBOL(option_fmt) ||
+		READ_SYMBOL(atom_once_pre_fmt) ||
+		READ_SYMBOL(atom_once_post_fmt) ||
+		READ_SYMBOL(atom_optional_pre_fmt) ||
+		READ_SYMBOL(atom_optional_post_fmt) ||
+		READ_SYMBOL(atom_multiple_pre_fmt) ||
+		READ_SYMBOL(atom_multiple_post_fmt) ||
+		READ_SYMBOL(atom_repeated_pre_fmt) ||
+		READ_SYMBOL(atom_repeated_post_fmt) ||
+		READ_SYMBOL(atom_string_fmt) ||
+		READ_SYMBOL(atom_charset_fmt) ||
+		READ_SYMBOL(atom_append_fmt) ||
+		READ_SYMBOL(atom_merge_fmt) ||
+		READ_SYMBOL(atom_skip_fmt) ||
+		READ_SYMBOL(state_name_fmt) ||
+		READ_SYMBOL(state_name_fmt_trunc) ||
+		READ_SYMBOL(state_name_generated_fmt)
+		)){
+			dlclose(handle);
+			return NULL;
+	}
+	return handle;
+#undef READ_SYMBOL
+}
+
+void release_fmts(void *handle){
+	src_pre_fmt = NULL;
+	src_mid_fmt = NULL;
+	pattern_decl_fmt = NULL;
+	pattern_pre_merge_fmt = NULL;
+	pattern_pre_fmt = NULL;
+	pattern_post_fmt = NULL;
+	group_pre_fmt = NULL;
+	group_post1_fmt = NULL;
+	group_post2_fmt = NULL;
+	group_singular_pre_fmt = NULL;
+	group_singular_post_fmt = NULL;
+	option_fmt = NULL;
+	atom_once_pre_fmt = NULL;
+	atom_once_post_fmt = NULL;
+	atom_optional_pre_fmt = NULL;
+	atom_optional_post_fmt = NULL;
+	atom_multiple_pre_fmt = NULL;
+	atom_multiple_post_fmt = NULL;
+	atom_repeated_pre_fmt = NULL;
+	atom_repeated_post_fmt = NULL;
+	atom_string_fmt = NULL;
+	atom_charset_fmt = NULL;
+	atom_append_fmt = NULL;
+	atom_merge_fmt = NULL;
+	atom_skip_fmt = NULL;
+	state_name_fmt = NULL;
+	state_name_fmt_trunc = NULL;
+	state_name_generated_fmt = NULL;
+	dlclose(handle);
+}
 
 void write_rule_decl(FILE *f, const ast *pattern, const char *name){
 	fprintf(f, pattern_decl_fmt, name);

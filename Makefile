@@ -43,16 +43,19 @@ GEN_LDFLAGS := $(LDFLAGS) --coverage -shared -lpraser
 
 
 SIMPLE_LIB_ARCS := $(patsubst src/libs/%.c,lib/lib%.a,$(shell find src/libs -maxdepth 1 -name '*.c'))
-SIMPLE_MODULE_SOS := $(patsubst src/modules/%.c,lib/lib%.so,$(shell find src/modules -maxdepth 1 -name '*.c' ! -name '*.gen.c'))
+SIMPLE_PARSER_MODULE_SOS := $(patsubst src/modules/parsers/%.c,lib/parsers/lib%.so,$(shell find src/modules/parsers -maxdepth 2 -name '*.c' ! -name '*.gen.c'))
+SIMPLE_AST_CALLBACK_MODULE_SOS := $(patsubst src/modules/ast_callbacks/%.c,lib/ast_callbacks/lib%.so,$(shell find src/modules/ast_callbacks -maxdepth 2 -name '*.c' ! -name '*.gen.c'))
+SIMPLE_BACKEND_FMT_MODULE_SOS := $(patsubst src/modules/backend_fmts/%.c,lib/backend_fmts/lib%.so,$(shell find src/modules/backend_fmts -maxdepth 2 -name '*.c' ! -name '*.gen.c'))
 SIMPLE_TEST_BINS := $(patsubst src/test/%.c,bin/test/%,$(shell find src/test -maxdepth 1 -name '*.c'))
 SIMPLE_BINARIES := $(patsubst src/bin/%.c,bin/%,$(shell find src/bin -maxdepth 1 -name '*.c'))
 
 COMPOUND_LIB_ARCS := $(patsubst src/libs/%,lib/lib%.a,$(shell find src/libs -mindepth 1 -maxdepth 1 -type d))
-COMPOUND_MODULE_SOS := $(patsubst src/modules/%,lib/lib%.so,$(shell find src/modules -mindepth 1 -maxdepth 1 -type d))
-COMPOUND_TEST_BINS := $(patsubst src/test%,bin/test/%,$(shell find src/modules -mindepth 1 -maxdepth 1 -type d))
-COMPOUND_BINARIES := $(patsubst src/bin/%,bin/%,$(shell find src/modules -mindepth 1 -maxdepth 1 -type d))
+COMPOUND_PARSER_MODULE_SOS := $(patsubst src/modules/parsers/%,lib/lib%.so,$(shell find src/modules/parsers -mindepth 1 -maxdepth 1 -type d))
+COMPOUND_AST_CALLBACK_MODULE_SOS := $(patsubst src/modules/ast_callbacks/%,lib/lib%.so,$(shell find src/modules/ast_callbacks -mindepth 1 -maxdepth 1 -type d))
+COMPOUND_TEST_BINS := $(patsubst src/test/%,bin/test/%,$(shell find src/test -mindepth 1 -maxdepth 1 -type d))
+COMPOUND_BINARIES := $(patsubst src/bin/%,bin/%,$(shell find src/bin -mindepth 1 -maxdepth 1 -type d))
 
-GEN_SOS := $(patsubst src/parsers/%.pra,lib/lib%_parser.so,$(PARSER_DESCS))
+GEN_SOS := $(patsubst src/parsers/%.pra,lib/parsers/lib%_parser.so,$(PARSER_DESCS))
 
 
 
@@ -60,17 +63,17 @@ GEN_SOS := $(patsubst src/parsers/%.pra,lib/lib%_parser.so,$(PARSER_DESCS))
 
 .DEFAULT_GOAL := all
 
-all: $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) $(SIMPLE_MODULE_SOS) $(COMPOUND_MODULE_SOS) $(GEN_SOS) $(SIMPLE_BINARIES) $(COMPOUND_BINARIES)
+all: $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) $(SIMPLE_PARSER_MODULE_SOS) $(SIMPLE_AST_CALLBACK_MODULE_SOS) $(SIMPLE_BACKEND_FMT_MODULE_SOS) $(COMPOUND_PARSER_MODULE_SOS) $(COMPOUND_AST_CALLBACK_MODULE_SOS) $(GEN_SOS) $(SIMPLE_BINARIES) $(COMPOUND_BINARIES)
 
 .SECONDARY:
-bin bin/test lib notes notes/modules notes/libs notes/test notes/bin cov obj obj/modules obj/libs obj/test obj/bin log:
+bin bin/test lib lib/parsers lib/ast_callbacks lib/backend_fmts notes notes/modules notes/libs notes/test notes/bin cov obj obj/modules obj/modules/parsers obj/libs obj/test obj/bin log:
 	@mkdir -p $@
 
-src/modules/parser_parser.gen.c: src/parsers/parser.pra | bin/parser_runner lib/libbootstrap_parser.so lib/libast_callback_compile.so
-	bin/parser_runner bootstrap compile $^ $@
+src/modules/parsers/parser_parser.gen.c: src/parsers/parser.pra | bin/parser_runner lib/parsers/libbootstrap_parser.so lib/ast_callbacks/libast_callback_compile.so lib/backend_fmts/libc_backend_fmts.so
+	bin/parser_runner bootstrap compile $^ c $@
 
-src/modules/%_parser.gen.c: src/parsers/%.pra | bin/parser_runner lib/libparser_parser.so lib/libast_callback_compile.so
-	bin/parser_runner parser compile $^ $@
+src/modules/parsers/%_parser.gen.c: src/parsers/%.pra | bin/parser_runner lib/parsers/libparser_parser.so lib/ast_callbacks/libast_callback_compile.so lib/backend_fmts/libc_backend_fmts.so
+	bin/parser_runner parser compile $^ c $@
 
 obj/libs/%.o: src/libs/%.c
 	@mkdir -p $(@D) notes/libs/$(*D)
@@ -79,9 +82,9 @@ obj/libs/%.o: src/libs/%.c
 	@printf "%%s" "$(@D)/" > obj/libs/$*.d
 	@$(CC) -Iinclude -std=c99 -MM $^ >> obj/libs/$*.d
 
-obj/modules/%_parser.gen.o: src/modules/%_parser.gen.c | include/parser.h obj/modules notes/modules
-	$(CC) $(GEN_CFLAGS) -c $^ -o notes/modules/$*.o
-	@mv notes/modules/$*.o $@
+obj/modules/parsers/%_parser.gen.o: src/modules/parsers/%_parser.gen.c | include/parser.h obj/modules/parsers notes/modules/parsers
+	$(CC) $(GEN_CFLAGS) -c $^ -o notes/modules/parsers/$*.o
+	@mv notes/modules/parsers/$*.o $@
 
 obj/modules/%.o: src/modules/%.c
 	@mkdir -p $(@D) notes/modules/$(*D)
@@ -110,14 +113,23 @@ $(SIMPLE_LIB_ARCS): lib/lib%.a: obj/libs/%.o | lib
 $(COMPOUND_LIB_ARCS): lib/lib%.a: obj/libs/%.compound | lib
 	$(AR) rcs $@ $(filter obj/libs/$*/%.o,$(LIB_OBJS))
 
-$(SIMPLE_MODULE_SOS): lib/lib%.so: obj/modules/%.o | $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
+$(SIMPLE_PARSER_MODULE_SOS): lib/parsers/lib%.so: obj/modules/parsers/%.o | lib/parsers $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
 	$(LD) -o $@ $^ $(MODULE_LDFLAGS)
 
-$(GEN_SOS): lib/lib%.so: obj/modules/%.gen.o | lib/libpraser.a
+$(SIMPLE_AST_CALLBACK_MODULE_SOS): lib/ast_callbacks/lib%.so: obj/modules/ast_callbacks/%.o | lib/ast_callbacks $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
+	$(LD) -o $@ $^ $(MODULE_LDFLAGS)
+
+$(SIMPLE_BACKEND_FMT_MODULE_SOS): lib/backend_fmts/lib%.so: obj/modules/backend_fmts/%.o | lib/backend_fmts $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
+	$(LD) -o $@ $^ $(MODULE_LDFLAGS)
+
+$(GEN_SOS): lib/parsers/lib%.so: obj/modules/parsers/%.gen.o | lib/libpraser.a
 	$(LD) -o $@ $^ $(GEN_LDFLAGS)
 	
-$(COMPOUND_MODULE_SOS): lib/lib%.so: obj/modules/%.compound | $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
-	$(LD) -o $@ $(filter obj/modules/$*/%.o,$(MODULE_OBJS)) $(MODULE_LDFLAGS)
+$(COMPOUND_PARSER_MODULE_SOS): lib/parsers/lib%.so: obj/modules/parsers/%.compound | lib/parsers $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
+	$(LD) -o $@ $(filter obj/modules/parsers/$*/%.o,$(MODULE_OBJS)) $(MODULE_LDFLAGS)
+
+$(COMPOUND_AST_CALLBACK_MODULE_SOS): lib/ast_callbacks/lib%.so: obj/modules/ast_callbacks/%.compound | lib/ast_callbacks $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS)
+	$(LD) -o $@ $(filter obj/modules/ast_callbacks/$*/%.o,$(MODULE_OBJS)) $(MODULE_LDFLAGS)
 
 $(SIMPLE_TEST_BINS): bin/test/%: obj/test/%.o | $(SIMPLE_LIB_ARCS) $(COMPOUND_LIB_ARCS) bin/test
 	$(LD) -o $@ $^ $(TEST_LDFLAGS)
@@ -139,7 +151,8 @@ obj/$(1)/$(2).compound: $(filter obj/$(1)/$(2)/%.o,$(3))
 endef
 
 $(foreach c,$(patsubst lib/lib%.a,%,$(COMPOUND_LIB_ARCS)),$(eval $(call make-compound,libs,$c,$(LIB_OBJS))))
-$(foreach c,$(patsubst lib/lib%.so,%,$(COMPOUND_MODULE_SOS)),$(eval $(call make-compound,modules,$c,$(MODULE_OBJS))))
+$(foreach c,$(patsubst lib/parsers/lib%.so,%,$(COMPOUND_PARSER_MODULE_SOS)),$(eval $(call make-compound,modules/parsers,$c,$(MODULE_OBJS))))
+$(foreach c,$(patsubst lib/ast_callbacks/lib%.so,%,$(COMPOUND_AST_CALLBACK_MODULE_SOS)),$(eval $(call make-compound,modules/ast_callbacks,$c,$(MODULE_OBJS))))
 $(foreach c,$(patsubst bin/test/%,%,$(COMPOUND_TEST_BINS)),$(eval $(call make-compound,test,$c,$(TEST_OBJS))))
 $(foreach c,$(patsubst bin/%,%,$(COMPOUND_BINARIES)),$(eval $(call make-compound,bin,$c,$(BINARY_OBJS))))
 
@@ -157,4 +170,4 @@ clean:
 	-find src/ "(" -name '*.gen.*' -or -name '*.d' ")" -delete
 
 debug_makefile:
-	@echo $(SIMPLE_MODULE_SOS)
+	@echo $(COMPOUND_BINARIES)

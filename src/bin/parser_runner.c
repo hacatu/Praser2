@@ -27,12 +27,12 @@ int main(int argc, char **argv){
 	}
 	void *parser_so_handle = NULL, *cb_so_handle = NULL;
 	{
-		size_t buf_len = strlen(argv[1]) + strlen("lib/lib_parser.so"), cb_so_name_len = strlen(argv[2]) + strlen("lib/libast_callback_.so");
+		size_t buf_len = strlen(argv[1]) + strlen("lib/parsers/lib_parser.so"), cb_so_name_len = strlen(argv[2]) + strlen("lib/ast_callbacks/libast_callback_.so");
 		if(cb_so_name_len > buf_len){
 			buf_len = cb_so_name_len;
 		}
 		char buf[buf_len + 1];
-		sprintf(buf, "lib/lib%s_parser.so", argv[1]);
+		sprintf(buf, "lib/parsers/lib%s_parser.so", argv[1]);
 		parser_so_handle = dlopen(buf, RTLD_LAZY);
 		if(!parser_so_handle){
 			fprintf(stderr, "dlopen failed for library \"%s\": %s\n", buf, dlerror());
@@ -44,7 +44,7 @@ int main(int argc, char **argv){
 			dlclose(parser_so_handle);
 			return 1;
 		}
-		sprintf(buf, "lib/libast_callback_%s.so", argv[2]);
+		sprintf(buf, "lib/ast_callbacks/libast_callback_%s.so", argv[2]);
 		cb_so_handle = dlopen(buf, RTLD_LAZY);
 		if(!cb_so_handle){
 			fprintf(stderr, "dlopen failed for library \"%s\": %s\n", buf, dlerror());
@@ -76,15 +76,17 @@ int main(int argc, char **argv){
 		dlclose(cb_so_handle);
 		return 1;
 	}
+	int status = 1;
 	if((err = start_parser(t, &p))){
 		log_err(err, p);
 		mmap_close(&p);
 	}else{
 		mmap_close(&p);
-		ast_callback(t, argc - 4, argv + 4);
+		status = ast_callback(t, argc - 4, argv + 4);
 	}
 	delete_ast(t);
 	dlclose(parser_so_handle);
 	dlclose(cb_so_handle);
+	return status;
 }
 

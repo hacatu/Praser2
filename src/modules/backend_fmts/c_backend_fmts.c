@@ -137,6 +137,8 @@ ast *r = &(ast){0};
 clear_ast(r);
 */
 
+#include <inttypes.h>
+
 const char
 src_pre_fmt[] =
 "#include <stdio.h>\n"
