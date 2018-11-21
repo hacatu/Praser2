@@ -85,33 +85,33 @@ void *read_fmts(const char *filename){
 		return NULL;
 	}
 #define READ_SYMBOL(name) read_symbol(&name, sizeof(name), handle, STRINGIFY(name))
-	if(!(READ_SYMBOL(src_pre_fmt) ||
-		READ_SYMBOL(src_mid_fmt) ||
-		READ_SYMBOL(pattern_decl_fmt) ||
-		READ_SYMBOL(pattern_pre_merge_fmt) ||
-		READ_SYMBOL(pattern_pre_fmt) ||
-		READ_SYMBOL(pattern_post_fmt) ||
-		READ_SYMBOL(group_pre_fmt) ||
-		READ_SYMBOL(group_post1_fmt) ||
-		READ_SYMBOL(group_post2_fmt) ||
-		READ_SYMBOL(group_singular_pre_fmt) ||
-		READ_SYMBOL(group_singular_post_fmt) ||
-		READ_SYMBOL(option_fmt) ||
-		READ_SYMBOL(atom_once_pre_fmt) ||
-		READ_SYMBOL(atom_once_post_fmt) ||
-		READ_SYMBOL(atom_optional_pre_fmt) ||
-		READ_SYMBOL(atom_optional_post_fmt) ||
-		READ_SYMBOL(atom_multiple_pre_fmt) ||
-		READ_SYMBOL(atom_multiple_post_fmt) ||
-		READ_SYMBOL(atom_repeated_pre_fmt) ||
-		READ_SYMBOL(atom_repeated_post_fmt) ||
-		READ_SYMBOL(atom_string_fmt) ||
-		READ_SYMBOL(atom_charset_fmt) ||
-		READ_SYMBOL(atom_append_fmt) ||
-		READ_SYMBOL(atom_merge_fmt) ||
-		READ_SYMBOL(atom_skip_fmt) ||
-		READ_SYMBOL(state_name_fmt) ||
-		READ_SYMBOL(state_name_fmt_trunc) ||
+	if(!(READ_SYMBOL(src_pre_fmt) &&
+		READ_SYMBOL(src_mid_fmt) &&
+		READ_SYMBOL(pattern_decl_fmt) &&
+		READ_SYMBOL(pattern_pre_merge_fmt) &&
+		READ_SYMBOL(pattern_pre_fmt) &&
+		READ_SYMBOL(pattern_post_fmt) &&
+		READ_SYMBOL(group_pre_fmt) &&
+		READ_SYMBOL(group_post1_fmt) &&
+		READ_SYMBOL(group_post2_fmt) &&
+		READ_SYMBOL(group_singular_pre_fmt) &&
+		READ_SYMBOL(group_singular_post_fmt) &&
+		READ_SYMBOL(option_fmt) &&
+		READ_SYMBOL(atom_once_pre_fmt) &&
+		READ_SYMBOL(atom_once_post_fmt) &&
+		READ_SYMBOL(atom_optional_pre_fmt) &&
+		READ_SYMBOL(atom_optional_post_fmt) &&
+		READ_SYMBOL(atom_multiple_pre_fmt) &&
+		READ_SYMBOL(atom_multiple_post_fmt) &&
+		READ_SYMBOL(atom_repeated_pre_fmt) &&
+		READ_SYMBOL(atom_repeated_post_fmt) &&
+		READ_SYMBOL(atom_string_fmt) &&
+		READ_SYMBOL(atom_charset_fmt) &&
+		READ_SYMBOL(atom_append_fmt) &&
+		READ_SYMBOL(atom_merge_fmt) &&
+		READ_SYMBOL(atom_skip_fmt) &&
+		READ_SYMBOL(state_name_fmt) &&
+		READ_SYMBOL(state_name_fmt_trunc) &&
 		READ_SYMBOL(state_name_generated_fmt)
 		)){
 			dlclose(handle);
@@ -163,7 +163,7 @@ void write_all(FILE *f, const state *fsm, size_t num_states){
 		if(s->parse != state_parse_rule){
 			continue;
 		}
-		ast *pattern;
+		ast *pattern = NULL;
 		if(!strcmp("rule", s->rule->name)){
 			pattern = s->rule->children[2];
 		}else{
@@ -178,7 +178,7 @@ void write_all(FILE *f, const state *fsm, size_t num_states){
 		if(s->parse != state_parse_rule){//s is a special rule that should be defined somewhere else
 			continue;
 		}
-		ast *pattern;
+		ast *pattern = NULL;
 		int is_merge_rule = 1;
 		if(!strcmp("rule", s->rule->name)){
 			pattern = s->rule->children[2];
@@ -206,7 +206,7 @@ char *get_parser_name(const ast *atom){
 }
 
 char *get_state_name(const state *s){
-	char *ret;
+	char *ret = NULL;
 	if(!strcmp("rule", s->rule->name)){//explicit rule, use the name
 		asprintf(&ret, state_name_fmt_trunc, s->rule->children[0]->text, (int)s->rule->children[0]->length);
 	}else{
