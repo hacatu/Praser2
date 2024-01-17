@@ -318,5 +318,5 @@ operator_assoc op_prec_assocs[MAX_PRECEDENCE] = {
 	[2]=OP_ASSOC_LEFT,
 	[3]=OP_ASSOC_LEFT,
 	[4]=OP_ASSOC_RIGHT,
-}
+};
 
